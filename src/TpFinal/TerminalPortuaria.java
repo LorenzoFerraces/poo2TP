@@ -2,14 +2,19 @@ package TpFinal;
 
 public class TerminalPortuaria {
 	
-	private Par<Double, Double> coordenadas;
+	private Punto coordenadas;
 	
-	public Par<Double, Double> getCoordenadas(){
+	public TerminalPortuaria(Punto p) {
+		super();
+		this.coordenadas = p;
+	}
+	
+	public Punto getCoordenadas(){
 		return this.coordenadas;
 	}
 	
-	public Double calcularDistancia(Par<Double, Double> p){
-		this.getCoordenadas().calcularDistancia(p);
+	public Double calcularDistancia(TerminalPortuaria t){
+		return this.getCoordenadas().calcularDistancia(t.getCoordenadas());
 	}
 	
 
