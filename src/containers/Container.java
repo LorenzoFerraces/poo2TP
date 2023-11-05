@@ -40,6 +40,10 @@ public class Container {
 		return pesoTotal;
 	}
 	
+	public double getMetrosCuibicos() {
+		return this.getAltura() * this.getAncho() * this.getLargo();
+	}
+	
 	public List<IServicio> getServicios() {
 		return this.servicios;
 	}

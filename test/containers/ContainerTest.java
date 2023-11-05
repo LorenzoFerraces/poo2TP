@@ -33,6 +33,20 @@ class ContainerTest {
 		assertEquals(customContainer.getPesoTotal(), PESO);
 	}
 	
+	@Test 
+	void seDebePoderObtenerLosMetrosCubicosDelContenedor() {
+		int ANCHO = 100;
+		int LARGO = 200;
+		int ALTO = 300;
+		int PESO = 400;
+		
+		Container customContainer = new Container(ANCHO, LARGO, ALTO, PESO);
+		
+		int expectedMetrosCubicos = ANCHO * LARGO * ALTO;
+		
+		assertEquals(customContainer.getMetrosCuibicos(), expectedMetrosCubicos);
+	}
+	
 	@Test
 	void elConsumoPorHoraDebeSerCero() {		
 		assertEquals(myContainer.consumoPorHora(), 0);
