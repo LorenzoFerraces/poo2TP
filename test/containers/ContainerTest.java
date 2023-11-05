@@ -89,8 +89,8 @@ class ContainerTest {
 		IServicio myServicio1 = mock(IServicio.class);
 		IServicio myServicio2 = mock(IServicio.class);
 		
-		when(myServicio1.costo()).thenReturn(500);
-		when(myServicio2.costo()).thenReturn(200);
+		when(myServicio1.costo()).thenReturn(500.0);
+		when(myServicio2.costo()).thenReturn(200.0);
 		
 		myContainer.addServicio(myServicio1);
 		myContainer.addServicio(myServicio2);

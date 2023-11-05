@@ -3,7 +3,7 @@ package services;
 public class ServicioDePesado implements IServicio {
 
 	@Override
-	public int costo() {
+	public double costo() {
 		return 300;
 	}
 

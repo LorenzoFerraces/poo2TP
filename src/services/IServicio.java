@@ -1,5 +1,5 @@
 package services;
 
 public interface IServicio {
-	public int costo();
+	public double costo();
 }

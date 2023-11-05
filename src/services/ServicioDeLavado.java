@@ -14,7 +14,7 @@ public class ServicioDeLavado implements IServicio {
 	
 
 	@Override
-	public int costo() {
+	public double costo() {
 		int costoFinal;
 		
 		//Si supera los 70m2 se cobra a costo de container grande

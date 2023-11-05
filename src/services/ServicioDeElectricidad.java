@@ -21,8 +21,8 @@ public class ServicioDeElectricidad implements IServicio {
 	}
 
 	@Override
-	public int costo() {
-		return (int) (getCantidadDeHorasDelServicio() * consumoKWH * costoKWH);
+	public double costo() {
+		return getCantidadDeHorasDelServicio() * consumoKWH * costoKWH;
 	}
 
 }

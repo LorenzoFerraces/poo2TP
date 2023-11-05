@@ -18,7 +18,7 @@ public class ServicioDeAlmacenamientoExcedente implements IServicio {
 	}
 
 	@Override
-	public int costo() {
+	public double costo() {
 		return this.cantDias * this.costoPorDia;
 	}
 

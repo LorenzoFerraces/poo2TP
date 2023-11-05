@@ -52,8 +52,8 @@ public class Container {
 		this.servicios.add(servicio);
 	}
 	
-	public int costoTotalDeLosServicios() {
-		return this.servicios.stream().mapToInt(service -> service.costo()).sum();
+	public double costoTotalDeLosServicios() {
+		return this.servicios.stream().mapToDouble(service -> service.costo()).sum();
 	}
 
 	
