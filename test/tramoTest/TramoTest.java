@@ -2,6 +2,7 @@ package tramoTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,10 @@ class TramoTest {
 	}
 
 	@Test
-	void testDistancia() {
-		fail("Not yet implemented");
+	void testCalcularDistanciaTramo() {
+		tramo.distancia();
+		verify(tramo.getOrigen()).calcularDistancia(tramo.getDestino().getCoordenadas());
 	}
 
+//	Me parece innecesario testear getters y setters para subir el porcentaje de cobertura
 }

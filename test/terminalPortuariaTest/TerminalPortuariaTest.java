@@ -21,8 +21,7 @@ class TerminalPortuariaTest {
 		this.p1 = mock(Punto.class);
 //		this.p1 = new Punto(5d,10d);
 		this.p2 = mock(Punto.class);
-//		this.p2 = new Punto(7d,12d);
-		when(this.p1.calcularDistancia(p2)).thenReturn(Math.sqrt(8));
+//		this.p2 = new Punto(7d,12d);;
 		this.t1 = new TerminalPortuaria(p1);
 	}
 
@@ -32,10 +31,9 @@ class TerminalPortuariaTest {
 	}
 	
 	@Test
-	void testCalcularDistancia() {
+	void testCalcularDistanciaEntreTerminales() {
 		t1.calcularDistancia(p2);
-		verify(p2).getFirst();
-		verify(p2).getSecond();
+		verify(p1).calcularDistancia(p2);
 	}
 
 }
