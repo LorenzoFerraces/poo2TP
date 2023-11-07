@@ -1,11 +1,11 @@
-package TpFinalTest;
+package puntoTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import TpFinal.Par;
+import punto.Par;
 
 class ParTest {
 	

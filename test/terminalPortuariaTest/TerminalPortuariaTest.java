@@ -1,4 +1,4 @@
-package TpFinalTest;
+package terminalPortuariaTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -6,13 +6,12 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import TpFinal.Punto;
-import TpFinal.TerminalPortuaria;
+import punto.Punto;
+import terminalPortuaria.TerminalPortuaria;
 
 class TerminalPortuariaTest {
 	
 	private TerminalPortuaria t1;
-	private TerminalPortuaria t2;
 	
 	private Punto p1;
 	private Punto p2;
@@ -25,7 +24,6 @@ class TerminalPortuariaTest {
 //		this.p2 = new Punto(7d,12d);
 		when(this.p1.calcularDistancia(p2)).thenReturn(Math.sqrt(8));
 		this.t1 = new TerminalPortuaria(p1);
-		this.t2 = new TerminalPortuaria(p2);
 	}
 
 	@Test
@@ -35,7 +33,9 @@ class TerminalPortuariaTest {
 	
 	@Test
 	void testCalcularDistancia() {
-		assertEquals(t1.calcularDistancia(t2), Math.sqrt(8));
+		t1.calcularDistancia(p2);
+		verify(p2).getFirst();
+		verify(p2).getSecond();
 	}
 
 }

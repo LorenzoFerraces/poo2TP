@@ -1,4 +1,4 @@
-package TpFinal;
+package punto;
 
 public class Punto extends Par<Double,Double> {
 	

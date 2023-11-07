@@ -1,4 +1,4 @@
-package TpFinal;
+package punto;
 
 public class Par<A, B> {
 	private A first;
