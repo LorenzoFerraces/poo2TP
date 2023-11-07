@@ -1,4 +1,4 @@
-package tramoTest;
+package test.naviera.circuitoMaritimo.tramo;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
