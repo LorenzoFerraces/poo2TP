@@ -24,6 +24,11 @@ class TramoTest {
 		tramo.distancia();
 		verify(tramo.getOrigen()).calcularDistancia(tramo.getDestino().getCoordenadas());
 	}
+	
+	@Test
+	void testContieneTerminal() {
+		fail("test no implementado");
+	}
 
 //	Me parece innecesario testear getters y setters para subir el porcentaje de cobertura
 }

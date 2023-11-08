@@ -2,6 +2,9 @@ package naviera.circuitoMaritimo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+
 import naviera.circuitoMaritimo.tramo.Tramo;
 import terminalPortuaria.TerminalPortuaria;
 
@@ -28,6 +31,7 @@ public class CircuitoMaritimo {
 	}
 	
 	public boolean agregarTramo(Tramo t) throws Exception{
+//		agrega un tramo al final del recorrido
 		if (! tramos.isEmpty()) {
 			verificarTramo(t);
 		}
@@ -35,6 +39,7 @@ public class CircuitoMaritimo {
 	}
 
 	private void verificarTramo(Tramo t) throws Exception{
+//		verifica que el origen del tramo a agregar corresponda con el destino del tramo previo
 		Tramo ultimoTramo = tramos.get(tramos.size() - 1);
 		if(!(t.getOrigen() == ultimoTramo.getDestino())){
 			throw new Exception(
@@ -49,6 +54,27 @@ public class CircuitoMaritimo {
 	
 	private List<Tramo> subCircuito(TerminalPortuaria inicio, TerminalPortuaria fin) {
 //		TODO: implementar buscador por terminal de origen y buscador por terminal de destino
+		return new ArrayList<Tramo>();
 	}
+	
+	public boolean contieneTerminal(TerminalPortuaria t) {
+//		devuelve si un circuito contiene una terminal t, en cualquier parte del recorrido
+		return tramos.parallelStream().map(tramo -> tramo.contieneTerminal(t)).anyMatch(bool -> bool);
+	}
+	
+	public Double tiempoTotal() {
+		return this.mapReduceToDouble(Tramo::getTiempo);
+	}
+	
+	public Double precioTotal() {
+		return this.mapReduceToDouble(Tramo::getPrecio);
+	}
+	
+	private Double mapReduceToDouble(ToDoubleFunction<Tramo> f) {
+		return tramos.stream().mapToDouble(f).sum();
+	}
+	
+	
+	
 
 }
