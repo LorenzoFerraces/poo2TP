@@ -19,8 +19,22 @@ public class EmpresaTransportista {
 		this.conductores.add(unConductor);
 	}
 	
+	public void agregarCamion(Camion unCamion) {
+		this.camiones.add(unCamion);
+		
+	}
 	public void enviarCamionATerminal(Camion unCamion, TerminalPortuaria unaTerminal) {
 		unCamion.irATerminal(unaTerminal);
 		this.camiones.remove(unCamion);
 	}
+
+	public List<Conductor> getConductores() {
+		return this.conductores;
+	}
+
+	public List<Camion> getCamiones() {
+		return this.camiones;
+	}
+
+	
 }
