@@ -16,7 +16,9 @@ public abstract class FaseDeBuque {
 	
 	public abstract boolean esLaFaseCorrespondienteA(Buque unBuque);
 	
-	public FaseDeBuque faseParaBuque(Buque unBuque) {
+	// public abstract void accionar(TerminalPortuaria unaTerminal);
+	
+	public FaseDeBuque siguienteFasePara(Buque unBuque) {
 		return fases().stream().
 				filter(fase -> fase.esLaFaseCorrespondienteA(unBuque)).
 				findFirst().

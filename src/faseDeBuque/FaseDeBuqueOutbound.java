@@ -4,6 +4,6 @@ public class FaseDeBuqueOutbound extends FaseDeBuque{
 	
 	@Override
 	public boolean esLaFaseCorrespondienteA(Buque unBuque) {
-		return unBuque.estaEnFaseOutbound();
+		return unBuque.estaLejosDeLaTerminal();
 	}
 }
