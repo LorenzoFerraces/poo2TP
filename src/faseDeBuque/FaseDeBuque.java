@@ -3,6 +3,8 @@ package faseDeBuque;
 import java.util.Arrays;
 import java.util.List;
 
+import buque.Buque;
+
 public abstract class FaseDeBuque {
 	
 	public List<FaseDeBuque> fases() {

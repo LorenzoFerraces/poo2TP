@@ -1,5 +1,7 @@
 package faseDeBuque;
 
+import buque.Buque;
+
 public class FaseDeBuqueInbound extends FaseDeBuque{
 
 	@Override
