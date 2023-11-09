@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
+import java.util.stream.Collectors;
 
 import naviera.circuitoMaritimo.tramo.Tramo;
 import terminalPortuaria.TerminalPortuaria;
@@ -52,11 +53,11 @@ public class CircuitoMaritimo {
 		return tramos.remove(tramos.size() - 1);
 	}
 	
-	private CircuitoMaritimo subCircuito(TerminalPortuaria inicio, TerminalPortuaria fin) {
+	public CircuitoMaritimo subCircuito(TerminalPortuaria inicio, TerminalPortuaria fin) {
 //		Prop: describe el CircuitoMaritimo con 'inicio' como terminal de origen, y 'fin' como terminal de fin
 //			  En caso de no existir alguna de las terminales, retorna un circuito vacio			  
 		try {
-			return new CircuitoMaritimo(tramos.subList(0, 0));
+			return new CircuitoMaritimo(tramos.subList(this.posicionComoOrigen(inicio),this.posicionComoDestino(fin)));
 		} catch (Exception e) {
 			return new CircuitoMaritimo();
 		}
@@ -80,17 +81,15 @@ public class CircuitoMaritimo {
 	private Double mapReduceToDouble(ToDoubleFunction<Tramo> f) {
 		return tramos.stream().mapToDouble(f).sum();
 	}
-	
-	private int posicionDe(TerminalPortuaria t){
 		
-		
-		for(Tramo tramo : tramos) {
-			
+	private int posicionComoOrigen(TerminalPortuaria t) {
+			return tramos.stream().map(Tramo::getOrigen).collect(Collectors.toList()).indexOf(t);
 		}
-		return 
+
+	private int posicionComoDestino(TerminalPortuaria t) {
+		return tramos.stream().map(Tramo::getDestino).collect(Collectors.toList()).indexOf(t);
 	}
 	
-	
+}
 	
 
-}
