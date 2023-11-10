@@ -2,7 +2,6 @@ package naviera.circuitoMaritimo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 
@@ -32,7 +31,8 @@ public class CircuitoMaritimo {
 	}
 	
 	public boolean agregarTramo(Tramo t) throws Exception{
-//		agrega un tramo al final del recorrido
+//		Prop: agrega un tramo al final del recorrido
+//		Prec: el origen del tramo t coincide con el destino del ultimo tramo en tramos
 		if (! tramos.isEmpty()) {
 			verificarTramo(t);
 		}
@@ -40,17 +40,12 @@ public class CircuitoMaritimo {
 	}
 
 	private void verificarTramo(Tramo t) throws Exception{
-//		verifica que el origen del tramo a agregar corresponda con el destino del tramo previo
+//		Prop verifica que el origen del tramo a agregar corresponda con el destino del tramo previo
 		Tramo ultimoTramo = tramos.get(tramos.size() - 1);
 		if(!(t.getOrigen() == ultimoTramo.getDestino())){
 			throw new Exception(
 					"el origen de " + t.toString() + " no coincide con el destino de " + ultimoTramo.toString());
 		}
-		
-	}
-	
-	public Tramo sacarUltimoTramo() throws Exception {
-		return tramos.remove(tramos.size() - 1);
 	}
 	
 	public CircuitoMaritimo subCircuito(TerminalPortuaria inicio, TerminalPortuaria fin) {
@@ -79,14 +74,17 @@ public class CircuitoMaritimo {
 	}
 	
 	private Double mapReduceToDouble(ToDoubleFunction<Tramo> f) {
+//		Prop: toma una funcion de Tramo a Double, y mapea los tramos para despues devolver la suma de ese mapeo
 		return tramos.stream().mapToDouble(f).sum();
 	}
 		
 	private int posicionComoOrigen(TerminalPortuaria t) {
+//		Prop: describe el index del tramo en tramos que tiene a la terminal t como origen
 			return tramos.stream().map(Tramo::getOrigen).collect(Collectors.toList()).indexOf(t);
 		}
 
 	private int posicionComoDestino(TerminalPortuaria t) {
+//		Prop: describe el index del tramo en tramos que tiene a la terminal t como destino
 		return tramos.stream().map(Tramo::getDestino).collect(Collectors.toList()).indexOf(t);
 	}
 	
