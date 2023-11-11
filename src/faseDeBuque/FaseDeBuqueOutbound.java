@@ -2,10 +2,17 @@ package faseDeBuque;
 
 import buque.Buque;
 
-public class FaseDeBuqueOutbound extends FaseDeBuque{
-	
+public class FaseDeBuqueOutbound implements FaseDeBuque{
+
 	@Override
-	public boolean esLaFaseCorrespondienteA(Buque unBuque) {
-		return unBuque.estaLejosDeLaTerminal();
+	public void accionar(Buque unBuque) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	// Retorna la fase 2 de 5
+	@Override
+	public FaseDeBuque siguienteFase() {
+		return new FaseDeBuqueInbound();
 	}
 }
