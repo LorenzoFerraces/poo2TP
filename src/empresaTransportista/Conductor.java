@@ -8,4 +8,8 @@ public class Conductor {
 		this.camion = unCamion;
 	}
 
+	public Camion getCamion() {
+		return camion;
+	}
+
 }
