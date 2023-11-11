@@ -9,14 +9,14 @@ import faseDeBuque.*;
 public class Buque {
 
 	private List<Container> carga;
-	private GPS gps;
+	// private GPS gps;
 	private FaseDeBuque fase_del_buque;
 	private TerminalPortuaria terminal;
 	
-	public Buque(List<Container> carga, GPS gps, TerminalPortuaria terminal) {
+	public Buque(List<Container> carga, /*GPS gps, */TerminalPortuaria terminal) {
 		super();
 		this.carga = carga;
-		this.gps = gps;
+		// this.gps = gps;
 		this.fase_del_buque = new FaseDeBuqueOutbound();
 		this.terminal = terminal;
 	}
@@ -25,7 +25,5 @@ public class Buque {
 		this.fase_del_buque.siguienteFase();
 	}
 	
-	public Punto posicion() {
-		
-	}
+	
 }
