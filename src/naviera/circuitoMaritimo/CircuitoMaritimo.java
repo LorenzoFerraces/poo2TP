@@ -57,6 +57,10 @@ public class CircuitoMaritimo {
 		return new ArrayList<Tramo>();
 	}
 	
+	public double getTiempoDeViajeEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
+		return this.subCircuito(inicio, fin).stream().mapToDouble(tramo -> tramo.getTiempo()).sum();
+	}
+	
 	public boolean contieneTerminal(TerminalPortuaria t) {
 //		devuelve si un circuito contiene una terminal t, en cualquier parte del recorrido
 		return tramos.parallelStream().map(tramo -> tramo.contieneTerminal(t)).anyMatch(bool -> bool);
