@@ -1,19 +1,31 @@
 package faseDeBuque;
 
 import TpFinal.TerminalPortuaria;
-import buque.Buque;
 
 public class FaseDeBuqueOutbound implements FaseDeBuque{
 
+	
+	// Retorna la fase 2 de 5 si esta a menos de 50 km de la terminal
 	@Override
-	public void accionar(Buque unBuque, TerminalPortuaria unaTerminal) {
-		// TODO Auto-generated method stub
-		
+	public FaseDeBuque siguienteFase(Buque unBuque) {
+		if (unBuque.calcularDistanciaATerminal() < 50.0) {
+			return new FaseDeBuqueInbound();
+		}
+		return this;
 	}
 
-	// Retorna la fase 2 de 5
 	@Override
-	public FaseDeBuque siguienteFase() {
-		return new FaseDeBuqueInbound();
+	public void avisarArriboATerminal(Buque unBuque) {
+		// Implementado en la fase Inbound
+	}
+
+	@Override
+	public void realizarCargaYDescarga(Buque unBuque) {
+		// Implementado en la fase Arrived
+	}
+
+	@Override
+	public void avisarPartidaATerminal(Buque unBuque) {
+		// Implementado en la fase Departing
 	}
 }
