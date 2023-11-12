@@ -37,5 +37,4 @@ class TramoTest {
 		assertTrue(tramo.contieneTerminal(t2));
 	}
 
-//	Me parece innecesario testear getters y setters para subir el porcentaje de cobertura
 }
