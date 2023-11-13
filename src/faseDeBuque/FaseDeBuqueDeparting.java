@@ -8,10 +8,7 @@ public class FaseDeBuqueDeparting implements FaseDeBuque{
 	// Retorna la primera fase, ya que this es la última
 	@Override
 	public FaseDeBuque siguienteFase(Buque unBuque) {
-		if (unBuque.calcularDistanciaATerminal() > 1.0) {
-			return new FaseDeBuqueOutbound(); 
-		}
-		return this;
+		return new FaseDeBuqueOutbound();
 	}
 
 	@Override
@@ -25,8 +22,16 @@ public class FaseDeBuqueDeparting implements FaseDeBuque{
 	}
 
 	@Override
+	public void depart(Buque unBuque) {
+		// Implementado en la fase Working
+	}
+	
+	@Override
 	public void avisarPartidaATerminal(Buque unBuque) {
-		unBuque.getTerminal().notificarShippersSobrePartidaDeBuque(unBuque);
+		if (unBuque.calcularDistanciaATerminal() > 1.0) {
+			unBuque.getTerminal().notificarShippersSobrePartidaDeBuque(unBuque);
+			unBuque.cambiarFase(this.siguienteFase());
+		}
 	}
 
 	

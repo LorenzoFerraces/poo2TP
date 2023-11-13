@@ -25,6 +25,11 @@ public class FaseDeBuqueOutbound implements FaseDeBuque{
 	}
 
 	@Override
+	public void depart(Buque unBuque) {
+		// Implementado en la fase Working
+	}
+	
+	@Override
 	public void avisarPartidaATerminal(Buque unBuque) {
 		// Implementado en la fase Departing
 	}

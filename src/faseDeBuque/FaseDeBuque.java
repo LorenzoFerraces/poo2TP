@@ -10,6 +10,8 @@ public interface FaseDeBuque {
 	
 	public void realizarCargaYDescarga(Buque unBuque);
 	
+	public void depart(Buque unBuque);
+	
 	public void avisarPartidaATerminal(Buque unBuque);
 
 }

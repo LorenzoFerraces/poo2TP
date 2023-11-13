@@ -22,6 +22,11 @@ public class FaseDeBuqueWorking implements FaseDeBuque{
 	}
 
 	@Override
+	public void depart(Buque unBuque) {
+		unBuque.cambiarFase(this.siguienteFase());
+	}
+	
+	@Override
 	public void avisarPartidaATerminal(Buque unBuque) {
 		// Implementado en la fase Departing
 	}
