@@ -5,18 +5,18 @@ import java.util.List;
 import TpFinal.TerminalPortuaria;
 import containers.Container;
 import faseDeBuque.*;
+import gps.GPS;
 
 public class Buque {
 
 	private List<Container> carga;
-	// private GPS gps;
+	private GPS gps;
 	private FaseDeBuque fase_del_buque;
 	private TerminalPortuaria terminal;
 	
-	public Buque(List<Container> carga, /*GPS gps, */TerminalPortuaria terminal) {
-		super();
+	public Buque(List<Container> carga, GPS gps, TerminalPortuaria terminal) {
 		this.carga = carga;
-		// this.gps = gps;
+		this.gps = gps;
 		this.fase_del_buque = new FaseDeBuqueOutbound();
 		this.terminal = terminal;
 	}
