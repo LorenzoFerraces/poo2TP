@@ -57,6 +57,10 @@ public class CircuitoMaritimo {
 			return new CircuitoMaritimo();
 		}
 	}
+	
+	public Integer cantidadTramos() {
+		return this.tramos.size();
+	}
 
 	public boolean contieneTerminal(TerminalPortuaria t) {
 //		Prop: indica si el circuito contiene la terminal como origen o destino en alguno de sus tramos
