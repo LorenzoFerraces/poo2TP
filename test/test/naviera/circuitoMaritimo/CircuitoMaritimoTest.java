@@ -3,12 +3,6 @@ package test.naviera.circuitoMaritimo;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,11 +16,9 @@ class CircuitoMaritimoTest {
 	private CircuitoMaritimo circuito;
 	private Tramo tramo1;
 	private Tramo tramo2;
-	private Tramo tramo3;
 	private TerminalPortuaria terminal1;
 	private TerminalPortuaria terminal2;
 	private TerminalPortuaria terminal3;
-	private TerminalPortuaria terminal4;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -37,7 +29,6 @@ class CircuitoMaritimoTest {
 		
 		this.tramo1 = new Tramo(terminal1,terminal2, 20d, 100d);
 		this.tramo2 = new Tramo(terminal2,terminal3, 50d, 300d);
-		this.tramo3 = new Tramo(terminal3,terminal4, 15d, 150d);
 
 		this.circuito = new CircuitoMaritimo();
 	}
@@ -96,5 +87,16 @@ class CircuitoMaritimoTest {
 		circuito.agregarTramo(tramo1);
 		circuito.agregarTramo(tramo2);
 		assertFalse(circuito.subCircuito(terminal1, terminal3).contieneTerminal(terminal1));
+	}
+	
+	@Test
+	void cantidadDeTramosCero() {
+		assertEquals(0, circuito.cantidadTramos());
+	}
+	
+	@Test
+	void cantidadDeTramosNoCero() throws Exception { 
+		circuito.agregarTramo(tramo1);
+		assertEquals(1, circuito.cantidadTramos());
 	}
 }
