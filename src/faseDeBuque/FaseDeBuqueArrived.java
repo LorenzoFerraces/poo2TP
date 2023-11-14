@@ -1,19 +1,34 @@
 package faseDeBuque;
 
-import buque.Buque;
+import TpFinal.TerminalPortuaria;
 
 public class FaseDeBuqueArrived implements FaseDeBuque{
 
-	@Override
-	public void accionar(Buque unBuque) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	// Retorna la fase 4 de 5
 	@Override
-	public FaseDeBuque siguienteFase() {
+	public FaseDeBuque siguienteFase(Buque unBuque) {
 		return new FaseDeBuqueWorking();
+	}
+
+	@Override
+	public void avisarArriboATerminal(Buque unBuque) {
+		// Implementado en la fase Inbound
+	}
+
+	@Override
+	public void realizarCargaYDescarga(Buque unBuque) {
+		unBuque.cambiarFase(this.siguienteFase());
+	}
+	
+	@Override
+	public void depart(Buque unBuque) {
+		// Implementado en la fase Working
+	}
+	
+	@Override
+	public void avisarPartidaATerminal(Buque unBuque) {
+		// Implementado en la fase Departing
 	}
 
 	
