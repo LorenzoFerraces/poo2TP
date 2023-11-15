@@ -1,6 +1,7 @@
 package faseDeBuque;
 
 import TpFinal.TerminalPortuaria;
+import buque.Buque;
 
 public class FaseDeBuqueDeparting implements FaseDeBuque{
 
@@ -29,8 +30,8 @@ public class FaseDeBuqueDeparting implements FaseDeBuque{
 	@Override
 	public void avisarPartidaATerminal(Buque unBuque) {
 		if (unBuque.calcularDistanciaATerminal() > 1.0) {
-			unBuque.getTerminal().notificarShippersSobrePartidaDeBuque(unBuque);
-			unBuque.cambiarFase(this.siguienteFase());
+			// unBuque.getTerminal().notificarShippersSobrePartidaDeBuque(unBuque);
+			unBuque.cambiarFase();
 		}
 	}
 

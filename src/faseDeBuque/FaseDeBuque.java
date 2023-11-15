@@ -1,10 +1,11 @@
 package faseDeBuque;
 
 import TpFinal.TerminalPortuaria;
+import buque.Buque;
 
 public interface FaseDeBuque {
 
-	public FaseDeBuque siguienteFase();
+	public FaseDeBuque siguienteFase(Buque unBuque);
 	
 	public void avisarArriboATerminal(Buque unBuque);
 	

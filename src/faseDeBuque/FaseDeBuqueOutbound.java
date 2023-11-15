@@ -1,6 +1,7 @@
 package faseDeBuque;
 
 import TpFinal.TerminalPortuaria;
+import buque.Buque;
 
 public class FaseDeBuqueOutbound implements FaseDeBuque{
 

@@ -1,6 +1,7 @@
 package faseDeBuque;
 
 import TpFinal.TerminalPortuaria;
+import buque.Buque;
 
 public class FaseDeBuqueArrived implements FaseDeBuque{
 
@@ -18,7 +19,7 @@ public class FaseDeBuqueArrived implements FaseDeBuque{
 
 	@Override
 	public void realizarCargaYDescarga(Buque unBuque) {
-		unBuque.cambiarFase(this.siguienteFase());
+		unBuque.cambiarFase();
 	}
 	
 	@Override
