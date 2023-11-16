@@ -1,6 +1,6 @@
 package faseDeBuque;
 
-import TpFinal.TerminalPortuaria;
+import TpFinal.Punto;
 import buque.Buque;
 
 public class FaseDeBuqueDeparting implements FaseDeBuque{
@@ -33,6 +33,14 @@ public class FaseDeBuqueDeparting implements FaseDeBuque{
 			// unBuque.getTerminal().notificarShippersSobrePartidaDeBuque(unBuque);
 			unBuque.cambiarFase();
 		}
+	}
+
+	// Simula el alejamiento del buque de la terminal
+	@Override
+	public void navegar(Buque unBuque) {
+		Punto posicionDeTerminal = unBuque.getTerminal().getCoordenadas();
+		
+		unBuque.getGPS().alejarseDePosicion(posicionDeTerminal);
 	}
 
 	

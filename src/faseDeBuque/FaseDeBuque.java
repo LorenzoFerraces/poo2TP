@@ -1,6 +1,5 @@
 package faseDeBuque;
 
-import TpFinal.TerminalPortuaria;
 import buque.Buque;
 
 public interface FaseDeBuque {
@@ -15,4 +14,5 @@ public interface FaseDeBuque {
 	
 	public void avisarPartidaATerminal(Buque unBuque);
 
+	public void navegar(Buque unBuque);
 }

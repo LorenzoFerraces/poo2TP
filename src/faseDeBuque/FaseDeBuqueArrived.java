@@ -1,6 +1,5 @@
 package faseDeBuque;
 
-import TpFinal.TerminalPortuaria;
 import buque.Buque;
 
 public class FaseDeBuqueArrived implements FaseDeBuque{
@@ -19,6 +18,7 @@ public class FaseDeBuqueArrived implements FaseDeBuque{
 
 	@Override
 	public void realizarCargaYDescarga(Buque unBuque) {
+		// No contemplado en el trabajo
 		unBuque.cambiarFase();
 	}
 	
@@ -30,6 +30,12 @@ public class FaseDeBuqueArrived implements FaseDeBuque{
 	@Override
 	public void avisarPartidaATerminal(Buque unBuque) {
 		// Implementado en la fase Departing
+	}
+
+	// No realiza nada, porque el buque llego a la terminal
+	@Override
+	public void navegar(Buque unBuque) {
+		// Se queda en su posicion
 	}
 
 	
