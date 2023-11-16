@@ -22,8 +22,8 @@ class BuqueTest {
 	private List<Container> carga;
 	private Container container;
 	private TerminalPortuaria terminal;
-	Punto puntoBuque;
-	Punto puntoTerminal;
+	private Punto puntoBuque;
+	private Punto puntoTerminal;
 	
 	@BeforeEach
 	void setUp() throws Exception {
