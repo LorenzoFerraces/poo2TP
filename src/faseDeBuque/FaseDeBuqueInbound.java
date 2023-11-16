@@ -1,6 +1,6 @@
 package faseDeBuque;
 
-import TpFinal.Punto;
+import punto.Punto;
 import buque.Buque;
 
 public class FaseDeBuqueInbound implements FaseDeBuque{

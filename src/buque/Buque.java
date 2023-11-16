@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import TpFinal.Punto;
-import TpFinal.TerminalPortuaria;
+import punto.Punto;
+import terminalPortuaria.TerminalPortuaria;
 import containers.Container;
 import faseDeBuque.*;
 import gps.GPS;
@@ -29,6 +29,7 @@ public class Buque implements Observer {
 	public List<Container> getCarga() {
 		return carga;
 	}
+	
 	public TerminalPortuaria getTerminal() {
 		return this.terminal;
 	}

@@ -2,7 +2,7 @@ package gps;
 
 import java.util.Observable;
 
-import TpFinal.Punto;
+import punto.Punto;
 
 @SuppressWarnings("deprecation")
 public class GPS extends Observable {
