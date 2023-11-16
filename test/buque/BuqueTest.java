@@ -9,8 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import TpFinal.Punto;
-import TpFinal.TerminalPortuaria;
+import punto.Punto;
+import terminalPortuaria.TerminalPortuaria;
 import containers.Container;
 import faseDeBuque.*;
 import gps.GPS;
