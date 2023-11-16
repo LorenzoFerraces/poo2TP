@@ -1,4 +1,4 @@
-package test.TerminalPortuaria.TerminalGestionada.CriterioCircuito;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

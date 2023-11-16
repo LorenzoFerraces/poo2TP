@@ -3,6 +3,10 @@ package test.naviera.circuitoMaritimo;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,14 +26,20 @@ class CircuitoMaritimoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		this.terminal1 = new TerminalPortuaria(new Punto(5d,10d));
-		this.terminal2 = new TerminalPortuaria(new Punto(10d,15d));
-		this.terminal3 = new TerminalPortuaria(new Punto(15d,20d));
-		this.terminal3 = new TerminalPortuaria(new Punto(20d,25d));
+		this.terminal1 = mock(TerminalPortuaria.class);
+		this.terminal2 = mock(TerminalPortuaria.class);
+		this.terminal3 = mock(TerminalPortuaria.class);
 		
-		this.tramo1 = new Tramo(terminal1,terminal2, 20d, 100d);
-		this.tramo2 = new Tramo(terminal2,terminal3, 50d, 300d);
-
+		this.tramo1 = mock(Tramo.class);
+		this.tramo2 = mock(Tramo.class);
+		
+		when(tramo1.getOrigen()).thenReturn(terminal1);
+		when(tramo1.getDestino()).thenReturn(terminal2);
+		when(tramo2.getOrigen()).thenReturn(terminal2);
+		when(tramo2.getDestino()).thenReturn(terminal3);
+		when(tramo1.contieneTerminal(terminal1)).thenReturn(true);
+		when(tramo1.contieneTerminal(terminal2)).thenReturn(true);
+		
 		this.circuito = new CircuitoMaritimo();
 	}
 
@@ -53,6 +63,7 @@ class CircuitoMaritimoTest {
 	@Test
 	void contieneTerminal() throws Exception {
 		circuito.agregarTramo(tramo1);
+		
 		assertTrue(circuito.contieneTerminal(terminal1));
 	}
 	

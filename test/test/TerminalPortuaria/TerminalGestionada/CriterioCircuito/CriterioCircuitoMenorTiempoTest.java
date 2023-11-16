@@ -55,6 +55,7 @@ class CriterioCircuitoMenorTiempoTest {
 
 	@Test
 	void buscar() {		
+//		no funciona a menos que haga lista.get(0)
 		assertEquals(lista.get(1) , this.criterio.buscar(lista).get());
 	}
 }

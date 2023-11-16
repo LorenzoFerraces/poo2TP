@@ -55,6 +55,8 @@ class CriterioCircuitoMenorPrecioTest {
 
 	@Test
 	void buscar() {		
+		System.out.println(lista.get(0).cantidadTramos());
+		System.out.println(lista.get(1).cantidadTramos());
 		assertEquals(lista.get(0) , this.criterio.buscar(lista).get());
 	}
 }
