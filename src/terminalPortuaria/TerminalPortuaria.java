@@ -1,4 +1,6 @@
-package TpFinal;
+package terminalPortuaria;
+
+import punto.Punto;
 
 public class TerminalPortuaria {
 	
@@ -13,8 +15,8 @@ public class TerminalPortuaria {
 		return this.coordenadas;
 	}
 	
-	public Double calcularDistancia(TerminalPortuaria t){
-		return this.getCoordenadas().calcularDistancia(t.getCoordenadas());
+	public Double calcularDistancia(Punto p){
+		return this.getCoordenadas().calcularDistancia(p);
 	}
 	
 
