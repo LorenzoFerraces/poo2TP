@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import naviera.circuitoMaritimo.CircuitoMaritimo;
-import naviera.circuitoMaritimo.tramo.Tramo;
 import terminalPortuaria.TerminalGestionada.CriterioCircuito.CriterioCircuitoMenorPrecio;
 
 

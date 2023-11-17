@@ -36,5 +36,14 @@ class TramoTest {
 	void testContieneTerminalDestino() {
 		assertTrue(tramo.contieneTerminal(t2));
 	}
+	
+	@Test
+	void testGetPrecio() {
+		assertEquals(800d, tramo.getPrecio());
+	}
 
+	@Test
+	void testGetTiempo() {
+		assertEquals(360d, tramo.getTiempo());
+	}
 }

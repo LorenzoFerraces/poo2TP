@@ -6,13 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import naviera.circuitoMaritimo.CircuitoMaritimo;
 import naviera.circuitoMaritimo.tramo.Tramo;
-import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
 
 class CircuitoMaritimoTest {

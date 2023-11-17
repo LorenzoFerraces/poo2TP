@@ -30,6 +30,7 @@ class ServicioDeElectricidadTest {
 		assertEquals(customService.costo(), 25 * 100 * 2); //Horas * costoKWH * consumoKWH
 	}
 	
+	@Test
 	void elPrecioVariaDependiendoElCostoDeKW() {
 		// 1 hora de diferencia entre fechas
 		LocalDateTime dateInicio = LocalDateTime.of(2023, 11, 5, 12, 0);
@@ -39,6 +40,7 @@ class ServicioDeElectricidadTest {
 		assertEquals(customService.costo(), 1 * 300 * 2); //Horas * costoKWH * consumoKWH
 	}
 	
+	@Test
 	void elPrecioVariaDependiendoElConsumoDeKW() {
 		// 1 hora de diferencia entre fechas
 		LocalDateTime dateInicio = LocalDateTime.of(2023, 11, 5, 12, 0);
