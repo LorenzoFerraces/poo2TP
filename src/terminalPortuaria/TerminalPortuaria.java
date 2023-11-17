@@ -18,12 +18,6 @@ public class TerminalPortuaria {
 	public Double calcularDistancia(Punto p){
 		return this.getCoordenadas().calcularDistancia(p);
 	}
-	
-@Override
-public boolean equals(Object obj) {
-	// TODO Auto-generated method stub
-	return this.getCoordenadas().equals((Punto)obj);
-}
 
 
 

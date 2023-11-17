@@ -24,24 +24,12 @@ class CriterioCircuitoMenorPrecioTest {
 	void setUp() throws Exception {
 		this.criterio = new CriterioCircuitoMenorPrecio();
 		this.lista = new ArrayList<CircuitoMaritimo>();
-		Tramo tramo1 = mock(Tramo.class);
-		Tramo tramo2 = mock(Tramo.class);
-		Tramo tramo3 = mock(Tramo.class);
-		Tramo tramo4 = mock(Tramo.class);
-		
-		when(tramo1.getPrecio()).thenReturn(100d);
-		when(tramo2.getPrecio()).thenReturn(150d);
-		when(tramo3.getPrecio()).thenReturn(200d);
-		when(tramo4.getPrecio()).thenReturn(75d);
 		
 		CircuitoMaritimo circuito1 = mock(CircuitoMaritimo.class);
 		CircuitoMaritimo circuito2 = mock(CircuitoMaritimo.class);
 		
-		circuito1.agregarTramo(tramo1);
-		circuito1.agregarTramo(tramo2);
-		circuito2.agregarTramo(tramo3);
-		circuito2.agregarTramo(tramo4);
-		when(circuito2.)
+		when(circuito1.precioTotal()).thenReturn(250d);
+		when(circuito2.precioTotal()).thenReturn(275d);
 		
 		this.lista.add(circuito1);
 		this.lista.add(circuito2);
@@ -56,8 +44,6 @@ class CriterioCircuitoMenorPrecioTest {
 
 	@Test
 	void buscar() {		
-		System.out.println(lista.get(0).cantidadTramos());
-		System.out.println(lista.get(1).cantidadTramos());
 		assertEquals(lista.get(0) , this.criterio.buscar(lista).get());
 	}
 }
