@@ -3,7 +3,6 @@ package empresaTransportista;
 import java.util.ArrayList;
 import java.util.List;
 
-import TpFinal.TerminalPortuaria;
 
 public class EmpresaTransportista {
 
@@ -15,19 +14,6 @@ public class EmpresaTransportista {
 		this.conductores = new ArrayList<Conductor>();
 	}
 	
-	public void agregarConductor(Conductor unConductor) {
-		this.conductores.add(unConductor);
-	}
-	
-	public void agregarCamion(Camion unCamion) {
-		this.camiones.add(unCamion);
-		
-	}
-	public void enviarCamionATerminal(Camion unCamion, TerminalPortuaria unaTerminal) {
-		unCamion.irATerminal(unaTerminal);
-		this.camiones.remove(unCamion);
-	}
-
 	public List<Conductor> getConductores() {
 		return this.conductores;
 	}
@@ -35,6 +21,13 @@ public class EmpresaTransportista {
 	public List<Camion> getCamiones() {
 		return this.camiones;
 	}
-
+	
+	public void agregarConductor(Conductor unConductor) {
+		this.conductores.add(unConductor);
+	}
+	
+	public void agregarCamion(Camion unCamion) {
+		this.camiones.add(unCamion);
+	}
 	
 }
