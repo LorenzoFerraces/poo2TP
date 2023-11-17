@@ -41,6 +41,7 @@ class CriterioCircuitoMenorPrecioTest {
 		circuito1.agregarTramo(tramo2);
 		circuito2.agregarTramo(tramo3);
 		circuito2.agregarTramo(tramo4);
+		when(circuito2.)
 		
 		this.lista.add(circuito1);
 		this.lista.add(circuito2);

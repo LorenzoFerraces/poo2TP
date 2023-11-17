@@ -33,12 +33,23 @@ class CircuitoMaritimoTest {
 		this.tramo1 = mock(Tramo.class);
 		this.tramo2 = mock(Tramo.class);
 		
+		when(tramo1.contieneTerminal(terminal1)).thenReturn(true);
+		when(tramo1.contieneTerminal(terminal1)).thenReturn(true);
+
 		when(tramo1.getOrigen()).thenReturn(terminal1);
 		when(tramo1.getDestino()).thenReturn(terminal2);
 		when(tramo2.getOrigen()).thenReturn(terminal2);
 		when(tramo2.getDestino()).thenReturn(terminal3);
-		when(tramo1.contieneTerminal(terminal1)).thenReturn(true);
-		when(tramo1.contieneTerminal(terminal2)).thenReturn(true);
+
+		when(tramo1.getPrecio()).thenReturn(50d);
+		when(tramo2.getPrecio()).thenReturn(75d);
+
+		when(tramo1.getTiempo()).thenReturn(100d);
+		when(tramo2.getTiempo()).thenReturn(120d);
+		
+		
+		
+		
 		
 		this.circuito = new CircuitoMaritimo();
 	}
@@ -76,14 +87,14 @@ class CircuitoMaritimoTest {
 	void tiempoTotal() throws Exception {
 		circuito.agregarTramo(tramo1);
 		circuito.agregarTramo(tramo2);
-		assertEquals(70d, circuito.tiempoTotal());
+		assertEquals(220d, circuito.tiempoTotal());
 	}
 
 	@Test
 	void precioTotal() throws Exception {
 		circuito.agregarTramo(tramo1);
 		circuito.agregarTramo(tramo2);
-		assertEquals(400d, circuito.precioTotal());
+		assertEquals(125d, circuito.precioTotal());
 	}
 	
 	@Test
