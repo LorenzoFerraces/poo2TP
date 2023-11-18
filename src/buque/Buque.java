@@ -1,8 +1,6 @@
 package buque;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
@@ -10,8 +8,7 @@ import containers.Container;
 import faseDeBuque.*;
 import gps.GPS;
 
-@SuppressWarnings("deprecation")
-public class Buque implements Observer {
+public class Buque {
 
 	private List<Container> carga;
 	private GPS gps;
@@ -23,7 +20,6 @@ public class Buque implements Observer {
 		this.gps = gps;
 		this.terminal = terminal;
 		this.fase_del_buque = new FaseDeBuqueOutbound();
-		this.gps.addObserver(this);
 	}
 	
 	public List<Container> getCarga() {
@@ -41,6 +37,7 @@ public class Buque implements Observer {
 	public GPS getGPS() {
 		return this.gps;
 	}
+	
 	public Punto posicion() {
 		return gps.getPosicion();
 	}
@@ -50,7 +47,8 @@ public class Buque implements Observer {
 		return posicion().calcularDistancia(terminal.getCoordenadas());
 	}
 
-	// Setea la fase actual con la siguiente o la misma, si no se cumple la condicion
+	// Delega a la fase actual la responsabilidad de cambiar a la siguiente 
+	// o continuar en la misma
 	public void cambiarFase() {
 		fase_del_buque = fase_del_buque.siguienteFase(this);
 	}
@@ -70,15 +68,5 @@ public class Buque implements Observer {
 	public void avisarPartidaATerminal() {
 		this.fase_del_buque.avisarPartidaATerminal(this);
 	}
-	
-	public void navegar() {
-		this.fase_del_buque.navegar(this);
-	}
 
-	// Mensaje enviado por el GPS alertando sobre un cambio de posicion
-	// El buque intenta cambiar de fase
-	@Override
-	public void update(Observable o, Object arg) {
-		this.cambiarFase();
-	}
 }
