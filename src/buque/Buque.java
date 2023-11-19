@@ -12,14 +12,14 @@ public class Buque {
 
 	private List<Container> carga;
 	private GPS gps;
-	private FaseDeBuque fase_del_buque;
 	private TerminalPortuaria terminal;
+	private FaseDeBuque fase_del_buque;
 	
-	public Buque(List<Container> carga, GPS gps, TerminalPortuaria terminal) {
+	public Buque(List<Container> carga, GPS gps, TerminalPortuaria terminal, FaseDeBuqueOutbound faseDeBuque) {
 		this.carga = carga;
 		this.gps = gps;
 		this.terminal = terminal;
-		this.fase_del_buque = new FaseDeBuqueOutbound();
+		this.fase_del_buque = faseDeBuque;
 	}
 	
 	public List<Container> getCarga() {
@@ -52,7 +52,7 @@ public class Buque {
 	public void cambiarFase() {
 		fase_del_buque = fase_del_buque.siguienteFase(this);
 	}
-	
+
 	public void avisarArriboATerminal() {
 		this.fase_del_buque.avisarArriboATerminal(this);
 	}
