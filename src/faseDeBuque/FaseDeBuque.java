@@ -13,6 +13,5 @@ public interface FaseDeBuque {
 	public void depart(Buque unBuque);
 	
 	public void avisarPartidaATerminal(Buque unBuque);
-
-	public void navegar(Buque unBuque);
+	
 }
