@@ -20,22 +20,30 @@ class BuqueTest {
 	private Buque unBuque;
 	private GPS gps;
 	private List<Container> carga;
-	private Container container;
 	private TerminalPortuaria terminal;
 	private Punto puntoBuque;
 	private Punto puntoTerminal;
+	private FaseDeBuqueOutbound faseOutbound;
+	private FaseDeBuqueInbound faseInbound;
+	private FaseDeBuqueArrived faseArrived;
+	private FaseDeBuqueWorking faseWorking;
+	private FaseDeBuqueDeparting faseDeparting;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		gps = mock(GPS.class);
-		container = mock(Container.class);
-		carga = new ArrayList<Container>();
-		carga.add(container);
-		terminal = mock(TerminalPortuaria.class);
-		unBuque = new Buque(carga, gps, terminal);
+		faseOutbound = mock(FaseDeBuqueOutbound.class);
+		faseInbound = mock(FaseDeBuqueInbound.class);
+		faseArrived = mock(FaseDeBuqueArrived.class);
+		faseWorking = mock(FaseDeBuqueWorking.class);
+		faseDeparting = mock(FaseDeBuqueDeparting.class);
 		
 		puntoBuque = mock(Punto.class);
 		puntoTerminal = mock(Punto.class);
+		
+		gps = new GPS(puntoBuque);
+		carga = new ArrayList<Container>();
+		terminal = new TerminalPortuaria(puntoTerminal);
+		unBuque = new Buque(carga, gps, terminal, faseOutbound);
 	}
 
 	@Test
@@ -49,41 +57,35 @@ class BuqueTest {
 	}
 	
 	@Test
+	void testUnBuqueConoceSuGPS() {
+		assertEquals(gps, unBuque.getGPS());
+	}
+	
+	@Test
 	void testUnBuqueRecienCreadoEstaEnFaseOutbound() {
 		assertEquals(FaseDeBuqueOutbound.class, unBuque.getFase().getClass());
 	}
 	
 	@Test
 	void testUnBuquePuedeSaberSuPosicion() {
-		Punto punto = mock(Punto.class);
-		when(gps.getPosicion()).thenReturn(punto);
-		
-		assertEquals(punto, unBuque.posicion());
+		assertEquals(puntoBuque, unBuque.posicion());
 	}
 	
 	@Test
 	void testUnBuquePuedeSaberLaDistanciaEnKilometrosALaTerminal() {
+		// Setup
 		Double distanciaEsperada = Double.valueOf(62.4);
-		
-		when(gps.getPosicion()).thenReturn(puntoBuque);
-		when(terminal.getCoordenadas()).thenReturn(puntoTerminal);
 		when(puntoBuque.calcularDistancia(puntoTerminal)).thenReturn(distanciaEsperada);
 		
-		assertEquals(distanciaEsperada, unBuque.calcularDistanciaATerminal());
+		// Exercise
+		Double distanciaObtenida = unBuque.calcularDistanciaATerminal();
+		
+		assertEquals(distanciaEsperada, distanciaObtenida);
 	}
 
 	@Test
-	void testUnBuqueEnFaseOutboundPasaAFaseInboundSiPuede() {
-		// Con menos de 50 kilometros puede pasar a fase inbound
-		Double distancia = Double.valueOf(49.00);
-		Punto puntoBuque = mock(Punto.class);
-		Punto puntoTerminal = mock(Punto.class);
-		/*
-		when(gps.getPosicion()).thenReturn(puntoBuque);
-		when(terminal.getCoordenadas()).thenReturn(puntoTerminal);
-		when(puntoBuque.calcularDistancia(puntoTerminal)).thenReturn(distancia);
-		*/
-		when(unBuque.getFase().siguienteFase(unBuque)).thenReturn(new FaseDeBuqueInbound());
+	void testUnBuqueEnFaseOutboundPasaAFaseInbound() {
+		when(faseOutbound.siguienteFase(unBuque)).thenReturn(faseInbound);
 		
 		unBuque.cambiarFase();
 		
@@ -91,39 +93,61 @@ class BuqueTest {
 	}
 	
 	@Test
-	void testUnBuqueEnFaseInboundPuedeAvisarALaTerminal() {
-		fail("Not yet implemented");
+	void testUnBuqueDelegaASuFaseElAvisoALaTerminal() {
+		unBuque.avisarArriboATerminal();
+		
+		verify(unBuque.getFase()).avisarArriboATerminal(unBuque); // Verifica que la fase recibio el mensaje
 	}
 
 	@Test
 	void testUnBuqueEnFaseInboundQueLlegaALaTerminalPasaAFaseArrived() {
-		fail("Not yet implemented");
+		// Setup
+		when(faseOutbound.siguienteFase(unBuque)).thenReturn(faseInbound);
+		when(faseInbound.siguienteFase(unBuque)).thenReturn(faseArrived);
+		unBuque.cambiarFase(); // Pasa a fase Inbound
+		
+		// Exercise
+		unBuque.cambiarFase(); // Pasa a fase Arrived
+		
+		assertEquals(FaseDeBuqueArrived.class, unBuque.getFase().getClass());
 	}
 	
 	@Test
-	void testUnBuqueEnFaseArrivedPuedePasarAFaseWorking() {
-		fail("Not yet implemented");
+	void testUnBuqueDelegaLaCargaYDescargaASuFase() {
+		unBuque.realizarCargaYDescarga();
+		
+		verify(unBuque.getFase()).realizarCargaYDescarga(unBuque); // Verifica que la fase recibio el mensaje
 	}
 
 	@Test
-	void testUnBuqueEnFaseWorkingPuedePasarAFaseDeparting() {
-		fail("Not yet implemented");
+	void testUnBuqueQueRecibeElMensajeDepartSeLoDelegaASuEstado() {
+		unBuque.depart();
+		
+		verify(unBuque.getFase()).depart(unBuque); // Verifica que la fase recibio el mensaje
+	}
+	
+	@Test
+	void testUnBuqueDelegaASuFaseElAvisoDePartidaALaTerminal() {
+		unBuque.avisarPartidaATerminal();
+		
+		verify(unBuque.getFase()).avisarPartidaATerminal(unBuque); // Verifica que la fase recibio el mensaje
 	}
 	
 	@Test
 	void testUnBuqueEnFaseDepartPasaAFaseOutboundCuandoSeAlejaDeLaTerminal() {
-		// Necesita alejarse un kilometro para poder cambiar de fase
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	void testUnBuqueQueNoLlegoALaTerminalNavegaHaciaLaMisma() {
-		fail("Not yet implemented");
-	}
-	
-	@Test
-	void testUnBuqueQueLlegoALaTerminalSeAlejaNavegando() {
-		fail("Not yet implemented");
+		// Setup
+		when(faseOutbound.siguienteFase(unBuque)).thenReturn(faseInbound);
+		when(faseInbound.siguienteFase(unBuque)).thenReturn(faseArrived);
+		when(faseArrived.siguienteFase(unBuque)).thenReturn(faseWorking);
+		when(faseWorking.siguienteFase(unBuque)).thenReturn(faseDeparting);
+		when(faseWorking.siguienteFase(unBuque)).thenReturn(faseOutbound);
+		unBuque.cambiarFase(); // Pasa a fase Inbound
+		unBuque.cambiarFase(); // Pasa a fase Arrived
+		unBuque.cambiarFase(); // Pasa a fase Working
+		
+		unBuque.cambiarFase();
+		
+		assertEquals(FaseDeBuqueOutbound.class, unBuque.getFase().getClass());
 	}
 
 }
