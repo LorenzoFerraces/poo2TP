@@ -2,7 +2,7 @@ package faseDeBuque;
 
 import buque.Buque;
 
-public class FaseDeBuqueArrived implements FaseDeBuque{
+public class FaseDeBuqueArrived implements FaseDeBuque {
 
 
 	// Retorna la fase 4 de 5
@@ -32,11 +32,4 @@ public class FaseDeBuqueArrived implements FaseDeBuque{
 		// Implementado en la fase Departing
 	}
 
-	// No realiza nada, porque el buque llego a la terminal
-	@Override
-	public void navegar(Buque unBuque) {
-		// Se queda en su posicion
-	}
-
-	
 }

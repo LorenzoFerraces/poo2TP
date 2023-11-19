@@ -1,9 +1,8 @@
 package faseDeBuque;
 
-import punto.Punto;
 import buque.Buque;
 
-public class FaseDeBuqueOutbound implements FaseDeBuque{
+public class FaseDeBuqueOutbound implements FaseDeBuque {
 
 	
 	// Retorna la fase 2 de 5 si esta a menos de 50 km de la terminal
@@ -35,11 +34,4 @@ public class FaseDeBuqueOutbound implements FaseDeBuque{
 		// Implementado en la fase Departing
 	}
 
-	// Simula la navegación del buque hacia la terminal
-	@Override
-	public void navegar(Buque unBuque) {
-		Punto posicionDeTerminal = unBuque.getTerminal().getCoordenadas();
-		
-		unBuque.getGPS().acercarseAPosicion(posicionDeTerminal);
-	}
 }

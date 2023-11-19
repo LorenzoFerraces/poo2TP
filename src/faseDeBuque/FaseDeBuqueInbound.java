@@ -1,9 +1,8 @@
 package faseDeBuque;
 
-import punto.Punto;
 import buque.Buque;
 
-public class FaseDeBuqueInbound implements FaseDeBuque{
+public class FaseDeBuqueInbound implements FaseDeBuque {
 
 
 	// Retorna la fase 3 de 5 cuando las coordenadas del buque y la terminal coinciden
@@ -36,13 +35,4 @@ public class FaseDeBuqueInbound implements FaseDeBuque{
 		// Implementado en la fase Departing
 	}
 
-	// Simula la navegación del buque hacia la terminal
-	@Override
-	public void navegar(Buque unBuque) {
-		Punto posicionDeTerminal = unBuque.getTerminal().getCoordenadas();
-		
-		unBuque.getGPS().acercarseAPosicion(posicionDeTerminal);
-	}
-
-	
 }

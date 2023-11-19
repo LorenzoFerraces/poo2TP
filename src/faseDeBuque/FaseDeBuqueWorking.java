@@ -2,7 +2,7 @@ package faseDeBuque;
 
 import buque.Buque;
 
-public class FaseDeBuqueWorking implements FaseDeBuque{
+public class FaseDeBuqueWorking implements FaseDeBuque {
 
 
 	// Retorna la fase 5 de 5
@@ -31,11 +31,4 @@ public class FaseDeBuqueWorking implements FaseDeBuque{
 		// Implementado en la fase Departing
 	}
 
-	// No realiza nada, pues el buque esta realizando la carga y descarga
-	@Override
-	public void navegar(Buque unBuque) {
-		// Se queda en su posicion
-	}
-
-	
 }

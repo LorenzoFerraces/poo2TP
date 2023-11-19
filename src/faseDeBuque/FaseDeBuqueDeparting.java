@@ -1,9 +1,8 @@
 package faseDeBuque;
 
-import punto.Punto;
 import buque.Buque;
 
-public class FaseDeBuqueDeparting implements FaseDeBuque{
+public class FaseDeBuqueDeparting implements FaseDeBuque {
 
 
 	// Retorna la primera fase, ya que this es la última
@@ -35,13 +34,4 @@ public class FaseDeBuqueDeparting implements FaseDeBuque{
 		}
 	}
 
-	// Simula el alejamiento del buque de la terminal
-	@Override
-	public void navegar(Buque unBuque) {
-		Punto posicionDeTerminal = unBuque.getTerminal().getCoordenadas();
-		
-		unBuque.getGPS().alejarseDePosicion(posicionDeTerminal);
-	}
-
-	
 }
