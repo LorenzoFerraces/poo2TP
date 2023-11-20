@@ -56,6 +56,10 @@ public class CircuitoMaritimo {
 		return tramos.get(tramos.size() - 1).getDestino();
 	}
 	
+	public TerminalPortuaria getTerminalInicio() {
+		return tramos.get(0).getOrigen();
+	}
+	
 	private List<Tramo> subCircuito(TerminalPortuaria inicio, TerminalPortuaria fin) {
 //		TODO: implementar buscador por terminal de origen y buscador por terminal de destino
 		return new ArrayList<Tramo>();
