@@ -1,4 +1,4 @@
-package containers;
+package container;
 
 public class ContainerReefer extends Container {
 	double kwHora;

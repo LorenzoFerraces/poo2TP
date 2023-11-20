@@ -1,6 +1,6 @@
 package empresaTransportista;
 
-import containers.Container;
+import container.Container;
 
 public class Camion {
 

@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import container.Container;
+import container.ContainerReefer;
+
 class ContainerReeferTest {
 	@Test
 	void elConsumoDeKwPorHoraEsCorrecto() {

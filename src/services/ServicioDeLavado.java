@@ -1,6 +1,6 @@
 package services;
 
-import containers.Container;
+import container.Container;
 
 public class ServicioDeLavado implements IServicio {
 	Container container;

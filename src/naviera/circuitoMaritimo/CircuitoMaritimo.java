@@ -76,6 +76,14 @@ public class CircuitoMaritimo {
 		return this.mapReduceToDouble(Tramo::getPrecio);
 	}
 
+	public boolean contieneOrigenYDestino(TerminalPortuaria origen, TerminalPortuaria destino) {
+		int indexOrigen = this.posicionComoOrigen(origen);
+		int indexDestino = this.posicionComoDestino(destino);
+		return ((indexOrigen <= indexDestino) && 
+				(indexOrigen != (-1)) && (indexDestino != (-1))); 
+		
+	}
+	
 	private Double mapReduceToDouble(ToDoubleFunction<Tramo> f) {
 //		Prop: toma una funcion de Tramo a Double, y mapea los tramos para despues devolver la suma de ese mapeo
 		return tramos.stream().mapToDouble(f).sum();
