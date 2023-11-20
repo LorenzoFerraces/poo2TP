@@ -25,7 +25,7 @@ public class Viaje {
 		return this.fecha_de_salida;
 	}
 	
-	public double getTiempoDeViajeEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
-		return this.circuito.getTiempoDeViajeEntreTerminales(inicio, fin);
+	public double getTiempoEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
+		return this.circuito.getTiempoEntreTramos(inicio, fin);
 	}
 }

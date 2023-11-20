@@ -91,4 +91,9 @@ public class CircuitoMaritimo {
 		return tramos.stream().map(Tramo::getDestino).collect(Collectors.toList()).indexOf(t);
 	}
 
+	public double getTiempoEntreTramos(TerminalPortuaria inicio, TerminalPortuaria fin) {
+		CircuitoMaritimo sub = this.subCircuito(inicio, fin);
+		return sub.tiempoTotal();
+	}
+
 }
