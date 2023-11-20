@@ -61,7 +61,6 @@ public class CircuitoMaritimo {
 	public Integer cantidadTramos() {
 		return this.tramos.size();
 	}
-
 	public boolean contieneTerminal(TerminalPortuaria t) {
 //		Prop: indica si el circuito contiene la terminal como origen o destino en alguno de sus tramos
 		return tramos.stream().map(tramo -> tramo.contieneTerminal(t)).anyMatch(bool -> bool);
@@ -90,6 +89,11 @@ public class CircuitoMaritimo {
 	private int posicionComoDestino(TerminalPortuaria t) {
 //		Prop: describe el index del tramo en tramos que tiene a la terminal t como destino
 		return tramos.stream().map(Tramo::getDestino).collect(Collectors.toList()).indexOf(t);
+	}
+
+	public double getTiempoEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
+		CircuitoMaritimo sub = this.subCircuito(inicio, fin);
+		return sub.tiempoTotal();
 	}
 
 }
