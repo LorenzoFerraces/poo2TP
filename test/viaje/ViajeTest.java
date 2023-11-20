@@ -5,7 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ class ViajeTest {
 	CircuitoMaritimo circuito;
 	TerminalPortuaria terminal1;
 	TerminalPortuaria terminal2;
-	LocalDateTime fechaSalida;
+	LocalDate fechaSalida;
 	
 	
 	@BeforeEach
@@ -26,8 +26,9 @@ class ViajeTest {
 		this.circuito = mock(CircuitoMaritimo.class);
 		this.terminal1 = mock(TerminalPortuaria.class);
 		this.terminal2 = mock(TerminalPortuaria.class);
-		this.fechaSalida = mock(LocalDateTime.class);
+		this.fechaSalida = LocalDate.now();
 		this.miViaje = new Viaje(this.circuito, this.fechaSalida);
+		when(circuito.tiempoTotal()).thenReturn(5d);
 	}
 
 	@Test
@@ -44,11 +45,35 @@ class ViajeTest {
 	@Test
 	void sePuedeCalcularELTiempoDeViajeEntreDosTerminales() {
 		double tiempo_esperado = 1200.0; //Valor expresado en minutos
-		when(circuito.getTiempoDeViajeEntreTerminales(terminal1, terminal2)).thenReturn(tiempo_esperado);
+		when(circuito.getTiempoEntreTerminales(terminal1, terminal2)).thenReturn(tiempo_esperado);
 		
-		assertEquals(this.miViaje.getTiempoDeViajeEntreTerminales(terminal1, terminal2), tiempo_esperado);
+		assertEquals(this.miViaje.getTiempoEntreTerminales(terminal1, terminal2), tiempo_esperado);
 		
-		verify(circuito).getTiempoDeViajeEntreTerminales(terminal1, terminal2); //Verifcar que se llame a la funcion de circuito
+		verify(circuito).getTiempoEntreTerminales(terminal1, terminal2); //Verifcar que se llame a la funcion de circuito
+	}
+	
+	@Test
+	void testContieneTerminal() {
+		when(miViaje.contieneTerminal(terminal1)).thenReturn(true);
+		
+		assertTrue(this.miViaje.contieneTerminal(terminal1));
+		
+		verify(this.circuito).contieneTerminal(terminal1);
+	}
+	
+	@Test
+	void testNoContieneTerminal() {
+		when(miViaje.contieneTerminal(terminal2)).thenReturn(false);
+		
+		assertFalse(this.miViaje.contieneTerminal(terminal2));
+		
+		verify(this.circuito).contieneTerminal(terminal2);
+	}
+	
+	@Test
+	void testFechaLlegada() {
+		LocalDate esperado = LocalDate.now().plusDays((long)Math.ceil(5d));
+		assertEquals(esperado, this.miViaje.getFechaLlegada());
 	}
 
 }
