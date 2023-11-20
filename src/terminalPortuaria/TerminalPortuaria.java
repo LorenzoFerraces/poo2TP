@@ -18,6 +18,8 @@ public class TerminalPortuaria {
 	public Double calcularDistancia(Punto p){
 		return this.getCoordenadas().calcularDistancia(p);
 	}
-	
+
+
+
 
 }

@@ -12,11 +12,13 @@ import terminalPortuaria.TerminalPortuaria;
 class TramoTest {
 
 	private Tramo tramo;
+	private TerminalPortuaria t1;
+	private TerminalPortuaria t2;
 	@BeforeEach
 	void setUp() throws Exception {
-		TerminalPortuaria terminal1 = mock(TerminalPortuaria.class);
-		TerminalPortuaria terminal2 = mock(TerminalPortuaria.class);
-		this.tramo = new Tramo(terminal1, terminal2, 360d, 800d);
+		this.t1 = mock(TerminalPortuaria.class);
+		this.t2 = mock(TerminalPortuaria.class);
+		this.tramo = new Tramo(t1, t2, 360d, 800d);
 	}
 
 	@Test
@@ -26,9 +28,22 @@ class TramoTest {
 	}
 	
 	@Test
-	void testContieneTerminal() {
-		fail("test no implementado");
+	void testContieneTerminalOrigen() {
+		assertTrue(tramo.contieneTerminal(t1));
+	}
+	
+	@Test
+	void testContieneTerminalDestino() {
+		assertTrue(tramo.contieneTerminal(t2));
+	}
+	
+	@Test
+	void testGetPrecio() {
+		assertEquals(800d, tramo.getPrecio());
 	}
 
-//	Me parece innecesario testear getters y setters para subir el porcentaje de cobertura
+	@Test
+	void testGetTiempo() {
+		assertEquals(360d, tramo.getTiempo());
+	}
 }
