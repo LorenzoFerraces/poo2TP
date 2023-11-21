@@ -6,18 +6,21 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import punto.Punto;
-import terminalPortuaria.TerminalPortuaria;
+import buque.Buque;
+import naviera.Naviera;
 
 class NavieraTest {
 	
-	private TerminalPortuaria t1;
+	private Naviera nav;
 	
-	private Punto p1;
-	private Punto p2;
-
 	@BeforeEach
 	void setUp() throws Exception {
+	}
+	
+	@Test
+	void testAddBuque() {
+		Buque b = mock(Buque.class);
+		assertTrue(nav.addBuque(b));
 	}
 
 
