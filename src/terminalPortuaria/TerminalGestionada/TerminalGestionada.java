@@ -1,9 +1,12 @@
 package terminalPortuaria.TerminalGestionada;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import container.Container;
 import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
 import empresaTransportista.EmpresaTransportista;
@@ -12,29 +15,30 @@ import naviera.circuitoMaritimo.CircuitoMaritimo;
 import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
 import terminalPortuaria.TerminalGestionada.CriterioCircuito.CriterioCircuito;
+import viaje.Viaje;
 
 public class TerminalGestionada extends TerminalPortuaria {
 	
-	private List<Naviera> navieras;
-	private List<Shipper> shippers;
-	private List<Consignee> consignees;
-	private List<EmpresaTransportista> empresasTransporte;
-	private List<Conductor> conductores;
-	private List<Camion> camiones;
-	private List<OrdenImportacion> ordenesImportacion;
-	private List<OrdenExportacion> ordenesExportacion;
+	private Set<Naviera> navieras;
+	private Set<Shipper> shippers;
+	private Set<Consignee> consignees;
+	private Set<EmpresaTransportista> empresasTransporte;
+	private Set<Conductor> conductores;
+	private Set<Camion> camiones;
+	private Set<OrdenImportacion> ordenesImportacion;
+	private Set<OrdenExportacion> ordenesExportacion;
 	private CriterioCircuito criterio;
 
 	public TerminalGestionada(Punto p, CriterioCircuito criterio) {
 		super(p);
-		this.navieras = new ArrayList<Naviera>();
-		this.shippers = new ArrayList<Shipper>();
-		this.consignees = new ArrayList<Consignee>();
-		this.empresasTransporte = new ArrayList<EmpresaTransportista>();
-		this.conductores = new ArrayList<Conductor>();
-		this.camiones = new ArrayList<Camion>();
-		this.ordenesImportacion = new ArrayList<OrdenImportacion>();
-		this.ordenesExportacion = new ArrayList<OrdenExportacion>();
+		this.navieras = new HashSet<Naviera>();
+		this.shippers = new HashSet<Shipper>();
+		this.consignees = new HashSet<Consignee>();
+		this.empresasTransporte = new HashSet<EmpresaTransportista>();
+		this.conductores = new HashSet<Conductor>();
+		this.camiones = new HashSet<Camion>();
+		this.ordenesImportacion = new HashSet<OrdenImportacion>();
+		this.ordenesExportacion = new HashSet<OrdenExportacion>();
 		this.criterio = criterio;
 	}
 	
@@ -80,6 +84,19 @@ public class TerminalGestionada extends TerminalPortuaria {
 			.filter(circ -> circ.contieneTerminal(t)).collect(Collectors.toList()))
 			.get();
 				
+	}
+	
+	public List<Viaje> viajesConCircuito(CircuitoMaritimo circ) {
+		return this.navieras.stream().map(nav -> nav.getCircuitos().stream().map(Viaje::getCircuito))
+				.filter(circuito -> circ.equals(circuito));
+	}
+	
+	public void exportar(TerminalPortuaria t, Viaje viaje, Camion camion, 
+					Conductor conductor, Container carga, Shipper ship) {
+		this.add(ship);
+		this.add(conductor);
+		this.add(camion);
+		
 	}
 	
 	
