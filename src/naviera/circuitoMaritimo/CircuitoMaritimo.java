@@ -20,14 +20,16 @@ public class CircuitoMaritimo {
 	public CircuitoMaritimo(List<Tramo> list) throws Exception {
 		super();
 		this.tramos = new ArrayList<Tramo>();
-		tramos.forEach(t -> {
-			try {
-				this.agregarTramo(t);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-		}
+		list.forEach(t -> {try {
+			this.agregarTramo(t);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}});
+	}
+	
+	private void verificarLista(List<Tramo> list) throws Exception{
+		
+	}
 
 	public boolean agregarTramo(Tramo t) throws Exception {
 //		Prop: agrega un tramo al final del recorrido

@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -55,6 +59,24 @@ class CircuitoMaritimoTest {
 	@Test
 	void agregarTramoACircuitoVacio() throws Exception {
 		assertTrue(circuito.agregarTramo(tramo1));
+	}
+	
+	@Test 
+	void testCrearCircuitoConListaValida() throws Exception {
+		List<Tramo> lista = new ArrayList<Tramo>(
+				Arrays.asList(
+						tramo1,tramo2,tramo3));
+		CircuitoMaritimo circuito = new CircuitoMaritimo(lista);
+		assertEquals(3, circuito.cantidadTramos());
+	}
+	
+	@Test 
+	void testCrearCircuitoConListaInvalida() throws Exception {
+		List<Tramo> lista = new ArrayList<Tramo>(
+				Arrays.asList(
+						tramo1,tramo3,tramo2));
+		CircuitoMaritimo nuevo = new CircuitoMaritimo(lista);
+		assertEquals(0, nuevo.cantidadTramos());
 	}
 
 	@Test
