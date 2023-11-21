@@ -75,8 +75,8 @@ class CircuitoMaritimoTest {
 		List<Tramo> lista = new ArrayList<Tramo>(
 				Arrays.asList(
 						tramo1,tramo3,tramo2));
-		CircuitoMaritimo nuevo = new CircuitoMaritimo(lista);
-		assertEquals(0, nuevo.cantidadTramos());
+		assertThrows(Exception.class, 
+				() -> new CircuitoMaritimo(lista));
 	}
 
 	@Test

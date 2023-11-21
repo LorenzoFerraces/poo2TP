@@ -17,18 +17,22 @@ public class CircuitoMaritimo {
 		this.tramos = new ArrayList<Tramo>();
 	}
 
-	public CircuitoMaritimo(List<Tramo> list) throws Exception {
+	public CircuitoMaritimo(List<Tramo> lista) throws Exception {
 		super();
-		this.tramos = new ArrayList<Tramo>();
-		list.forEach(t -> {try {
-			this.agregarTramo(t);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}});
+		this.verificarLista(lista);
+		this.tramos = lista;
+		
 	}
 	
-	private void verificarLista(List<Tramo> list) throws Exception{
-		
+	private void verificarLista(List<Tramo> lista) throws Exception{
+		TerminalPortuaria origen = lista.get(0).getOrigen();
+		for (Tramo t : lista) {
+			if(!t.getOrigen().equals(origen)) {
+				throw new Exception(
+						"La lista no es valida");
+			}
+			origen = t.getDestino();
+		}
 	}
 
 	public boolean agregarTramo(Tramo t) throws Exception {
