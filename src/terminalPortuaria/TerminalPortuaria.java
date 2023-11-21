@@ -4,7 +4,7 @@ import punto.Punto;
 
 public class TerminalPortuaria {
 	
-	private Punto coordenadas;
+	protected Punto coordenadas;
 	
 	public TerminalPortuaria(Punto p) {
 		super();
