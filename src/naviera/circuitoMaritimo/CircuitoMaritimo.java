@@ -24,7 +24,6 @@ public class CircuitoMaritimo {
 			try {
 				this.agregarTramo(t);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
@@ -52,7 +51,7 @@ public class CircuitoMaritimo {
 //		Prop: describe el CircuitoMaritimo con 'inicio' como terminal de origen, y 'fin' como terminal de fin
 //			  En caso de no existir alguna de las terminales, retorna un circuito vacio			  
 		try {
-			return new CircuitoMaritimo(tramos.subList(this.posicionComoOrigen(inicio), this.posicionComoDestino(fin)));
+			return new CircuitoMaritimo(this.tramos.subList(this.posicionComoOrigen(inicio), this.posicionComoDestino(fin)));
 		} catch (Exception e) {
 			return new CircuitoMaritimo();
 		}
@@ -68,12 +67,12 @@ public class CircuitoMaritimo {
 
 	public Double tiempoTotal() {
 //		Prop: describe el tiempo total de recorrido de los tramos
-		return this.mapReduceToDouble(Tramo::getTiempo);
+		return this.mapToDoubleSum(Tramo::getTiempo);
 	}
 
 	public Double precioTotal() {
 //		Prop: describe el total del costo de los tramos
-		return this.mapReduceToDouble(Tramo::getPrecio);
+		return this.mapToDoubleSum(Tramo::getPrecio);
 	}
 
 	public boolean contieneOrigenYDestino(TerminalPortuaria origen, TerminalPortuaria destino) {
@@ -84,7 +83,7 @@ public class CircuitoMaritimo {
 		
 	}
 	
-	private Double mapReduceToDouble(ToDoubleFunction<Tramo> f) {
+	private Double mapToDoubleSum(ToDoubleFunction<Tramo> f) {
 //		Prop: toma una funcion de Tramo a Double, y mapea los tramos para despues devolver la suma de ese mapeo
 		return tramos.stream().mapToDouble(f).sum();
 	}
@@ -100,8 +99,9 @@ public class CircuitoMaritimo {
 	}
 
 	public double getTiempoEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
-		CircuitoMaritimo sub = this.subCircuito(inicio, fin);
-		return sub.tiempoTotal();
+		return this.tramos.subList(this.posicionComoOrigen(inicio), this.posicionComoDestino(fin) +1)
+				.stream().mapToDouble(Tramo::getTiempo).sum()
+		;
 	}
 
 }

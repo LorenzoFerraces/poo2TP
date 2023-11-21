@@ -31,11 +31,11 @@ public class Naviera {
 		return this.circuitos.add(m);
 	}
 	
-	public boolean addViaje(CircuitoMaritimo m, LocalDate date ) {
+	public boolean addViaje(CircuitoMaritimo m, Buque b, LocalDate date ) {
 		if (!this.circuitos.contains(m)){
 			circuitos.add(m);
 		}
-		return this.viajes.add(new Viaje(m,date));
+		return this.viajes.add(new Viaje(m, b, date));
 	}
 	
 	public Set<CircuitoMaritimo> circuitosQuePasanPor(TerminalPortuaria t1, TerminalPortuaria t2){

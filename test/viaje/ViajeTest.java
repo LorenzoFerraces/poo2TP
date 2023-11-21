@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import buque.Buque;
 import naviera.circuitoMaritimo.CircuitoMaritimo;
 import terminalPortuaria.TerminalPortuaria;
 
@@ -19,6 +20,7 @@ class ViajeTest {
 	TerminalPortuaria terminal1;
 	TerminalPortuaria terminal2;
 	LocalDate fechaSalida;
+	Buque bu;
 	
 	
 	@BeforeEach
@@ -26,8 +28,9 @@ class ViajeTest {
 		this.circuito = mock(CircuitoMaritimo.class);
 		this.terminal1 = mock(TerminalPortuaria.class);
 		this.terminal2 = mock(TerminalPortuaria.class);
+		this.bu = mock(Buque.class);
 		this.fechaSalida = LocalDate.now();
-		this.miViaje = new Viaje(this.circuito, this.fechaSalida);
+		this.miViaje = new Viaje(this.circuito, bu, this.fechaSalida);
 		when(circuito.tiempoTotal()).thenReturn(5d);
 	}
 

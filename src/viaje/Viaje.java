@@ -11,8 +11,10 @@ public class Viaje {
 	Buque buque;
 	LocalDate fechaDeSalida;
 	
-	public Viaje(CircuitoMaritimo circuito, LocalDate fecha) {
+	public Viaje(CircuitoMaritimo circuito, Buque b, LocalDate fecha) {
+		super();
 		this.circuito = circuito;
+		this.buque = b;
 		this.fechaDeSalida = fecha;
 	}
 	
