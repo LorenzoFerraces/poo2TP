@@ -36,7 +36,7 @@ class ViajeTest {
 
 	@Test
 	void sePuedeObtenerElCircuitoQueVaASeguirElViaje() {
-		assertEquals(miViaje.getCircuitoMaritimo(), this.circuito);
+		assertEquals(miViaje.getCircuito(), this.circuito);
 	}
 	
 	@Test

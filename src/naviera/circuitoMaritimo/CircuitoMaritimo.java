@@ -46,16 +46,6 @@ public class CircuitoMaritimo {
 					"el origen de " + t.toString() + " no coincide con el destino de " + ultimoTramo.toString());
 		}
 	}
-
-	public CircuitoMaritimo subCircuito(TerminalPortuaria inicio, TerminalPortuaria fin) {
-//		Prop: describe el CircuitoMaritimo con 'inicio' como terminal de origen, y 'fin' como terminal de fin
-//			  En caso de no existir alguna de las terminales, retorna un circuito vacio			  
-		try {
-			return new CircuitoMaritimo(this.tramos.subList(this.posicionComoOrigen(inicio), this.posicionComoDestino(fin)));
-		} catch (Exception e) {
-			return new CircuitoMaritimo();
-		}
-	}
 	
 	public Integer cantidadTramos() {
 		return this.tramos.size();

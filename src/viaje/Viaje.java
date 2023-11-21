@@ -18,7 +18,7 @@ public class Viaje {
 		this.fechaDeSalida = fecha;
 	}
 	
-	public CircuitoMaritimo getCircuitoMaritimo() {
+	public CircuitoMaritimo getCircuito() {
 		return this.circuito;
 	}
 	
@@ -36,7 +36,7 @@ public class Viaje {
 	
 	public LocalDate getFechaLlegada() {
 		return this.getFechaDeSalida().plusDays(
-				(long) Math.ceil(this.getCircuitoMaritimo().tiempoTotal()));
+				(long) Math.ceil(this.getCircuito().tiempoTotal()));
 	}
 	
 }

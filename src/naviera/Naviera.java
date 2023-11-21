@@ -2,6 +2,7 @@ package naviera;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,16 +32,34 @@ public class Naviera {
 		return this.circuitos.add(m);
 	}
 	
-	public boolean addViaje(CircuitoMaritimo m, Buque b, LocalDate date ) {
-		if (!this.circuitos.contains(m)){
-			circuitos.add(m);
+	public boolean addViaje(CircuitoMaritimo m, Buque b, LocalDate date ) throws Exception{
+		if (!this.circuitos.contains(m) || !this.buques.contains(b)) {
+			throw new Exception(
+					"Solo pueden crearse viajes con componentes que contenga la naviera");
+			
 		}
 		return this.viajes.add(new Viaje(m, b, date));
 	}
 	
-	public Set<CircuitoMaritimo> circuitosQuePasanPor(TerminalPortuaria t1, TerminalPortuaria t2){
-		return this.circuitos.stream().filter(circ -> circ.contieneOrigenYDestino(t1,t2)).collect(Collectors.toSet());
+	public List<CircuitoMaritimo> getCircuitos(){
+		return this.circuitos.stream().toList();
 	}
+	
+	public List<Buque> getBuques(){
+		return this.buques.stream().toList();
+	}
+	
+	public List<Viaje> getViajes(){
+		return this.viajes.stream().toList();
+	}
+	
+	public List<Viaje> viajesQuePasanPor(TerminalPortuaria t1, TerminalPortuaria t2){
+		return this.viajes.stream()
+				.filter(viaje -> viaje
+						.getCircuito()
+						.contieneOrigenYDestino(t1,t2)).toList();
+	}
+	
 	
 	
 	
