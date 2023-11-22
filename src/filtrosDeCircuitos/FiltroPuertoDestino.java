@@ -2,23 +2,24 @@ package filtrosDeCircuitos;
 
 import java.util.List;
 
-
-import naviera.circuitoMaritimo.CircuitoMaritimo;
 import terminalPortuaria.TerminalPortuaria;
+import terminalPortuaria.TerminalGestionada.TerminalGestionada;
 import viaje.Viaje;
 
 public class FiltroPuertoDestino implements IFiltrable {
-	TerminalPortuaria puertoFiltro;
-	List<CircuitoMaritimo> circuitos;
+	TerminalPortuaria puertoDestino;
+	TerminalGestionada origen;
 	
-	public FiltroPuertoDestino(TerminalPortuaria puertoFiltro, List<Viaje> viajes ) {
-		this.puertoFiltro = puertoFiltro;
-		this.circuitos = viajes.stream().map(viaje -> viaje.getCircuitoMaritimo()).toList();
+	public FiltroPuertoDestino(TerminalPortuaria puertoFiltro, TerminalGestionada origen) {
+		this.puertoDestino = puertoFiltro;
+		this.origen = origen;
 	}
 
 	@Override
-	public List<CircuitoMaritimo> filtrar() {		
-		return this.circuitos.stream().filter(circuito -> circuito.getTerminalDestino().equals(this.puertoFiltro)).toList();
+	public List<Viaje> filtrar(List<Viaje> viajes) {		
+		return viajes.stream()
+				.filter(viaje -> viaje.vieneDespuesDe(this.origen, this.puertoDestino))
+				.toList();				
 	}
 
 }

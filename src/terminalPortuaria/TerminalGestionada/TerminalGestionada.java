@@ -1,5 +1,6 @@
 package terminalPortuaria.TerminalGestionada;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -96,7 +97,7 @@ public class TerminalGestionada extends TerminalPortuaria {
 	
 	public List<Viaje> viajesConCircuito(CircuitoMaritimo circ) {
 		return this.navieras.stream().map(nav -> nav.getViajes().stream()
-				.filter(viaje -> viaje.getCircuito().equals(circ)))
+					.filter(viaje -> viaje.getCircuito().equals(circ)))
 				.flatMap(Function.identity())
 				.collect(Collectors.toList());
 	}
@@ -106,10 +107,31 @@ public class TerminalGestionada extends TerminalPortuaria {
 		this.add(ship);
 		this.add(conductor);
 		this.add(camion);
-		orden OrdenExportacion = new OrdenExportacion()
-		
+		LocalDate fecha = viaje.getFechaDeSalida();
+		OrdenExportacion orden = new OrdenExportacion(t, viaje, camion, conductor, 
+								  carga, fecha, fecha.plusDays((long) viaje.getTiempoEntreTerminales(this, t)),
+								  ship, fecha.minusDays(5l));
+		this.add(orden);
 	}
 	
+	public void importar(TerminalPortuaria t, Viaje viaje, Container carga, Consignee consig) {
+		this.add(consig);
+		LocalDate fecha = viaje.getFechaDeSalida();
+		OrdenImportacion orden = new OrdenImportacion(t, viaje, carga, fecha, 
+			fecha.plusDays((long) viaje.getTiempoEntreTerminales(this, t)), consig);
+		this.add(orden);
+}
+	
+	public LocalDate proximaSalidaBuque(TerminalPortuaria t) {
+		return this.navieras.stream().map(nav -> nav.getViajes().stream()
+					.filter(viaje -> viaje.contieneTerminal(t)))
+				.flatMap(Function.identity())
+				.map(Viaje::getFechaDeSalida)
+				.min((f1, f2) -> f1.compareTo(f2))
+				.get();
+	}
+	
+	public filtrarViajes()
 	
 
 }

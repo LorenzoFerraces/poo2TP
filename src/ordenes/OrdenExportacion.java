@@ -12,16 +12,25 @@ import viaje.Viaje;
 public class OrdenExportacion extends Orden {
 
 	private Shipper shipper;
+	private LocalDate turnoAsignado;
+	
 	
 	public OrdenExportacion(TerminalPortuaria terminalDeDestino, Viaje viajeElegido, Camion camionAsignado,
 			Conductor conductorAsignado, Container carga, LocalDate fechaDeSalidaDesdeOrigen,
-			LocalDate fechaDeLlegadaADestino, Shipper shipper) {
-		super(terminalDeDestino, viajeElegido, camionAsignado, conductorAsignado, carga, fechaDeSalidaDesdeOrigen,
+			LocalDate fechaDeLlegadaADestino, Shipper shipper, LocalDate turno) {
+		super(terminalDeDestino, viajeElegido, carga, fechaDeSalidaDesdeOrigen,
 				fechaDeLlegadaADestino);
+		this.setCamion(camionAsignado);
+		this.setConductor(conductorAsignado);
 		this.shipper = shipper;
+		this.turnoAsignado = turno;
 	}
 
 	public Shipper getShipper() {
-		return shipper;
+		return this.shipper;
+	}
+	
+	public LocalDate getTurno() {
+		return this.turnoAsignado;
 	}
 }

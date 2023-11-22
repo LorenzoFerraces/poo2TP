@@ -39,4 +39,8 @@ public class Viaje {
 				(long) Math.ceil(this.getCircuito().tiempoTotal()));
 	}
 	
+	public boolean vieneDespuesDe(TerminalPortuaria t1, TerminalPortuaria t2) {
+		return this.circuito.vieneDespuesDe(t1, t2);
+	}
+	
 }

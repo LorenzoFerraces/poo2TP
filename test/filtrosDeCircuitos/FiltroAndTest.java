@@ -12,14 +12,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import naviera.circuitoMaritimo.CircuitoMaritimo;
+import viaje.Viaje;
 
 class FiltroAndTest {
 	IFiltrable filtro;
 	IFiltrable operador1;
 	IFiltrable operador2;
-	CircuitoMaritimo circuito1;
-	CircuitoMaritimo circuito2;
-	CircuitoMaritimo circuito3;
+	
+	Viaje viaje1;
+	Viaje viaje2;
+	Viaje viaje3;
+	
+	List<Viaje> viajes;
 
 	@BeforeEach
 	void setUp() {
@@ -27,54 +31,61 @@ class FiltroAndTest {
 		this.operador2 = mock(IFiltrable.class);
 		this.filtro = new FiltroAnd(operador1, operador2);
 		
-		this.circuito1 = mock(CircuitoMaritimo.class);
-		this.circuito2 = mock(CircuitoMaritimo.class);
-		this.circuito3 = mock(CircuitoMaritimo.class);
+		this.viaje1 = mock(Viaje.class);
+		this.viaje2 = mock(Viaje.class);
+		this.viaje3 = mock(Viaje.class);
+		
+		this.viajes = new ArrayList<Viaje>();
+		
+		viajes.add(viaje3);
+		viajes.add(viaje2);
+		viajes.add(viaje1);
+		
 		
 	}
 
 
 	@Test
 	void alFiltrarSeLlamaALaRecursionFiltrandoSusOperadores() {
-		filtro.filtrar();
+		filtro.filtrar(viajes);
 		
-		verify(operador1).filtrar();
-		verify(operador2).filtrar();
+		verify(operador1).filtrar(viajes);
+		verify(operador2).filtrar(viajes);
 	}
 	
 	@Test
 	void elFiltroDeDosListasVaciasDebeSerUnaListaVacia() {
-		when(operador1.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>());
-		when(operador2.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>());
+		when(operador1.filtrar(viajes)).thenReturn(new ArrayList<Viaje>());
+		when(operador2.filtrar(viajes)).thenReturn(new ArrayList<Viaje>());
 		
-		assertTrue(filtro.filtrar().isEmpty());
+		assertTrue(filtro.filtrar(viajes).isEmpty());
 	}
 	
 	@Test
 	void elFiltradoDeDosListasIgualesIncluyeATodosLosElementos() {
-		when(operador1.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>(List.of(circuito1, circuito2)));
-		when(operador2.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>(List.of(circuito1, circuito2)));
+		when(operador1.filtrar(viajes)).thenReturn(new ArrayList<Viaje>(List.of(viaje1, viaje2)));
+		when(operador2.filtrar(viajes)).thenReturn(new ArrayList<Viaje>(List.of(viaje1, viaje2)));
 		
-		assertEquals(filtro.filtrar().size(),2);
-		assertTrue(filtro.filtrar().contains(circuito1));
-		assertTrue(filtro.filtrar().contains(circuito2));
+		assertEquals(filtro.filtrar(viajes).size(),2);
+		assertTrue(filtro.filtrar(viajes).contains(viaje1));
+		assertTrue(filtro.filtrar(viajes).contains(viaje2));
 	}
 	
 	@Test
 	void elFiltradoRealizaLaInterseccionDeLasDosListas() {
-		when(operador1.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>(List.of(circuito1, circuito2)));
-		when(operador2.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>(List.of(circuito1, circuito3)));
+		when(operador1.filtrar(viajes)).thenReturn(new ArrayList<Viaje>(List.of(viaje1, viaje2)));
+		when(operador2.filtrar(viajes)).thenReturn(new ArrayList<Viaje>(List.of(viaje1, viaje3)));
 		
-		assertEquals(filtro.filtrar().size(),1);
-		assertTrue(filtro.filtrar().contains(circuito1));
+		assertEquals(filtro.filtrar(viajes).size(),1);
+		assertTrue(filtro.filtrar(viajes).contains(viaje1));
 	}
 	
 	@Test
 	void elFiltradoDevuelveUnaListaVaciaSiNoHayInterseccion() {
-		when(operador1.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>(List.of(circuito1, circuito2)));
-		when(operador2.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>(List.of(circuito3)));
+		when(operador1.filtrar(viajes)).thenReturn(new ArrayList<Viaje>(List.of(viaje1, viaje2)));
+		when(operador2.filtrar(viajes)).thenReturn(new ArrayList<Viaje>(List.of(viaje3)));
 		
-		assertTrue(filtro.filtrar().isEmpty());
+		assertTrue(filtro.filtrar(viajes).isEmpty());
 	}
 
 }

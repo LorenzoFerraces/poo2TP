@@ -1,9 +1,10 @@
 package filtrosDeCircuitos;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import viaje.Viaje;
 
 public class FiltroAnd implements IFiltrable {
 	IFiltrable operador1;
@@ -15,19 +16,12 @@ public class FiltroAnd implements IFiltrable {
 	}
 
 	@Override
-	public List<CircuitoMaritimo> filtrar() {
-		List<CircuitoMaritimo> listaFiltrada = new ArrayList<CircuitoMaritimo>();
-		List<CircuitoMaritimo> lista1 = operador1.filtrar();
-		List<CircuitoMaritimo> lista2 = operador2.filtrar();
+	public List<Viaje> filtrar(List<Viaje> viajes) {
+		Set<Viaje> set1 = operador1.filtrar(viajes).stream().collect(Collectors.toSet());
+		Set<Viaje> set2 = operador2.filtrar(viajes).stream().collect(Collectors.toSet());
+		set1.retainAll(set2);
 		
-		
-		for (CircuitoMaritimo circuito : lista1) {
-			if (lista2.contains(circuito)) {
-				listaFiltrada.add(circuito);
-			}
-			
-		}
-		return listaFiltrada;
+		return set1.stream().collect(Collectors.toList());
 	}
 	
 	

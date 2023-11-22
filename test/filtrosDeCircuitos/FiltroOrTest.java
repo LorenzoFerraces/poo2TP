@@ -12,13 +12,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import naviera.circuitoMaritimo.CircuitoMaritimo;
+import viaje.Viaje;
 
-class FiltroOrTest {
+class FiltroAndTest {
 	IFiltrable filtro;
 	IFiltrable operador1;
 	IFiltrable operador2;
-	CircuitoMaritimo circuito1;
-	CircuitoMaritimo circuito2;
+	
+	Viaje viaje1;
+	Viaje viaje2;
+	Viaje viaje3;
+	
+	List<Viaje> viajes;
 
 	@BeforeEach
 	void setUp() {
@@ -26,8 +31,16 @@ class FiltroOrTest {
 		this.operador2 = mock(IFiltrable.class);
 		this.filtro = new FiltroOr(operador1, operador2);
 		
-		this.circuito1 = mock(CircuitoMaritimo.class);
-		this.circuito2 = mock(CircuitoMaritimo.class);
+		this.viaje1 = mock(Viaje.class);
+		this.viaje2 = mock(Viaje.class);
+		this.viaje3 = mock(Viaje.class);
+		
+		this.viajes = new ArrayList<Viaje>();
+		
+		viajes.add(viaje3);
+		viajes.add(viaje2);
+		viajes.add(viaje1);
+		
 		
 	}
 	

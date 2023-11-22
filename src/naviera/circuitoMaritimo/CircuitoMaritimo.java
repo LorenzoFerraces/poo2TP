@@ -95,9 +95,22 @@ public class CircuitoMaritimo {
 	}
 
 	public double getTiempoEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
-		return this.tramos.subList(this.posicionComoOrigen(inicio), this.posicionComoDestino(fin) +1)
-				.stream().mapToDouble(Tramo::getTiempo).sum()
+//		Prop: indica el tiempo de viaje (en dias) entre las terminales
+//		Prec: ambas terminales existen en el circuito
+		int p1 = this.posicionComoOrigen(inicio);
+		int p2 = this.posicionComoDestino(fin);
+		double result = 
+				((p1 == (-1)) || (p2 == (-1)) ) ? (-1d) : 
+					this.tramos.subList(p1, p2 +1).stream().mapToDouble(Tramo::getTiempo).sum()
 		;
+		return result;
+	}
+	
+	public boolean vieneDespuesDe(TerminalPortuaria origen, TerminalPortuaria destino) {
+//		Prop: indica si la segunda terminal viene despues de la primera
+		int p1 = this.posicionComoOrigen(origen);
+		int p2 = this.posicionComoDestino(destino);
+		return (p1 <= p2 && !((p1 == (-1)) || (p2 == (-1)) ));
 	}
 
 }

@@ -1,13 +1,10 @@
 package filtrosDeCircuitos;
 
-import java.util.ArrayList;
-
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import viaje.Viaje;
 
 public class FiltroOr implements IFiltrable {
 	IFiltrable operador1;
@@ -20,15 +17,13 @@ public class FiltroOr implements IFiltrable {
 
 
 	@Override
-	public List<CircuitoMaritimo> filtrar() {
-		Set<CircuitoMaritimo> setFiltrado = new HashSet<CircuitoMaritimo>(); //Se utiliza un SET para evitar circuitos duplicados
-		List<CircuitoMaritimo> lista1 = operador1.filtrar();
-		List<CircuitoMaritimo> lista2 = operador2.filtrar();
+	public List<Viaje> filtrar(List<Viaje> viajes) {
+		Set<Viaje> set = operador1.filtrar(viajes).stream().collect(Collectors.toSet());
+		List<Viaje> lista = operador2.filtrar(viajes);
 
-		setFiltrado.addAll(lista1);
-		setFiltrado.addAll(lista2);
+		set.addAll(lista);
 		
-		return new ArrayList<CircuitoMaritimo>(setFiltrado);
+		return set.stream().collect(Collectors.toList());
 	}
 
 }

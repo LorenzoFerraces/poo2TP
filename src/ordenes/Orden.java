@@ -18,13 +18,11 @@ public abstract class Orden {
 	private LocalDate fechaDeSalidaDesdeOrigen;
 	private LocalDate fechaDeLlegadaADestino;
 
-	public Orden(TerminalPortuaria terminalDeDestino, Viaje viajeElegido, Camion camionAsignado,
-			Conductor conductorAsignado, Container carga, LocalDate fechaDeSalidaDesdeOrigen,
+	public Orden(TerminalPortuaria terminalDeDestino, Viaje viajeElegido,
+			Container carga, LocalDate fechaDeSalidaDesdeOrigen,
 			LocalDate fechaDeLlegadaADestino) {
 		this.terminalDeDestino = terminalDeDestino;
 		this.viajeElegido = viajeElegido;
-		this.camionAsignado = camionAsignado;
-		this.conductorAsignado = conductorAsignado;
 		this.carga = carga;
 		this.fechaDeSalidaDesdeOrigen = fechaDeSalidaDesdeOrigen;
 		this.fechaDeLlegadaADestino = fechaDeLlegadaADestino;
@@ -56,5 +54,13 @@ public abstract class Orden {
 
 	public LocalDate getFechaDeLlegadaADestino() {
 		return fechaDeLlegadaADestino;
+	}
+	
+	protected void setCamion(Camion camion) {
+		this.camionAsignado = camion;
+	}
+	
+	protected void setConductor(Conductor conductor) {
+		this.conductorAsignado = conductor;
 	}
 }

@@ -13,16 +13,21 @@ public class OrdenImportacion extends Orden {
 
 	private Consignee consignee;
 	
-	public OrdenImportacion(TerminalPortuaria terminalDeDestino, Viaje viajeElegido, Camion camionAsignado,
-			Conductor conductorAsignado, Container carga, LocalDate fechaDeSalidaDesdeOrigen,
+	public OrdenImportacion(TerminalPortuaria terminalDeDestino, Viaje viajeElegido, 
+			Container carga, LocalDate fechaDeSalidaDesdeOrigen,
 			LocalDate fechaDeLlegadaADestino, Consignee consignee) {
-		super(terminalDeDestino, viajeElegido, camionAsignado, conductorAsignado, carga, fechaDeSalidaDesdeOrigen,
+		super(terminalDeDestino, viajeElegido, carga, fechaDeSalidaDesdeOrigen,
 				fechaDeLlegadaADestino);
 		this.consignee = consignee;
 	}
 
 	public Consignee getConsignee() {
 		return consignee;
+	}
+	
+	public void cargarDatosRetiroDeCarga(Camion camion, Conductor conductor) {
+		this.setCamion(camion);
+		this.setConductor(conductor);
 	}
 	
 }
