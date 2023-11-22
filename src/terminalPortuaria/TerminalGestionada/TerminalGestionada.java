@@ -1,17 +1,24 @@
 package terminalPortuaria.TerminalGestionada;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import clientes.Consignee;
+import clientes.Shipper;
 import container.Container;
 import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
 import empresaTransportista.EmpresaTransportista;
 import naviera.Naviera;
 import naviera.circuitoMaritimo.CircuitoMaritimo;
+import ordenes.OrdenExportacion;
+import ordenes.OrdenImportacion;
 import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
 import terminalPortuaria.TerminalGestionada.CriterioCircuito.CriterioCircuito;
@@ -81,14 +88,17 @@ public class TerminalGestionada extends TerminalPortuaria {
 	public CircuitoMaritimo calcularMejorCircuito(TerminalPortuaria t) {
 		return this.criterio.buscar(this.navieras.stream().map(Naviera::getCircuitos)
 			.flatMap(List::stream)
-			.filter(circ -> circ.contieneTerminal(t)).collect(Collectors.toList()))
+			.filter(circ -> circ.contieneTerminal(t))
+			.collect(Collectors.toList()))
 			.get();
 				
 	}
 	
 	public List<Viaje> viajesConCircuito(CircuitoMaritimo circ) {
-		return this.navieras.stream().map(nav -> nav.getCircuitos().stream().map(Viaje::getCircuito))
-				.filter(circuito -> circ.equals(circuito));
+		return this.navieras.stream().map(nav -> nav.getViajes().stream()
+				.filter(viaje -> viaje.getCircuito().equals(circ)))
+				.flatMap(Function.identity())
+				.collect(Collectors.toList());
 	}
 	
 	public void exportar(TerminalPortuaria t, Viaje viaje, Camion camion, 
@@ -96,6 +106,7 @@ public class TerminalGestionada extends TerminalPortuaria {
 		this.add(ship);
 		this.add(conductor);
 		this.add(camion);
+		orden OrdenExportacion = new OrdenExportacion()
 		
 	}
 	
