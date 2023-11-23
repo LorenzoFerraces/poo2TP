@@ -100,7 +100,7 @@ public class CircuitoMaritimo {
 		int p1 = this.posicionComoOrigen(inicio);
 		int p2 = this.posicionComoDestino(fin);
 		double result = 
-				((p1 == (-1)) || (p2 == (-1)) ) ? (-1d) : 
+				((p1 == (-1)) || (p2 == (-1)) ) ? (Double.POSITIVE_INFINITY) : 
 					this.tramos.subList(p1, p2 +1).stream().mapToDouble(Tramo::getTiempo).sum()
 		;
 		return result;

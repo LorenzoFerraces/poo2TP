@@ -54,7 +54,7 @@ class FiltroLlegaEnTest {
 		this.filtro = new FiltroLlegaEn(mock(LocalDateTime.class), this.terminal1, this.terminal2, List.of(this.viaje1));
 		filtro.filtrar();
 		
-		verify(viaje1).getTiempoDeViajeEntreTerminales(terminal1, terminal2);
+		verify(viaje1).getTiempoEntreTerminales(terminal1, terminal2);
 	}
 	
 	@Test
@@ -64,9 +64,9 @@ class FiltroLlegaEnTest {
 		LocalDateTime fechaEsperada = LocalDateTime.of(2023, 10, 11, 0 ,0);
 		
 		//Definir el tiempo de viaje
-		when(this.viaje1.getTiempoDeViajeEntreTerminales(terminal1, terminal2)).thenReturn(10.0);
-		when(this.viaje2.getTiempoDeViajeEntreTerminales(terminal1, terminal2)).thenReturn(10.0);
-		when(this.viaje3.getTiempoDeViajeEntreTerminales(terminal1, terminal2)).thenReturn(10.0);
+		when(this.viaje1.getTiempoEntreTerminales(terminal1, terminal2)).thenReturn(10.0);
+		when(this.viaje2.getTiempoEntreTerminales(terminal1, terminal2)).thenReturn(10.0);
+		when(this.viaje3.getTiempoEntreTerminales(terminal1, terminal2)).thenReturn(10.0);
 		
 		when(this.viaje1.getFechaDeSalida()).thenReturn(fechaIncorrecta);
 		when(this.viaje2.getFechaDeSalida()).thenReturn(fechaIncorrecta);
@@ -86,9 +86,9 @@ class FiltroLlegaEnTest {
 		LocalDateTime fechaEsperada = LocalDateTime.of(2023, 10, 11, 0 ,0);
 		
 		//Definir el tiempo de viaje
-		when(this.viaje1.getTiempoDeViajeEntreTerminales(any(), any())).thenReturn(10.0);
-		when(this.viaje2.getTiempoDeViajeEntreTerminales(any(), any())).thenReturn(10.0);
-		when(this.viaje3.getTiempoDeViajeEntreTerminales(any(), any())).thenReturn(10.0);
+		when(this.viaje1.getTiempoEntreTerminales(any(), any())).thenReturn(10.0);
+		when(this.viaje2.getTiempoEntreTerminales(any(), any())).thenReturn(10.0);
+		when(this.viaje3.getTiempoEntreTerminales(any(), any())).thenReturn(10.0);
 		
 		when(this.viaje1.getFechaDeSalida()).thenReturn(fechaIncorrecta);
 		when(this.viaje2.getFechaDeSalida()).thenReturn(fechaIncorrecta);

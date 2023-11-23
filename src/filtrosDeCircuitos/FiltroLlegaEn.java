@@ -25,7 +25,7 @@ public class FiltroLlegaEn implements IFiltrable {
 				.filter(viaje -> 
 					viaje.getFechaDeSalida().plusDays(viaje.getTiempoEntreTerminales(terminalOrigen, terminalDestino))
 					.equals(fechaFiltro))
-				.toList()
+				.toList();
 				
 	}
 
