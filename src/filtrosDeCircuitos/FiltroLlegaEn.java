@@ -23,7 +23,7 @@ public class FiltroLlegaEn implements IFiltrable {
 	public List<Viaje> filtrar(List<Viaje> viajes) {
 		return viajes.stream()
 				.filter(viaje -> 
-					viaje.getFechaDeSalida().plusDays(viaje.getTiempoEntreTerminales(terminalOrigen, terminalDestino))
+					viaje.getFechaDeSalida().plusDays(Math.round(viaje.getTiempoEntreTerminales(terminalOrigen, terminalDestino)))
 					.equals(fechaFiltro))
 				.toList();
 				

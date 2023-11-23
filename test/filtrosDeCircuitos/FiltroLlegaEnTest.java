@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,39 +30,31 @@ class FiltroLlegaEnTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		this.circuito1 = mock(CircuitoMaritimo.class);
-		this.circuito2 = mock(CircuitoMaritimo.class);
-		this.circuito3 = mock(CircuitoMaritimo.class);
 		this.viaje1 = mock(Viaje.class);
 		this.viaje2 = mock(Viaje.class);
 		this.viaje3 = mock(Viaje.class);
 		this.terminal1 = mock(TerminalPortuaria.class);
-		this.terminal2 = mock(TerminalPortuaria.class);
-		
-		//Se asigna la el Circuito:X al Viaje:X
-		when(viaje1.getCircuito()).thenReturn(circuito1);
-		when(viaje2.getCircuito()).thenReturn(circuito2);
-		when(viaje3.getCircuito()).thenReturn(circuito3);
+		this.terminal2 = mock(TerminalPortuaria.class);	
 	}
 	
 	@Test
 	void seDebeObtenerElTiempoDeViajeEntreLaTerminalGestionadaYElDestino() {
-		when(viaje1.getFechaDeSalida()).thenReturn(LocalDateTime.of(2023, 10, 2, 0 ,0)); //fecha mock
+		when(viaje1.getFechaDeSalida()).thenReturn(LocalDate.of(2023, 10, 2)); //fecha mock
 		
-		//Asignar viaje a circuito y cicruito a terminal
+		//Asignar viaje a circuito
 		when(viaje1.getCircuito()).thenReturn(circuito1);
 		
-		this.filtro = new FiltroLlegaEn(mock(LocalDateTime.class), this.terminal1, this.terminal2, List.of(this.viaje1));
-		filtro.filtrar();
+		this.filtro = new FiltroLlegaEn(mock(LocalDate.class), this.terminal1, this.terminal2);
+		filtro.filtrar(List.of(this.viaje1));
 		
 		verify(viaje1).getTiempoEntreTerminales(terminal1, terminal2);
 	}
 	
 	@Test
 	void seObtienenSoloLosCircuitosQueCoincidanConLaFechaDeLlegada() {
-		LocalDateTime fechaIncorrecta = LocalDateTime.of(2023, 10, 2, 0 ,0);
-		LocalDateTime fechaCorrecta = LocalDateTime.of(2023, 10, 1, 0, 0);
-		LocalDateTime fechaEsperada = LocalDateTime.of(2023, 10, 11, 0 ,0);
+		LocalDate fechaIncorrecta = LocalDate.of(2023, 10, 2);
+		LocalDate fechaCorrecta = LocalDate.of(2023, 10, 1);
+		LocalDate fechaEsperada = LocalDate.of(2023, 10, 11);
 		
 		//Definir el tiempo de viaje
 		when(this.viaje1.getTiempoEntreTerminales(terminal1, terminal2)).thenReturn(10.0);
@@ -73,17 +66,17 @@ class FiltroLlegaEnTest {
 		when(this.viaje3.getFechaDeSalida()).thenReturn(fechaCorrecta);
 		
 		
-		this.filtro = new FiltroLlegaEn(fechaEsperada, this.terminal1, this.terminal2, List.of(this.viaje1, this.viaje2, this.viaje3));
+		this.filtro = new FiltroLlegaEn(fechaEsperada, this.terminal1, this.terminal2);
 		
-		assertEquals(this.filtro.filtrar().size(), 1);
-		assertTrue(this.filtro.filtrar().contains(this.circuito3));
+		assertEquals(this.filtro.filtrar(List.of(this.viaje1, this.viaje2, this.viaje3)).size(), 1);
+		assertTrue(this.filtro.filtrar(List.of(this.viaje1, this.viaje2, this.viaje3)).contains(this.viaje3));
 	}
 	
 	
 	@Test
 	void seObtieneUnaListaVaciaSiNingunCircuitoCumpleLaCondicion() {
-		LocalDateTime fechaIncorrecta = LocalDateTime.of(2023, 10, 2, 0 ,0);
-		LocalDateTime fechaEsperada = LocalDateTime.of(2023, 10, 11, 0 ,0);
+		LocalDate fechaIncorrecta = LocalDate.of(2023, 10, 2);
+		LocalDate fechaEsperada = LocalDate.of(2023, 10, 11);
 		
 		//Definir el tiempo de viaje
 		when(this.viaje1.getTiempoEntreTerminales(any(), any())).thenReturn(10.0);
@@ -95,9 +88,9 @@ class FiltroLlegaEnTest {
 		when(this.viaje3.getFechaDeSalida()).thenReturn(fechaIncorrecta);
 		
 
-		this.filtro = new FiltroLlegaEn(fechaEsperada, this.terminal1, this.terminal2, List.of(this.viaje1, this.viaje2, this.viaje3));
+		this.filtro = new FiltroLlegaEn(fechaEsperada, this.terminal1, this.terminal2);
 		
-		assertTrue(this.filtro.filtrar().isEmpty());
+		assertTrue(this.filtro.filtrar(List.of(this.viaje1, this.viaje2, this.viaje3)).isEmpty());
 	}
 
 
