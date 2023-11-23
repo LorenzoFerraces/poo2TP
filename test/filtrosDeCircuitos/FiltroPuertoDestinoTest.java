@@ -10,7 +10,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import naviera.circuitoMaritimo.CircuitoMaritimo;
 import terminalPortuaria.TerminalPortuaria;
 import terminalPortuaria.TerminalGestionada.TerminalGestionada;
 import viaje.Viaje;

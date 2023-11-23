@@ -1,14 +1,11 @@
 package terminalPortuaria.TerminalGestionada;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import clientes.Consignee;
 import clientes.Shipper;
@@ -110,7 +107,7 @@ public class TerminalGestionada extends TerminalPortuaria {
 		this.add(camion);
 		LocalDate fecha = viaje.getFechaDeSalida();
 		OrdenExportacion orden = new OrdenExportacion(t, viaje, camion, conductor, 
-								  carga, fecha, fecha.plusDays((long) viaje.getTiempoEntreTerminales(this, t)),
+								  carga, fecha, fecha.plusDays((long) Math.ceil(viaje.getTiempoEntreTerminales(this, t))),
 								  ship, fecha.minusDays(5l));
 		this.add(orden);
 	}
@@ -119,7 +116,7 @@ public class TerminalGestionada extends TerminalPortuaria {
 		this.add(consig);
 		LocalDate fecha = viaje.getFechaDeSalida();
 		OrdenImportacion orden = new OrdenImportacion(t, viaje, carga, fecha, 
-			fecha.plusDays((long) viaje.getTiempoEntreTerminales(this, t)), consig);
+			fecha.plusDays((long) Math.ceil(viaje.getTiempoEntreTerminales(this, t))), consig);
 		this.add(orden);
 }
 	
