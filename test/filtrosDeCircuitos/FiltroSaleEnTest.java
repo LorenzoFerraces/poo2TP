@@ -34,41 +34,28 @@ class FiltroSaleEnTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		this.circuito1 = mock(CircuitoMaritimo.class);
-		this.circuito2 = mock(CircuitoMaritimo.class);
-		this.circuito3 = mock(CircuitoMaritimo.class);
-		
 		this.viaje1 = mock(Viaje.class);
 		this.viaje2 = mock(Viaje.class);
 		this.viaje3 = mock(Viaje.class);
 		
-		this.viajes = new ArrayList<Viaje>();
-		this.viajes.add(viaje1);
-		this.viajes.add(viaje2);
-		this.viajes.add(viaje3);
+		this.viajes = List.of(viaje1,viaje2,viaje3);
 		
 		this.terminal1 = mock(TerminalPortuaria.class);
-		this.terminal2 = mock(TerminalPortuaria.class);
-		
-		//Se asigna la el Circuito:X al Viaje:X
-		when(viaje1.getCircuito()).thenReturn(circuito1);
-		when(viaje2.getCircuito()).thenReturn(circuito2);
-		when(viaje3.getCircuito()).thenReturn(circuito3);
-		
+		this.terminal2 = mock(TerminalPortuaria.class);	
 	}
 	
 	@Test
-	void seDebeObtenerElTiempoDeViajeEntreLaTerminalOrigenYLaTerminalGestionada() {
-		when(viaje1.getFechaDeSalida()).thenReturn(LocalDate.now()); //fecha mock
+	void seDebeObtenerLaFechaDeSalida() {
+		LocalDate dateMock = mock(LocalDate.class);
+		LocalDate fechaFiltro = mock(LocalDate.class);
+		when(viaje1.getFechaDeSalida()).thenReturn(dateMock);
 		
-		//Asignar viaje a circuito y cicruito a terminal
-		when(viaje1.getCircuito()).thenReturn(circuito1);
-		when(circuito1.getTerminalInicio()).thenReturn(terminal1);
+		this.filtro = new FiltroSaleEn(fechaFiltro, this.terminal2);
+		this.filtro.filtrar(List.of(viaje1));
+	
 		
-		this.filtro = new FiltroSaleEn(LocalDate.now(), this.terminal2);
-		filtro.filtrar(viajes);
-		
-		verify(viaje1).getTiempoEntreTerminales(terminal1, terminal2);
+		verify(viaje1).getFechaDeSalida();
+		verify(dateMock).equals(fechaFiltro);
 	}
 
 	@Test
@@ -86,7 +73,7 @@ class FiltroSaleEnTest {
 		when(this.viaje2.getFechaDeSalida()).thenReturn(fechaIncorrecta);
 		when(this.viaje3.getFechaDeSalida()).thenReturn(fechaCorrecta);
 		
-		this.filtro = new FiltroSaleEn(fechaEsperada, this.terminal1);
+		this.filtro = new FiltroSaleEn(fechaCorrecta, this.terminal1);
 		
 		assertEquals(this.filtro.filtrar(viajes).size(), 1);
 		assertTrue(this.filtro.filtrar(viajes).contains(this.viaje3));

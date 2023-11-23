@@ -1,13 +1,8 @@
 package filtrosDeCircuitos;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import naviera.circuitoMaritimo.CircuitoMaritimo;
 import terminalPortuaria.TerminalPortuaria;
-import terminalPortuaria.TerminalGestionada.TerminalGestionada;
 import viaje.Viaje;
 
 public class FiltroSaleEn implements IFiltrable{
