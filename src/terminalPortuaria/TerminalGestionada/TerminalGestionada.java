@@ -16,6 +16,7 @@ import container.Container;
 import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
 import empresaTransportista.EmpresaTransportista;
+import filtrosDeCircuitos.IFiltrable;
 import naviera.Naviera;
 import naviera.circuitoMaritimo.CircuitoMaritimo;
 import ordenes.OrdenExportacion;
@@ -131,7 +132,25 @@ public class TerminalGestionada extends TerminalPortuaria {
 				.get();
 	}
 	
-	public filtrarViajes()
+	public List<Viaje> filtrarViajes(IFiltrable filtro){
+		return filtro.filtrar(this.navieras.stream()
+				.map(Naviera::getViajes)
+				.flatMap(List::stream)
+				.toList()
+				);
+				
+	}
+	
+	public int cuantoTardaEnLlegar(Naviera nav, TerminalPortuaria t) {
+		int result = (int) (!this.navieras.contains(nav) ? (-1) : 
+			this.navieras.stream().map(Naviera::getViajes)
+				.flatMap(List::stream)
+				.map(viaje -> viaje.getTiempoEntreTerminales(this, t))
+				.min((v1,v2) -> v1.compareTo(v2))
+				.get());
+		
+		return result;
+	}
 	
 
 }

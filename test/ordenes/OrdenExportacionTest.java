@@ -26,6 +26,7 @@ class OrdenExportacionTest {
 	private Container unaCarga;
 	private LocalDate fechaDeSalidaDesdeOrigen;
 	private LocalDate fechaDeLlegadaADestino;
+	private LocalDate fechaTurno;
 	private Shipper unShipper;
 	
 	@BeforeEach
@@ -36,11 +37,12 @@ class OrdenExportacionTest {
 		unaCarga = mock(Container.class);
 		fechaDeSalidaDesdeOrigen = mock(LocalDate.class);
 		fechaDeLlegadaADestino = mock(LocalDate.class);
+		
 		unShipper = mock(Shipper.class);
 		
 		ordenExportacion = new OrdenExportacion(unaTerminalPortuaria, unViaje, unCamion, 
 				unConductor, unaCarga, fechaDeSalidaDesdeOrigen, 
-				fechaDeLlegadaADestino, unShipper);
+				fechaDeLlegadaADestino, unShipper, fechaTurno);
 	}
 
 	// Método de clase OrdenExportacion

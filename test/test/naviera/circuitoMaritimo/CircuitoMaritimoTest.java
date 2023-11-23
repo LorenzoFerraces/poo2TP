@@ -154,4 +154,27 @@ class CircuitoMaritimoTest {
 		assertEquals(300d, circuito.getTiempoEntreTerminales(this.terminal1, this.terminal4));
 		
 	}
+	
+	@Test
+	void testvienenDespuesDe() throws Exception {
+		circuito.agregarTramo(tramo1);
+		circuito.agregarTramo(tramo2);
+		circuito.agregarTramo(tramo3);
+		
+		when(tramo1.getTiempo()).thenReturn(100d);
+		when(tramo2.getTiempo()).thenReturn(120d);;
+		when(tramo3.getTiempo()).thenReturn(80d);
+		
+		assertAll(
+				() -> assertTrue(circuito.vieneDespuesDe(terminal1,terminal2)),
+				() -> assertTrue(circuito.vieneDespuesDe(terminal1,terminal3)),
+				() -> assertTrue(circuito.vieneDespuesDe(terminal1,terminal4))
+				);
+		
+	}
+	
+	@Test void testGetTerminalInicio() throws Exception{
+		circuito.agregarTramo(tramo3);
+		assertEquals(terminal3, circuito.getTerminalInicio());
+	}
 }
