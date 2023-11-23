@@ -78,5 +78,12 @@ class ViajeTest {
 		LocalDate esperado = LocalDate.now().plusDays((long)Math.ceil(5d));
 		assertEquals(esperado, this.miViaje.getFechaLlegada());
 	}
+	
+	@Test
+	void testVieneDespuesDe() {
+		when(this.circuito.vieneDespuesDe(terminal1, terminal2)).thenReturn(true);
+		assertTrue(this.miViaje.vieneDespuesDe(terminal1, terminal2));
+		
+	}
 
 }

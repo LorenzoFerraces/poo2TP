@@ -8,6 +8,11 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import clientes.Consignee;
+import clientes.Shipper;
+import empresaTransportista.Camion;
+import empresaTransportista.Conductor;
+import empresaTransportista.EmpresaTransportista;
 import naviera.Naviera;
 import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
@@ -35,6 +40,21 @@ class TerminalGestionadaTest {
 	private TerminalPortuaria terminal2;
 	private TerminalPortuaria terminal3;
 	private TerminalPortuaria terminal4;
+	
+	private Consignee cons1;
+	private Consignee cons2;
+	
+	private Shipper ship1;
+	private Shipper ship2;
+	
+	private EmpresaTransportista trans1;
+	private EmpresaTransportista trans2;
+	
+	private Conductor conductor1;
+	private Conductor conductor2;
+	
+	private Camion camion1;
+	private Camion camion2;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -60,32 +80,56 @@ class TerminalGestionadaTest {
 		this.terminal3 = mock(TerminalPortuaria.class);
 		this.terminal4 = mock(TerminalPortuaria.class);
 		
+		this.cons1 = mock(Consignee.class);
+		this.cons2 = mock(Consignee.class);
+		
+		this.ship1 = mock(Shipper.class);
+		this.ship2 = mock(Shipper.class);
+		
+		this.trans1 = mock(EmpresaTransportista.class);
+		this.trans2 = mock(EmpresaTransportista.class);
+		
+		this.conductor1 = mock(Conductor.class);
+		this.conductor2 = mock(Conductor.class);
+		
+		this.camion1 = mock(Camion.class);
+		this.camion2 = mock(Camion.class);
+		
 		when(nav1.getViajes()).thenReturn(List.of(viaje1,viaje2));
 		when(nav2.getViajes()).thenReturn(List.of(viaje3,viaje4));
 		when(nav3.getViajes()).thenReturn(List.of(viaje5,viaje6));
 		
 		terminalGest.add(nav1);
 		terminalGest.add(nav2);
-		terminalGest.add(nav3);
 	}
 
 	@Test
-	void testAddNaviera() {}
+	void testAddNaviera() {
+		assertTrue(this.terminalGest.add(nav3));
+	}
 	
 	@Test
-	void testAddShipper() {}
+	void testAddShipper() {
+		assertTrue(this.terminalGest.add(ship1));
+	}
+	@Test
+	void testAddConsignee() {
+		assertTrue(this.terminalGest.add(cons1));}
 	
 	@Test
-	void testAddConsignee() {}
+	void testAddEmpresa() {
+		assertTrue(this.terminalGest.add(trans1));
+		}
 	
 	@Test
-	void testAddEmpresa() {}
+	void testAddConductor() {
+		assertTrue(this.terminalGest.add(conductor1));
+		}
 	
 	@Test
-	void testAddConductor() {}
-	
-	@Test
-	void testAddCamion() {}
+	void testAddCamion() {
+		assertTrue(this.terminalGest.add(camion1));
+		}
 	
 	@Test
 	void testAddOrdenImport() {}
