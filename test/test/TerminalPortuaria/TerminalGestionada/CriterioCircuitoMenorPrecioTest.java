@@ -9,8 +9,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import naviera.Naviera;
+import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
 import terminalPortuaria.TerminalGestionada.TerminalGestionada;
+import terminalPortuaria.TerminalGestionada.CriterioCircuito.CriterioCircuito;
 import viaje.Viaje;
 
 
@@ -37,6 +39,11 @@ class TerminalGestionadaTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		
+		CriterioCircuito criterio = mock(CriterioCircuito.class);
+		Punto punto = mock(Punto.class);
+		
+		this.terminalGest = new TerminalGestionada(punto, criterio);
+
 		this.nav1 = mock(Naviera.class);
 		this.nav2 = mock(Naviera.class);
 		this.nav3 = mock(Naviera.class);
@@ -56,6 +63,10 @@ class TerminalGestionadaTest {
 		when(nav1.getViajes()).thenReturn(List.of(viaje1,viaje2));
 		when(nav2.getViajes()).thenReturn(List.of(viaje3,viaje4));
 		when(nav3.getViajes()).thenReturn(List.of(viaje5,viaje6));
+		
+		terminalGest.add(nav1);
+		terminalGest.add(nav2);
+		terminalGest.add(nav3);
 	}
 
 	@Test
