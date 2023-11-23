@@ -11,10 +11,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import naviera.circuitoMaritimo.CircuitoMaritimo;
 import viaje.Viaje;
 
-class FiltroAndTest {
+class FiltroOrTest {
 	IFiltrable filtro;
 	IFiltrable operador1;
 	IFiltrable operador2;
@@ -46,40 +45,40 @@ class FiltroAndTest {
 	
 	@Test
 	void alFiltrarSeLlamaALaRecursionFiltrandoSusOperadores() {
-		filtro.filtrar();
+		filtro.filtrar(viajes);
 		
-		verify(operador1).filtrar();
-		verify(operador2).filtrar();
+		verify(operador1).filtrar(viajes);
+		verify(operador2).filtrar(viajes);
 	}
 	
 	
 
 	@Test
 	void elFiltroDeDosListasVaciasDebeSerUnaListaVacia() {
-		when(operador1.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>());
-		when(operador2.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>());
+		when(operador1.filtrar(viajes)).thenReturn(new ArrayList<Viaje>());
+		when(operador2.filtrar(viajes)).thenReturn(new ArrayList<Viaje>());
 		
-		assertTrue(filtro.filtrar().isEmpty());
+		assertTrue(filtro.filtrar(viajes).isEmpty());
 	}
 	
 	@Test
 	void elFiltroDeDosListasVaciasEsLaListaUnida() {
-		when(operador1.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>(List.of(circuito1)));
-		when(operador2.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>(List.of(circuito2)));
+		when(operador1.filtrar(viajes)).thenReturn(new ArrayList<Viaje>(List.of(viaje1)));
+		when(operador2.filtrar(viajes)).thenReturn(new ArrayList<Viaje>(List.of(viaje2)));
 		
-		assertEquals(filtro.filtrar().size(),2);
-		assertTrue(filtro.filtrar().contains(circuito1));
-		assertTrue(filtro.filtrar().contains(circuito2));
+		assertEquals(filtro.filtrar(viajes).size(),2);
+		assertTrue(filtro.filtrar(viajes).contains(viaje1));
+		assertTrue(filtro.filtrar(viajes).contains(viaje2));
 	}
 	
 	@Test
 	void elFiltroNoIncluyeCircuitosRepetidos() {
-		when(operador1.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>(List.of(circuito1)));
-		when(operador2.filtrar()).thenReturn(new ArrayList<CircuitoMaritimo>(List.of(circuito1, circuito2)));
+		when(operador1.filtrar(viajes)).thenReturn(new ArrayList<Viaje>(List.of(viaje1)));
+		when(operador2.filtrar(viajes)).thenReturn(new ArrayList<Viaje>(List.of(viaje1, viaje2)));
 		
-		assertEquals(filtro.filtrar().size(),2);
-		assertTrue(filtro.filtrar().contains(circuito1));
-		assertTrue(filtro.filtrar().contains(circuito2));
+		assertEquals(filtro.filtrar(viajes).size(),2);
+		assertTrue(filtro.filtrar(viajes).contains(viaje1));
+		assertTrue(filtro.filtrar(viajes).contains(viaje2));
 	}
 
 }

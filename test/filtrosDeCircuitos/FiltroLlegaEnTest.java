@@ -39,9 +39,9 @@ class FiltroLlegaEnTest {
 		this.terminal2 = mock(TerminalPortuaria.class);
 		
 		//Se asigna la el Circuito:X al Viaje:X
-		when(viaje1.getCircuitoMaritimo()).thenReturn(circuito1);
-		when(viaje2.getCircuitoMaritimo()).thenReturn(circuito2);
-		when(viaje3.getCircuitoMaritimo()).thenReturn(circuito3);
+		when(viaje1.getCircuito()).thenReturn(circuito1);
+		when(viaje2.getCircuito()).thenReturn(circuito2);
+		when(viaje3.getCircuito()).thenReturn(circuito3);
 	}
 	
 	@Test
@@ -49,7 +49,7 @@ class FiltroLlegaEnTest {
 		when(viaje1.getFechaDeSalida()).thenReturn(LocalDateTime.of(2023, 10, 2, 0 ,0)); //fecha mock
 		
 		//Asignar viaje a circuito y cicruito a terminal
-		when(viaje1.getCircuitoMaritimo()).thenReturn(circuito1);
+		when(viaje1.getCircuito()).thenReturn(circuito1);
 		
 		this.filtro = new FiltroLlegaEn(mock(LocalDateTime.class), this.terminal1, this.terminal2, List.of(this.viaje1));
 		filtro.filtrar();

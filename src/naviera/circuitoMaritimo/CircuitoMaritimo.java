@@ -113,4 +113,9 @@ public class CircuitoMaritimo {
 		return (p1 <= p2 && !((p1 == (-1)) || (p2 == (-1)) ));
 	}
 
+	public TerminalPortuaria getTerminalInicio() {
+		
+		return this.tramos.get(0).getOrigen();
+	}
+
 }

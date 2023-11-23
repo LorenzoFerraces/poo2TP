@@ -12,9 +12,9 @@ import viaje.Viaje;
 
 public class FiltroSaleEn implements IFiltrable{
 	LocalDate fechaFiltro;
-	TerminalGestionada terminal;
+	TerminalPortuaria terminal;
 	
-	public FiltroSaleEn(LocalDate fechaDeSalida, TerminalGestionada terminal) {
+	public FiltroSaleEn(LocalDate fechaDeSalida, TerminalPortuaria terminal) {
 		super();
 		this.fechaFiltro = fechaDeSalida;
 		this.terminal = terminal;
