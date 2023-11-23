@@ -3,6 +3,7 @@ package test.TerminalPortuaria.TerminalGestionada;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -153,7 +154,17 @@ class TerminalGestionadaTest {
 	void testImportar() {}
 	
 	@Test
-	void testproximaSalidaBuque() {}
+	void testproximaSalidaBuque() {
+		when(viaje1.contieneTerminal(terminal1)).thenReturn(true);
+		when(viaje2.contieneTerminal(terminal1)).thenReturn(false);
+		when(viaje3.contieneTerminal(terminal1)).thenReturn(true);
+		when(viaje4.contieneTerminal(terminal1)).thenReturn(false);
+		
+		when(viaje1.getFechaDeSalida()).thenReturn(LocalDate.now());
+		when(viaje3.getFechaDeSalida()).thenReturn(LocalDate.now().plusDays(5l));
+	
+		assertEquals(LocalDate.now(), this.terminalGest.proximaSalidaBuque(terminal1));
+	}
 	
 	@Test
 	void testfiltrarViajes() {}
@@ -162,6 +173,8 @@ class TerminalGestionadaTest {
 	void testCuandoTardaEnLlegar() {
 		when(viaje1.getTiempoEntreTerminales(terminalGest, terminal1)).thenReturn(20d);
 		when(viaje2.getTiempoEntreTerminales(terminalGest, terminal1)).thenReturn(30d);
+		when(viaje3.getTiempoEntreTerminales(terminalGest, terminal1)).thenReturn(70d);
+		when(viaje4.getTiempoEntreTerminales(terminalGest, terminal1)).thenReturn(80d);
 		
 		assertEquals(20d, terminalGest.cuantoTardaEnLlegar(nav1, terminal1));
 	}
