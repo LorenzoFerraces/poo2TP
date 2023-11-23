@@ -15,13 +15,13 @@ import empresaTransportista.Conductor;
 import empresaTransportista.EmpresaTransportista;
 import filtrosDeCircuitos.IFiltrable;
 import naviera.Naviera;
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import naviera.viaje.Viaje;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
 import ordenes.OrdenExportacion;
 import ordenes.OrdenImportacion;
 import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
 import terminalPortuaria.TerminalGestionada.CriterioCircuito.CriterioCircuito;
-import viaje.Viaje;
 
 public class TerminalGestionada extends TerminalPortuaria {
 	

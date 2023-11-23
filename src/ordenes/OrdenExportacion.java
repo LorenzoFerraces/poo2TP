@@ -6,8 +6,8 @@ import clientes.Shipper;
 import container.Container;
 import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
+import naviera.viaje.Viaje;
 import terminalPortuaria.TerminalPortuaria;
-import viaje.Viaje;
 
 public class OrdenExportacion extends Orden {
 

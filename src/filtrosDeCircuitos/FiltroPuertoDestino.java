@@ -2,9 +2,9 @@ package filtrosDeCircuitos;
 
 import java.util.List;
 
+import naviera.viaje.Viaje;
 import terminalPortuaria.TerminalPortuaria;
 import terminalPortuaria.TerminalGestionada.TerminalGestionada;
-import viaje.Viaje;
 
 public class FiltroPuertoDestino implements IFiltrable {
 	TerminalPortuaria puertoDestino;

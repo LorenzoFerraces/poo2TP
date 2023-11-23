@@ -1,9 +1,9 @@
-package viaje;
+package naviera.viaje;
 
 import java.time.LocalDate;
 
 import buque.Buque;
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
 import terminalPortuaria.TerminalPortuaria;
 
 public class Viaje {

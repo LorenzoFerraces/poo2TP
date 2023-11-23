@@ -1,23 +1,19 @@
-package faseDeBuque;
+package buque.faseDeBuque;
 
 import buque.Buque;
 
-public class FaseDeBuqueInbound implements FaseDeBuque {
+public class FaseDeBuqueDeparting implements FaseDeBuque {
 
 
-	// Retorna la fase 3 de 5 cuando las coordenadas del buque y la terminal coinciden
+	// Retorna la primera fase, ya que this es la última
 	@Override
 	public FaseDeBuque siguienteFase(Buque unBuque) {
-		if (unBuque.calcularDistanciaATerminal() == 0.0) {
-			return new FaseDeBuqueArrived();
-		}
-		return this;
+		return new FaseDeBuqueOutbound();
 	}
 
 	@Override
 	public void avisarArriboATerminal(Buque unBuque) {
-		// unBuque.getTerminal().notificarConsigneesSobreLlegadaDeBuque(unBuque);
-		unBuque.cambiarFase();
+		// Implementado en la fase Inbound
 	}
 
 	@Override
@@ -32,7 +28,10 @@ public class FaseDeBuqueInbound implements FaseDeBuque {
 	
 	@Override
 	public void avisarPartidaATerminal(Buque unBuque) {
-		// Implementado en la fase Departing
+		if (unBuque.calcularDistanciaATerminal() > 1.0) {
+			// unBuque.getTerminal().notificarShippersSobrePartidaDeBuque(unBuque);
+			unBuque.cambiarFase();
+		}
 	}
 
 }

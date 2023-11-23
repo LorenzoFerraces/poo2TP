@@ -6,7 +6,8 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import naviera.circuitoMaritimo.tramo.Tramo;
+
+import naviera.viaje.circuitoMaritimo.tramo.Tramo;
 import terminalPortuaria.TerminalPortuaria;
 
 class TramoTest {

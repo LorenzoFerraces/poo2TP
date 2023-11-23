@@ -13,8 +13,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import naviera.circuitoMaritimo.CircuitoMaritimo;
-import naviera.circuitoMaritimo.tramo.Tramo;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
+import naviera.viaje.circuitoMaritimo.tramo.Tramo;
 import terminalPortuaria.TerminalPortuaria;
 
 class CircuitoMaritimoTest {

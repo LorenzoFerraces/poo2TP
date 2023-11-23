@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
+import buque.faseDeBuque.FaseDeBuqueInbound;
+import buque.faseDeBuque.FaseDeBuqueOutbound;
 
 class FaseDeBuqueOutboundTest {
 

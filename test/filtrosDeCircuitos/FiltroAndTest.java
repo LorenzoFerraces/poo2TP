@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import viaje.Viaje;
+import naviera.viaje.Viaje;
 
 class FiltroAndTest {
 	IFiltrable filtro;

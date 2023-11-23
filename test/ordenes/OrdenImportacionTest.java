@@ -12,8 +12,8 @@ import clientes.Consignee;
 import container.Container;
 import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
+import naviera.viaje.Viaje;
 import terminalPortuaria.TerminalPortuaria;
-import viaje.Viaje;
 
 class OrdenImportacionTest {
 	

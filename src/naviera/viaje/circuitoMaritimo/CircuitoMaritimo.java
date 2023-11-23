@@ -1,11 +1,11 @@
-package naviera.circuitoMaritimo;
+package naviera.viaje.circuitoMaritimo;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 
-import naviera.circuitoMaritimo.tramo.Tramo;
+import naviera.viaje.circuitoMaritimo.tramo.Tramo;
 import terminalPortuaria.TerminalPortuaria;
 
 public class CircuitoMaritimo {

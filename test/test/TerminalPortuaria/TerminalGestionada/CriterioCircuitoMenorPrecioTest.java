@@ -15,11 +15,11 @@ import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
 import empresaTransportista.EmpresaTransportista;
 import naviera.Naviera;
+import naviera.viaje.Viaje;
 import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
 import terminalPortuaria.TerminalGestionada.TerminalGestionada;
 import terminalPortuaria.TerminalGestionada.CriterioCircuito.CriterioCircuito;
-import viaje.Viaje;
 
 
 class TerminalGestionadaTest {

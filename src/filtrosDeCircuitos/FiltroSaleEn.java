@@ -2,8 +2,9 @@ package filtrosDeCircuitos;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import naviera.viaje.Viaje;
 import terminalPortuaria.TerminalPortuaria;
-import viaje.Viaje;
 
 public class FiltroSaleEn implements IFiltrable{
 	LocalDate fechaFiltro;

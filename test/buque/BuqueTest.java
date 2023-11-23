@@ -9,11 +9,11 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import buque.faseDeBuque.*;
+import buque.gps.GPS;
 import container.Container;
 import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
-import faseDeBuque.*;
-import gps.GPS;
 
 class BuqueTest {
 

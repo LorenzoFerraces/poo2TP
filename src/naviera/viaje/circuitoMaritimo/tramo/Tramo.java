@@ -1,4 +1,4 @@
-package naviera.circuitoMaritimo.tramo;
+package naviera.viaje.circuitoMaritimo.tramo;
 
 import terminalPortuaria.TerminalPortuaria;
 

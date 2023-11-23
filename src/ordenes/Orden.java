@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import container.Container;
 import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
+import naviera.viaje.Viaje;
 import terminalPortuaria.TerminalPortuaria;
-import viaje.Viaje;
 
 public abstract class Orden {
 	

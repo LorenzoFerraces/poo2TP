@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 import buque.Buque;
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import naviera.viaje.Viaje;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
 import terminalPortuaria.TerminalPortuaria;
-import viaje.Viaje;
 
 public class Naviera {
 	
