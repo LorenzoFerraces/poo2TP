@@ -59,6 +59,8 @@ public class Naviera {
 						.contieneOrigenYDestino(t1,t2)).toList();
 	}
 	
+//	public long cuantoTardaEnLlegar (delega a viaje)
+	
 	
 	
 	

@@ -12,6 +12,7 @@ public class CriterioCircuitoMenorPrecio extends CriterioCircuito {
 		}
 
 	@Override
+// calcular tiempo mejor
 	public Optional<CircuitoMaritimo> buscar(List<CircuitoMaritimo> lista) {
 		return lista.stream().min(this.criterio);
 	}

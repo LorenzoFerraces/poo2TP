@@ -18,6 +18,7 @@ public class FiltroPuertoDestino implements IFiltrable {
 	@Override
 	public List<Viaje> filtrar(List<Viaje> viajes) {		
 		return viajes.stream()
+//				no tiene sentido
 				.filter(viaje -> viaje.vieneDespuesDe(this.origen, this.puertoDestino))
 				.toList();				
 	}

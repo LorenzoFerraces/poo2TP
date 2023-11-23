@@ -141,6 +141,7 @@ public class TerminalGestionada extends TerminalPortuaria {
 	public int cuantoTardaEnLlegar(Naviera nav, TerminalPortuaria t) {
 		int result = (int) (!this.navieras.contains(nav) ? (-1) : 
 			this.navieras.stream().map(Naviera::getViajes)
+//			usar metodo de naviera
 				.flatMap(List::stream)
 				.map(viaje -> viaje.getTiempoEntreTerminales(this, t))
 				.min((v1,v2) -> v1.compareTo(v2))
