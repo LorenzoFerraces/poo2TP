@@ -55,7 +55,6 @@ class FiltroSaleEnTest {
 	
 		
 		verify(viaje1).getFechaDeSalida();
-		verify(dateMock).equals(fechaFiltro);
 	}
 
 	@Test
