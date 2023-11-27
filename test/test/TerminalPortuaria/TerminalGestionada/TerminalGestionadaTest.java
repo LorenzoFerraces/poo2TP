@@ -14,6 +14,7 @@ import clientes.Shipper;
 import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
 import empresaTransportista.EmpresaTransportista;
+import filtrosDeCircuitos.IFiltrable;
 import naviera.Naviera;
 import naviera.viaje.Viaje;
 import punto.Punto;
@@ -39,23 +40,19 @@ class TerminalGestionadaTest {
 	
 	private TerminalPortuaria terminal1;
 	private TerminalPortuaria terminal2;
-	private TerminalPortuaria terminal3;
-	private TerminalPortuaria terminal4;
 	
 	private Consignee cons1;
-	private Consignee cons2;
 	
 	private Shipper ship1;
-	private Shipper ship2;
 	
 	private EmpresaTransportista trans1;
-	private EmpresaTransportista trans2;
 	
 	private Conductor conductor1;
-	private Conductor conductor2;
 	
 	private Camion camion1;
-	private Camion camion2;
+	
+	private IFiltrable filtro;
+	
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -78,23 +75,18 @@ class TerminalGestionadaTest {
 		
 		this.terminal1 = mock(TerminalPortuaria.class);
 		this.terminal2 = mock(TerminalPortuaria.class);
-		this.terminal3 = mock(TerminalPortuaria.class);
-		this.terminal4 = mock(TerminalPortuaria.class);
 		
 		this.cons1 = mock(Consignee.class);
-		this.cons2 = mock(Consignee.class);
 		
 		this.ship1 = mock(Shipper.class);
-		this.ship2 = mock(Shipper.class);
 		
 		this.trans1 = mock(EmpresaTransportista.class);
-		this.trans2 = mock(EmpresaTransportista.class);
 		
 		this.conductor1 = mock(Conductor.class);
-		this.conductor2 = mock(Conductor.class);
 		
 		this.camion1 = mock(Camion.class);
-		this.camion2 = mock(Camion.class);
+		
+		this.filtro = mock(IFiltrable.class);
 		
 		when(nav1.getViajes()).thenReturn(List.of(viaje1,viaje2));
 		when(nav2.getViajes()).thenReturn(List.of(viaje3,viaje4));
@@ -167,7 +159,13 @@ class TerminalGestionadaTest {
 	}
 	
 	@Test
-	void testfiltrarViajes() {}
+	void testfiltrarViajes() {
+		List<Viaje> expected = List.of(viaje1,viaje4);
+		when(filtro.filtrar(List.of(viaje1,viaje2,viaje3,viaje4)))
+		.thenReturn(expected);
+		
+		assertEquals(expected, this.terminalGest.filtrarViajes(filtro));
+	}
 
 	@Test
 	void testCuandoTardaEnLlegar() {
