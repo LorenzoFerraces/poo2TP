@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 import clientes.Consignee;
 import clientes.Shipper;
 import container.Container;
@@ -86,9 +83,9 @@ public class TerminalGestionada extends TerminalPortuaria {
 	
 	public CircuitoMaritimo calcularMejorCircuito(TerminalPortuaria t) {
 		return this.criterio.buscar(this.navieras.stream()
-					.map(nav -> nav.circuitosConTerminal(t))
-					.flatMap(List::stream)
-					.toList())
+				.map(nav -> nav.circuitosConTerminal(t))
+				.flatMap(List::stream)
+				.toList())
 				.get();
 			
 				
@@ -120,10 +117,11 @@ public class TerminalGestionada extends TerminalPortuaria {
 		return this.add(orden);
 }
 	
+	
+	
 	public LocalDate proximaSalidaBuque(TerminalPortuaria t) {
-		return this.navieras.stream().map(nav -> nav.getViajes().stream()
-					.filter(viaje -> viaje.contieneTerminal(t)))
-				.flatMap(Function.identity())
+		return this.navieras.stream().map(nav -> nav.viajesConTerminal(t))
+				.flatMap(List::stream)
 				.map(Viaje::getFechaDeSalida)
 				.min((f1, f2) -> f1.compareTo(f2))
 				.get();

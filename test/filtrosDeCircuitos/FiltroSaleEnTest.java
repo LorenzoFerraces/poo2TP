@@ -60,7 +60,6 @@ class FiltroSaleEnTest {
 	void seObtienenSoloLosCircuitosQueCoincidanConLaFechaDeSalida() {
 		LocalDate fechaIncorrecta = LocalDate.of(2023, 11, 23);
 		LocalDate fechaCorrecta = LocalDate.of(2023, 6, 24);
-		LocalDate fechaEsperada = LocalDate.of(2023, 6, 14);
 		
 		//Definir el tiempo de viaje
 		when(this.viaje1.getTiempoEntreTerminales(any(), any())).thenReturn(10.0);

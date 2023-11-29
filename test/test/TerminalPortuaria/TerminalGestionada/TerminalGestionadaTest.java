@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,6 @@ class TerminalGestionadaTest {
 	private Naviera nav2;
 	private Naviera nav3;
 	
-	private CircuitoMaritimo circ;
 	
 	private Viaje viaje1;
 	private Viaje viaje2;
@@ -43,8 +43,10 @@ class TerminalGestionadaTest {
 	private Viaje viaje5;
 	private Viaje viaje6;
 	
-	private TerminalPortuaria terminal1;
-	private TerminalPortuaria terminal2;
+	private CircuitoMaritimo circ1;
+	private CircuitoMaritimo circ2;
+	
+	private TerminalPortuaria terminal1;	
 	
 	private Consignee cons1;
 	
@@ -58,7 +60,10 @@ class TerminalGestionadaTest {
 	
 	private Container carga;
 	
+	private CriterioCircuito criterio;
+
 	private IFiltrable filtro;
+	
 	
 
 	@BeforeEach
@@ -73,7 +78,6 @@ class TerminalGestionadaTest {
 		this.nav2 = mock(Naviera.class);
 		this.nav3 = mock(Naviera.class);
 		
-		this.circ = mock(CircuitoMaritimo.class);
 	
 		this.viaje1 = mock(Viaje.class);
 		this.viaje2 = mock(Viaje.class);
@@ -82,8 +86,10 @@ class TerminalGestionadaTest {
 		this.viaje5 = mock(Viaje.class);
 		this.viaje6 = mock(Viaje.class);
 		
+		this.circ1 = mock(CircuitoMaritimo.class);
+		this.circ2 = mock(CircuitoMaritimo.class);
+		
 		this.terminal1 = mock(TerminalPortuaria.class);
-		this.terminal2 = mock(TerminalPortuaria.class);
 		
 		this.cons1 = mock(Consignee.class);
 		
@@ -96,6 +102,8 @@ class TerminalGestionadaTest {
 		this.camion1 = mock(Camion.class);
 		
 		this.carga = mock(Container.class);
+		
+		this.criterio = mock(CriterioCircuito.class);
 		
 		this.filtro = mock(IFiltrable.class);
 		
@@ -144,20 +152,27 @@ class TerminalGestionadaTest {
 	@Test
 	void testSetCriterio() {}
 	
-	@Test
-	void testCalcularMejorCircuito() {}
+//	@Test
+//	void testCalcularMejorCircuito() {
+//		when(nav1.circuitosConTerminal(terminal1)).thenReturn(List.of(circ1));
+//		when(nav2.circuitosConTerminal(terminal1)).thenReturn(List.of(circ2));
+//		
+//		when(criterio.buscar(List.of(circ1,circ2))).thenReturn(Optional.of(circ2));
+//		
+//		assertEquals(circ2, terminalGest.calcularMejorCircuito(terminal1));
+//	};
 	
 	@Test
-	void testViajesConCirtuito() {
+	void testViajesConCircuito() {
 		terminalGest.add(nav3);
-		when(nav1.viajesConCircuito(circ)).thenReturn(List.of(viaje1,viaje2));
-		when(nav2.viajesConCircuito(circ)).thenReturn(List.of(viaje4));
-		when(nav3.viajesConCircuito(circ)).thenReturn(List.of(viaje6));
+		when(nav1.viajesConCircuito(circ1)).thenReturn(List.of(viaje1,viaje2));
+		when(nav2.viajesConCircuito(circ1)).thenReturn(List.of(viaje4));
+		when(nav3.viajesConCircuito(circ1)).thenReturn(List.of(viaje6));
 
 		List<Viaje> expected = List.of(viaje1,viaje2,viaje4,viaje6);
 //		No tiene sentido, pero la lista sale desordenada 
 //		aunque este ordenada de esta forma dentro de la terminal
-		assertTrue(expected.containsAll(terminalGest.viajesConCircuito(circ))) ;
+		assertTrue(expected.containsAll(terminalGest.viajesConCircuito(circ1))) ;
 		
 	}
 		
@@ -193,10 +208,8 @@ class TerminalGestionadaTest {
 	
 	@Test
 	void testproximaSalidaBuque() {
-		when(viaje1.contieneTerminal(terminal1)).thenReturn(true);
-		when(viaje2.contieneTerminal(terminal1)).thenReturn(false);
-		when(viaje3.contieneTerminal(terminal1)).thenReturn(true);
-		when(viaje4.contieneTerminal(terminal1)).thenReturn(false);
+		when(nav1.viajesConTerminal(terminal1)).thenReturn(List.of(viaje1));
+		when(nav2.viajesConTerminal(terminal1)).thenReturn(List.of(viaje3));
 		
 		when(viaje1.getFechaDeSalida()).thenReturn(LocalDate.now());
 		when(viaje3.getFechaDeSalida()).thenReturn(LocalDate.now().plusDays(5l));
