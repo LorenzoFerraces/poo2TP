@@ -29,5 +29,9 @@ public class OrdenImportacion extends Orden {
 		this.setCamion(camion);
 		this.setConductor(conductor);
 	}
+
+	public boolean esConsignee(Consignee cons) {
+		return this.consignee.equals(cons);
+	}
 	
 }

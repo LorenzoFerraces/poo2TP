@@ -33,4 +33,8 @@ public class OrdenExportacion extends Orden {
 	public LocalDate getTurno() {
 		return this.turnoAsignado;
 	}
+
+	public boolean esShipper(Shipper ship) {
+		return this.shipper.equals(ship);
+	}
 }

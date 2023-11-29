@@ -1,5 +1,6 @@
 package test.TerminalPortuaria.TerminalGestionada;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -11,12 +12,14 @@ import org.junit.jupiter.api.Test;
 
 import clientes.Consignee;
 import clientes.Shipper;
+import container.Container;
 import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
 import empresaTransportista.EmpresaTransportista;
 import filtrosDeCircuitos.IFiltrable;
 import naviera.Naviera;
 import naviera.viaje.Viaje;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
 import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
 import terminalPortuaria.TerminalGestionada.TerminalGestionada;
@@ -30,6 +33,8 @@ class TerminalGestionadaTest {
 	private Naviera nav1;
 	private Naviera nav2;
 	private Naviera nav3;
+	
+	private CircuitoMaritimo circ;
 	
 	private Viaje viaje1;
 	private Viaje viaje2;
@@ -51,6 +56,8 @@ class TerminalGestionadaTest {
 	
 	private Camion camion1;
 	
+	private Container carga;
+	
 	private IFiltrable filtro;
 	
 
@@ -65,6 +72,8 @@ class TerminalGestionadaTest {
 		this.nav1 = mock(Naviera.class);
 		this.nav2 = mock(Naviera.class);
 		this.nav3 = mock(Naviera.class);
+		
+		this.circ = mock(CircuitoMaritimo.class);
 	
 		this.viaje1 = mock(Viaje.class);
 		this.viaje2 = mock(Viaje.class);
@@ -85,6 +94,8 @@ class TerminalGestionadaTest {
 		this.conductor1 = mock(Conductor.class);
 		
 		this.camion1 = mock(Camion.class);
+		
+		this.carga = mock(Container.class);
 		
 		this.filtro = mock(IFiltrable.class);
 		
@@ -137,13 +148,48 @@ class TerminalGestionadaTest {
 	void testCalcularMejorCircuito() {}
 	
 	@Test
-	void testViajesConCirtuito() {}
+	void testViajesConCirtuito() {
+		terminalGest.add(nav3);
+		when(nav1.viajesConCircuito(circ)).thenReturn(List.of(viaje1,viaje2));
+		when(nav2.viajesConCircuito(circ)).thenReturn(List.of(viaje4));
+		when(nav3.viajesConCircuito(circ)).thenReturn(List.of(viaje6));
+
+		List<Viaje> expected = List.of(viaje1,viaje2,viaje4,viaje6);
+//		No tiene sentido, pero la lista sale desordenada 
+//		aunque este ordenada de esta forma dentro de la terminal
+		assertTrue(expected.containsAll(terminalGest.viajesConCircuito(circ))) ;
+		
+	}
+		
+
 	
 	@Test
-	void testExportar() {}
+	void testExportar() {
+		
+		when(viaje1.getFechaDeSalida()).thenReturn(LocalDate.now());
+		when(viaje1.getTiempoEntreTerminales(terminalGest, terminal1)).thenReturn(5d);
+		assertAll(
+			() -> assertEquals(0, terminalGest.getExportaciones(ship1).size()),
+			() -> assertTrue(this.terminalGest.exportar(terminal1, viaje1, camion1,
+												conductor1, carga, ship1 )),
+			() -> assertEquals(1, terminalGest.getExportaciones(ship1).size()));
+		
+	}
 	
 	@Test
-	void testImportar() {}
+	void testImportar() {
+		
+		when(viaje1.getFechaDeSalida()).thenReturn(LocalDate.now());
+		when(viaje1.getTiempoEntreTerminales(terminalGest, terminal1)).thenReturn(5d);
+		
+		assertAll(
+				() -> assertEquals(0, terminalGest.getImportaciones(cons1).size()),
+				() -> assertTrue(this.terminalGest.importar(terminal1, viaje1, 
+													 carga, cons1 )),
+				() -> assertEquals(1, terminalGest.getImportaciones(cons1).size()));
+					
+		}
+
 	
 	@Test
 	void testproximaSalidaBuque() {

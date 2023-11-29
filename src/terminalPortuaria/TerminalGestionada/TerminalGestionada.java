@@ -85,22 +85,22 @@ public class TerminalGestionada extends TerminalPortuaria {
 	}
 	
 	public CircuitoMaritimo calcularMejorCircuito(TerminalPortuaria t) {
-		return this.criterio.buscar(this.navieras.stream().map(Naviera::getCircuitos)
-			.flatMap(List::stream)
-			.filter(circ -> circ.contieneTerminal(t))
-			.collect(Collectors.toList()))
-			.get();
+		return this.criterio.buscar(this.navieras.stream()
+					.map(nav -> nav.circuitosConTerminal(t))
+					.flatMap(List::stream)
+					.toList())
+				.get();
+			
 				
 	}
 	
 	public List<Viaje> viajesConCircuito(CircuitoMaritimo circ) {
-		return this.navieras.stream().map(nav -> nav.getViajes().stream()
-					.filter(viaje -> viaje.getCircuito().equals(circ)))
-				.flatMap(Function.identity())
-				.collect(Collectors.toList());
+		return this.navieras.stream().map(nav -> nav.viajesConCircuito(circ))
+						.flatMap(List::stream)
+						.toList();
 	}
 	
-	public void exportar(TerminalPortuaria t, Viaje viaje, Camion camion, 
+	public boolean exportar(TerminalPortuaria t, Viaje viaje, Camion camion, 
 					Conductor conductor, Container carga, Shipper ship) {
 		this.add(ship);
 		this.add(conductor);
@@ -109,15 +109,15 @@ public class TerminalGestionada extends TerminalPortuaria {
 		OrdenExportacion orden = new OrdenExportacion(t, viaje, camion, conductor, 
 								  carga, fecha, fecha.plusDays((long) Math.ceil(viaje.getTiempoEntreTerminales(this, t))),
 								  ship, fecha.minusDays(5l));
-		this.add(orden);
+		return this.add(orden);
 	}
 	
-	public void importar(TerminalPortuaria t, Viaje viaje, Container carga, Consignee consig) {
+	public boolean importar(TerminalPortuaria t, Viaje viaje, Container carga, Consignee consig) {
 		this.add(consig);
 		LocalDate fecha = viaje.getFechaDeSalida();
 		OrdenImportacion orden = new OrdenImportacion(t, viaje, carga, fecha, 
 			fecha.plusDays((long) Math.ceil(viaje.getTiempoEntreTerminales(this, t))), consig);
-		this.add(orden);
+		return this.add(orden);
 }
 	
 	public LocalDate proximaSalidaBuque(TerminalPortuaria t) {
@@ -148,6 +148,15 @@ public class TerminalGestionada extends TerminalPortuaria {
 				.get());
 		
 		return result;
+	}
+	
+	public List<OrdenImportacion> getImportaciones(Consignee cons){
+		return this.ordenesImportacion.stream().filter(orden -> orden.esConsignee(cons)).toList();
+		}
+	
+	public List<OrdenExportacion> getExportaciones(Shipper ship){
+		return this.ordenesExportacion.stream().filter(orden -> orden.esShipper(ship)).toList();
+		
 	}
 	
 

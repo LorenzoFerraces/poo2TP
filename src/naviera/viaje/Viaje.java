@@ -42,5 +42,9 @@ public class Viaje {
 	public boolean vieneDespuesDe(TerminalPortuaria t1, TerminalPortuaria t2) {
 		return this.circuito.vieneDespuesDe(t1, t2);
 	}
+
+	public boolean tieneCircuito(CircuitoMaritimo circ) {
+		return this.getCircuito().equals(circ);
+	}
 	
 }

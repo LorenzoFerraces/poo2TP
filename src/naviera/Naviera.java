@@ -3,6 +3,7 @@ package naviera;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import buque.Buque;
@@ -57,6 +58,19 @@ public class Naviera {
 				.filter(viaje -> viaje
 						.getCircuito()
 						.contieneOrigenYDestino(t1,t2)).toList();
+	}
+
+	public List<Viaje> viajesConCircuito(CircuitoMaritimo circ) {
+
+		return this.viajes.stream()
+				.filter(viaje -> viaje.tieneCircuito(circ))
+				.toList();
+	}
+
+	public List<CircuitoMaritimo> circuitosConTerminal(TerminalPortuaria t) {
+		return this.getCircuitos().stream()
+				.filter(circ -> circ.contieneTerminal(t))
+				.toList();
 	}
 	
 //	public long cuantoTardaEnLlegar (delega a viaje)
