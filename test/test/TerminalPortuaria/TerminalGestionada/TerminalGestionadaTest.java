@@ -35,7 +35,6 @@ class TerminalGestionadaTest {
 	private Naviera nav2;
 	private Naviera nav3;
 	
-	
 	private Viaje viaje1;
 	private Viaje viaje2;
 	private Viaje viaje3;
@@ -60,7 +59,8 @@ class TerminalGestionadaTest {
 	
 	private Container carga;
 	
-	private CriterioCircuito criterio;
+	private CriterioCircuito criterio1;
+	private CriterioCircuito criterio2;
 
 	private IFiltrable filtro;
 	
@@ -69,10 +69,9 @@ class TerminalGestionadaTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		CriterioCircuito criterio = mock(CriterioCircuito.class);
 		Punto punto = mock(Punto.class);
 		
-		this.terminalGest = new TerminalGestionada(punto, criterio);
+		this.terminalGest = new TerminalGestionada(punto, criterio1);
 
 		this.nav1 = mock(Naviera.class);
 		this.nav2 = mock(Naviera.class);
@@ -103,7 +102,8 @@ class TerminalGestionadaTest {
 		
 		this.carga = mock(Container.class);
 		
-		this.criterio = mock(CriterioCircuito.class);
+		this.criterio1 = mock(CriterioCircuito.class);
+		this.criterio2 = mock(CriterioCircuito.class);
 		
 		this.filtro = mock(IFiltrable.class);
 		
@@ -144,23 +144,14 @@ class TerminalGestionadaTest {
 		}
 	
 	@Test
-	void testAddOrdenImport() {}
-	
-	@Test
-	void testAddOrdenExport() {}
-	
-	@Test
-	void testSetCriterio() {}
-	
-//	@Test
-//	void testCalcularMejorCircuito() {
-//		when(nav1.circuitosConTerminal(terminal1)).thenReturn(List.of(circ1));
-//		when(nav2.circuitosConTerminal(terminal1)).thenReturn(List.of(circ2));
-//		
-//		when(criterio.buscar(List.of(circ1,circ2))).thenReturn(Optional.of(circ2));
-//		
-//		assertEquals(circ2, terminalGest.calcularMejorCircuito(terminal1));
-//	};
+	void testCalcularMejorCircuito() {
+		when(nav1.circuitosConTerminal(terminal1)).thenReturn(List.of(circ1));
+		when(nav2.circuitosConTerminal(terminal1)).thenReturn(List.of(circ2));
+		
+		when(criterio1.buscar(List.of(circ1,circ2))).thenReturn(Optional.of(circ2));
+		
+		assertEquals(circ2, terminalGest.calcularMejorCircuito(terminal1));
+	};
 	
 	@Test
 	void testViajesConCircuito() {

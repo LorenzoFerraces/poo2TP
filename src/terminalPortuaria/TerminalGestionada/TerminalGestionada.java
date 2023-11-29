@@ -69,11 +69,11 @@ public class TerminalGestionada extends TerminalPortuaria {
 		return this.camiones.add(camion);
 	}
 	
-	public boolean add(OrdenImportacion orden) {
+	private boolean add(OrdenImportacion orden) {
 		return this.ordenesImportacion.add(orden);
 	}
 	
-	public boolean add(OrdenExportacion orden) {
+	private boolean add(OrdenExportacion orden) {
 		return this.ordenesExportacion.add(orden);
 	}
 	
