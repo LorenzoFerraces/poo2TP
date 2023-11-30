@@ -4,9 +4,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
 
-abstract class CriterioCircuito {
+public abstract class CriterioCircuito {
 	
 	protected Comparator<CircuitoMaritimo> criterio;
 	

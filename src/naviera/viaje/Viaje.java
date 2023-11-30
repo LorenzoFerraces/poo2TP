@@ -1,9 +1,9 @@
-package viaje;
+package naviera.viaje;
 
 import java.time.LocalDate;
 
 import buque.Buque;
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
 import terminalPortuaria.TerminalPortuaria;
 
 public class Viaje {
@@ -26,7 +26,7 @@ public class Viaje {
 		return this.fechaDeSalida;
 	}
 	
-	public double getTiempoEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
+	public Double getTiempoEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
 		return this.circuito.getTiempoEntreTerminales(inicio, fin);
 	}
 	
@@ -37,6 +37,14 @@ public class Viaje {
 	public LocalDate getFechaLlegada() {
 		return this.getFechaDeSalida().plusDays(
 				(long) Math.ceil(this.getCircuito().tiempoTotal()));
+	}
+	
+	public boolean vieneDespuesDe(TerminalPortuaria t1, TerminalPortuaria t2) {
+		return this.circuito.vieneDespuesDe(t1, t2);
+	}
+
+	public boolean tieneCircuito(CircuitoMaritimo circ) {
+		return this.getCircuito().equals(circ);
 	}
 	
 }

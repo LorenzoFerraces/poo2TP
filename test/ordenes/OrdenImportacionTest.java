@@ -12,8 +12,8 @@ import clientes.Consignee;
 import container.Container;
 import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
+import naviera.viaje.Viaje;
 import terminalPortuaria.TerminalPortuaria;
-import viaje.Viaje;
 
 class OrdenImportacionTest {
 	
@@ -38,8 +38,7 @@ class OrdenImportacionTest {
 		fechaDeLlegadaADestino = mock(LocalDate.class);
 		unConsignee = mock(Consignee.class);
 		
-		ordenImportacion = new OrdenImportacion(unaTerminalPortuaria, unViaje, unCamion, 
-				unConductor, unaCarga, fechaDeSalidaDesdeOrigen, 
+		ordenImportacion = new OrdenImportacion(unaTerminalPortuaria, unViaje, unaCarga, fechaDeSalidaDesdeOrigen, 
 				fechaDeLlegadaADestino, unConsignee);
 	}
 

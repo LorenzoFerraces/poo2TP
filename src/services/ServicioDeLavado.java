@@ -2,7 +2,7 @@ package services;
 
 import container.Container;
 
-public class ServicioDeLavado implements IServicio {
+public class ServicioDeLavado implements IServicio{
 	Container container;
 	int COSTO_CONTAINER_GRANDE = 1500;
 	int COSTO_CONTAINER_CHICO = 800;

@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 import buque.Buque;
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import naviera.viaje.Viaje;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
 import terminalPortuaria.TerminalPortuaria;
-import viaje.Viaje;
 
 public class Naviera {
 	
@@ -58,6 +58,27 @@ public class Naviera {
 						.getCircuito()
 						.contieneOrigenYDestino(t1,t2)).toList();
 	}
+
+	public List<Viaje> viajesConCircuito(CircuitoMaritimo circ) {
+
+		return this.viajes.stream()
+				.filter(viaje -> viaje.tieneCircuito(circ))
+				.toList();
+	}
+
+	public List<CircuitoMaritimo> circuitosConTerminal(TerminalPortuaria t) {
+		return this.getCircuitos().stream()
+				.filter(circ -> circ.contieneTerminal(t))
+				.toList();
+	}
+
+	public List<Viaje> viajesConTerminal(TerminalPortuaria t) {
+		return this.getViajes().stream()
+				.filter(viaje -> viaje.contieneTerminal(t))
+				.toList();
+	}
+	
+//	public long cuantoTardaEnLlegar (delega a viaje)
 	
 	
 	

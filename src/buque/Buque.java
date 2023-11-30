@@ -2,11 +2,11 @@ package buque;
 
 import java.util.List;
 
+import buque.faseDeBuque.*;
+import buque.gps.GPS;
 import container.Container;
 import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
-import faseDeBuque.*;
-import gps.GPS;
 
 public class Buque {
 

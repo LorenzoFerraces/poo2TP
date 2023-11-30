@@ -1,4 +1,4 @@
-package faseDeBuque;
+package buque.faseDeBuque;
 
 import buque.Buque;
 

@@ -3,7 +3,7 @@ package terminalPortuaria.TerminalGestionada.CriterioCircuito;
 import java.util.List;
 import java.util.Optional;
 
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
 
 public class CriterioCircuitoMenorPrecio extends CriterioCircuito {
 	
@@ -12,6 +12,7 @@ public class CriterioCircuitoMenorPrecio extends CriterioCircuito {
 		}
 
 	@Override
+// calcular tiempo mejor
 	public Optional<CircuitoMaritimo> buscar(List<CircuitoMaritimo> lista) {
 		return lista.stream().min(this.criterio);
 	}

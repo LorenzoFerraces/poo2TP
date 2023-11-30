@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 
 import buque.Buque;
 import naviera.Naviera;
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import naviera.viaje.Viaje;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
 import terminalPortuaria.TerminalPortuaria;
-import viaje.Viaje;
 
 class NavieraTest {
 	

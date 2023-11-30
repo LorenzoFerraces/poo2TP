@@ -11,7 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
-import naviera.circuitoMaritimo.CircuitoMaritimo;
+import naviera.viaje.Viaje;
+import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
 import terminalPortuaria.TerminalPortuaria;
 
 class ViajeTest {
@@ -77,6 +78,13 @@ class ViajeTest {
 	void testFechaLlegada() {
 		LocalDate esperado = LocalDate.now().plusDays((long)Math.ceil(5d));
 		assertEquals(esperado, this.miViaje.getFechaLlegada());
+	}
+	
+	@Test
+	void testVieneDespuesDe() {
+		when(this.circuito.vieneDespuesDe(terminal1, terminal2)).thenReturn(true);
+		assertTrue(this.miViaje.vieneDespuesDe(terminal1, terminal2));
+		
 	}
 
 }

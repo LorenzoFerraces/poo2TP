@@ -1,4 +1,4 @@
-package gps;
+package buque.gps;
 
 import punto.Punto;
 

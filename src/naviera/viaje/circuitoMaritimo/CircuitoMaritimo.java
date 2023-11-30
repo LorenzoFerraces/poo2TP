@@ -1,11 +1,11 @@
-package naviera.circuitoMaritimo;
+package naviera.viaje.circuitoMaritimo;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 
-import naviera.circuitoMaritimo.tramo.Tramo;
+import naviera.viaje.circuitoMaritimo.tramo.Tramo;
 import terminalPortuaria.TerminalPortuaria;
 
 public class CircuitoMaritimo {
@@ -95,9 +95,27 @@ public class CircuitoMaritimo {
 	}
 
 	public double getTiempoEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
-		return this.tramos.subList(this.posicionComoOrigen(inicio), this.posicionComoDestino(fin) +1)
-				.stream().mapToDouble(Tramo::getTiempo).sum()
+//		Prop: indica el tiempo de viaje (en dias) entre las terminales
+//		Prec: ambas terminales existen en el circuito
+		int p1 = this.posicionComoOrigen(inicio);
+		int p2 = this.posicionComoDestino(fin);
+		double result = 
+				((p1 == (-1)) || (p2 == (-1)) ) ? (Double.POSITIVE_INFINITY) : 
+					this.tramos.subList(p1, p2 +1).stream().mapToDouble(Tramo::getTiempo).sum()
 		;
+		return result;
+	}
+	
+	public boolean vieneDespuesDe(TerminalPortuaria origen, TerminalPortuaria destino) {
+//		Prop: indica si la segunda terminal viene despues de la primera
+		int p1 = this.posicionComoOrigen(origen);
+		int p2 = this.posicionComoDestino(destino);
+		return (p1 <= p2 && !((p1 == (-1)) || (p2 == (-1)) ));
+	}
+
+	public TerminalPortuaria getTerminalInicio() {
+		
+		return this.tramos.get(0).getOrigen();
 	}
 
 }

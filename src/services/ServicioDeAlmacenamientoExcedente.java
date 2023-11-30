@@ -8,14 +8,6 @@ public class ServicioDeAlmacenamientoExcedente implements IServicio {
 		this.cantDias = cantDias;
 		this.costoPorDia = costoPorDia;
 	}
-	
-	public void setCantDias(int cantDias) {
-		this.cantDias = cantDias;
-	}
-	
-	public void costoPorDia(int costoPorDia) {
-		this.costoPorDia = costoPorDia;
-	}
 
 	@Override
 	public double costo() {
