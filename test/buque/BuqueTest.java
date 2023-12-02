@@ -14,7 +14,6 @@ import buque.gps.GPS;
 import container.Container;
 import punto.Punto;
 import terminalPortuaria.TerminalGestionada.TerminalGestionada;
-import terminalPortuaria.TerminalGestionada.CriterioCircuito.CriterioCircuito;
 
 class BuqueTest {
 
@@ -24,7 +23,6 @@ class BuqueTest {
 	private TerminalGestionada terminal;
 	private Punto puntoBuque;
 	private Punto puntoTerminal;
-	private CriterioCircuito criterio;
 	private FaseDeBuqueOutbound faseOutbound;
 	private FaseDeBuqueInbound faseInbound;
 	private FaseDeBuqueArrived faseArrived;
@@ -41,13 +39,12 @@ class BuqueTest {
 		
 		puntoBuque = mock(Punto.class);
 		puntoTerminal = mock(Punto.class);
-		criterio = mock(CriterioCircuito.class);
 		
 		gps = mock(GPS.class);
-		when(gps.getPosicion()).thenReturn(puntoBuque);
+		when(gps.getPosicion()).thenReturn(puntoBuque); // gps.getPosicion() ejecutado en constructor de Buque
 		
 		carga = new ArrayList<Container>();
-		terminal = new TerminalGestionada(puntoTerminal, criterio);
+		terminal = mock(TerminalGestionada.class);
 		unBuque = new Buque(carga, gps, terminal, faseOutbound);
 	}
 
@@ -85,7 +82,7 @@ class BuqueTest {
 		// Exercise
 		unBuque.actualizarPosicion();
 		
-		verify(gps, times(2)).getPosicion(); // Se invoca al inicializar el buque y en .actualizarPosicion()
+		verify(gps, times(2)).getPosicion(); // Se invoca al inicializar el buque y en actualizarPosicion()
 		assertEquals(nuevaPosicion, unBuque.getPosicion());
 		verify(faseOutbound, times(1)).siguienteFase(unBuque); // Verifica que la fase haya recibido el mensaje para el cambio
 	}
@@ -94,6 +91,7 @@ class BuqueTest {
 	void testUnBuquePuedeSaberLaDistanciaEnKilometrosALaTerminal() {
 		// Setup
 		Double distanciaEsperada = Double.valueOf(62.4);
+		when(terminal.getCoordenadas()).thenReturn(puntoTerminal);
 		when(puntoBuque.calcularDistancia(puntoTerminal)).thenReturn(distanciaEsperada);
 		
 		// Exercise
@@ -115,7 +113,7 @@ class BuqueTest {
 	void testUnBuqueDelegaASuFaseElAvisoALaTerminal() {
 		unBuque.avisarArriboATerminal();
 		
-		verify(unBuque.getFase()).avisarArriboATerminal(unBuque); // Verifica que la fase recibio el mensaje
+		verify(unBuque.getFase()).avisarArriboATerminal(unBuque); // Verifica la delegacion a la fase
 	}
 
 	@Test
@@ -135,21 +133,21 @@ class BuqueTest {
 	void testUnBuqueDelegaLaCargaYDescargaASuFase() {
 		unBuque.realizarCargaYDescarga();
 		
-		verify(unBuque.getFase()).realizarCargaYDescarga(unBuque); // Verifica que la fase recibio el mensaje
+		verify(unBuque.getFase()).realizarCargaYDescarga(unBuque); // Verifica la delegacion a la fase
 	}
 
 	@Test
 	void testUnBuqueQueRecibeElMensajeDepartSeLoDelegaASuEstado() {
 		unBuque.depart();
 		
-		verify(unBuque.getFase()).depart(unBuque); // Verifica que la fase recibio el mensaje
+		verify(unBuque.getFase()).depart(unBuque); // Verifica la delegacion a la fase
 	}
 	
 	@Test
 	void testUnBuqueDelegaASuFaseElAvisoDePartidaALaTerminal() {
 		unBuque.avisarPartidaATerminal();
 		
-		verify(unBuque.getFase()).avisarPartidaATerminal(unBuque); // Verifica que la fase recibio el mensaje
+		verify(unBuque.getFase()).avisarPartidaATerminal(unBuque); // Verifica la delegacion a la fase
 	}
 	
 	@Test
