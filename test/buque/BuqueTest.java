@@ -13,16 +13,18 @@ import buque.faseDeBuque.*;
 import buque.gps.GPS;
 import container.Container;
 import punto.Punto;
-import terminalPortuaria.TerminalPortuaria;
+import terminalPortuaria.TerminalGestionada.TerminalGestionada;
+import terminalPortuaria.TerminalGestionada.CriterioCircuito.CriterioCircuito;
 
 class BuqueTest {
 
 	private Buque unBuque;
 	private GPS gps;
 	private List<Container> carga;
-	private TerminalPortuaria terminal;
+	private TerminalGestionada terminal;
 	private Punto puntoBuque;
 	private Punto puntoTerminal;
+	private CriterioCircuito criterio;
 	private FaseDeBuqueOutbound faseOutbound;
 	private FaseDeBuqueInbound faseInbound;
 	private FaseDeBuqueArrived faseArrived;
@@ -39,10 +41,13 @@ class BuqueTest {
 		
 		puntoBuque = mock(Punto.class);
 		puntoTerminal = mock(Punto.class);
+		criterio = mock(CriterioCircuito.class);
 		
-		gps = new GPS(puntoBuque);
+		gps = mock(GPS.class);
+		when(gps.getPosicion()).thenReturn(puntoBuque);
+		
 		carga = new ArrayList<Container>();
-		terminal = new TerminalPortuaria(puntoTerminal);
+		terminal = new TerminalGestionada(puntoTerminal, criterio);
 		unBuque = new Buque(carga, gps, terminal, faseOutbound);
 	}
 
@@ -68,7 +73,21 @@ class BuqueTest {
 	
 	@Test
 	void testUnBuquePuedeSaberSuPosicion() {
-		assertEquals(puntoBuque, unBuque.posicion());
+		assertEquals(puntoBuque, unBuque.getPosicion());
+	}
+	
+	@Test
+	void testUnBuqueActualizaSuPosicionPorLoQueIntentaCambiarDeFase() {
+		// Setup
+		Punto nuevaPosicion = mock(Punto.class);
+		when(gps.getPosicion()).thenReturn(nuevaPosicion);
+		
+		// Exercise
+		unBuque.actualizarPosicion();
+		
+		verify(gps, times(2)).getPosicion(); // Se invoca al inicializar el buque y en .actualizarPosicion()
+		assertEquals(nuevaPosicion, unBuque.getPosicion());
+		verify(faseOutbound, times(1)).siguienteFase(unBuque); // Verifica que la fase haya recibido el mensaje para el cambio
 	}
 	
 	@Test
