@@ -113,7 +113,7 @@ class BuqueTest {
 	void testUnBuqueDelegaASuFaseElAvisoALaTerminal() {
 		unBuque.avisarArriboATerminal();
 		
-		verify(unBuque.getFase()).avisarArriboATerminal(unBuque); // Verifica la delegacion a la fase
+		verify(unBuque.getFase()).avisarInminenteArriboATerminal(unBuque); // Verifica la delegacion a la fase
 	}
 
 	@Test
