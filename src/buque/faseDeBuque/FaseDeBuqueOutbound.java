@@ -15,7 +15,7 @@ public class FaseDeBuqueOutbound implements FaseDeBuque {
 	}
 
 	@Override
-	public void avisarArriboATerminal(Buque unBuque) {
+	public void avisarInminenteArriboATerminal(Buque unBuque) {
 		// Implementado en la fase Inbound
 	}
 

@@ -51,6 +51,11 @@ class OrdenExportacionTest {
 		assertEquals(unShipper, ordenExportacion.getShipper());
 	}
 
+	@Test
+	void testUnaOrdenDeExportacionConoceSuTurnoAsignado() {
+		assertEquals(fechaTurno, ordenExportacion.getTurno());
+	}
+	
 	// Métodos de superclase Orden
 	@Test
 	void testUnaOrdenConoceSuTerminalDeDestino() {

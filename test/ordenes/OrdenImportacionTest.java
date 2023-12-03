@@ -42,10 +42,17 @@ class OrdenImportacionTest {
 				fechaDeLlegadaADestino, unConsignee);
 	}
 
-	// Método de clase OrdenImportacion
+	// Métodos de clase OrdenImportacion
 	@Test
 	void testUnaOrdenDeExportacionConoceSuConsignee() {
 		assertEquals(unConsignee, ordenImportacion.getConsignee());
+	}
+	
+	@Test
+	void testSeLePuedenCargarLosDatosDeRetiroAUnaOrden() {
+		ordenImportacion.cargarDatosRetiroDeCarga(unCamion, unConductor);
+		assertEquals(unCamion, ordenImportacion.getCamionAsignado());
+		assertEquals(unConductor, ordenImportacion.getConductorAsignado());
 	}
 	
 	// Los métodos de la superclase están testeados en OrdenExportacionTest

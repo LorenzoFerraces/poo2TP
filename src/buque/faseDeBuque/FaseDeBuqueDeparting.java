@@ -12,7 +12,7 @@ public class FaseDeBuqueDeparting implements FaseDeBuque {
 	}
 
 	@Override
-	public void avisarArriboATerminal(Buque unBuque) {
+	public void avisarInminenteArriboATerminal(Buque unBuque) {
 		// Implementado en la fase Inbound
 	}
 
@@ -29,7 +29,7 @@ public class FaseDeBuqueDeparting implements FaseDeBuque {
 	@Override
 	public void avisarPartidaATerminal(Buque unBuque) {
 		if (unBuque.calcularDistanciaATerminal() > 1.0) {
-			// unBuque.getTerminal().notificarShippersSobrePartidaDeBuque(unBuque);
+			unBuque.getTerminal().notificarClientesSobrePartidaDeBuque(unBuque);
 			unBuque.cambiarFase();
 		}
 	}

@@ -29,7 +29,7 @@ class FaseDeBuqueArrivedTest {
 	@Test
 	void testLaFaseArrivedNoAvisaALaTerminalSobreLaLlegada() {
 		// Responsabilidad de la fase Inbound
-		faseArrived.avisarArriboATerminal(buque);
+		faseArrived.avisarInminenteArriboATerminal(buque);
 		
 		verifyNoInteractions(buque);
 	}
