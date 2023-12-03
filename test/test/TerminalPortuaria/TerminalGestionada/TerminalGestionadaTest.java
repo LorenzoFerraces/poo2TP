@@ -59,8 +59,7 @@ class TerminalGestionadaTest {
 	
 	private Container carga;
 	
-	private CriterioCircuito criterio1;
-	private CriterioCircuito criterio2;
+	private CriterioCircuito criterio;
 
 	private IFiltrable filtro;
 	
@@ -70,8 +69,9 @@ class TerminalGestionadaTest {
 	void setUp() throws Exception {
 		
 		Punto punto = mock(Punto.class);
+		this.criterio = mock(CriterioCircuito.class);
 		
-		this.terminalGest = new TerminalGestionada(punto, criterio1);
+		this.terminalGest = new TerminalGestionada(punto, criterio);
 
 		this.nav1 = mock(Naviera.class);
 		this.nav2 = mock(Naviera.class);
@@ -101,9 +101,6 @@ class TerminalGestionadaTest {
 		this.camion1 = mock(Camion.class);
 		
 		this.carga = mock(Container.class);
-		
-		this.criterio1 = mock(CriterioCircuito.class);
-		this.criterio2 = mock(CriterioCircuito.class);
 		
 		this.filtro = mock(IFiltrable.class);
 		
@@ -148,7 +145,7 @@ class TerminalGestionadaTest {
 		when(nav1.circuitosConTerminal(terminal1)).thenReturn(List.of(circ1));
 		when(nav2.circuitosConTerminal(terminal1)).thenReturn(List.of(circ2));
 		
-		when(criterio1.buscar(List.of(circ1,circ2))).thenReturn(Optional.of(circ2));
+		when(criterio.buscar(List.of(circ1,circ2))).thenReturn(Optional.of(circ2));
 		
 		assertEquals(circ2, terminalGest.calcularMejorCircuito(terminal1));
 	};
