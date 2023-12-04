@@ -120,11 +120,11 @@ public class TerminalGestionada extends TerminalPortuaria {
 	
 	
 	public LocalDate proximaSalidaBuque(TerminalPortuaria t) {
-		return this.navieras.stream().map(nav -> nav.viajesConTerminal(t))
-				.flatMap(List::stream)
-				.map(Viaje::getFechaDeSalida)
-				.min((f1, f2) -> f1.compareTo(f2))
+		return this.navieras.stream()
+				.map(nav -> nav.proximaSalidaBuque(t))
+				.min((f1,f2) -> f1.compareTo(f2))
 				.get();
+				
 	}
 	
 	public List<Viaje> filtrarViajes(IFiltrable filtro){
@@ -136,14 +136,9 @@ public class TerminalGestionada extends TerminalPortuaria {
 				
 	}
 	
-	public int cuantoTardaEnLlegar(Naviera nav, TerminalPortuaria t) {
-		int result = (int) (!this.navieras.contains(nav) ? (-1) : 
-			this.navieras.stream().map(Naviera::getViajes)
-//			usar metodo de naviera
-				.flatMap(List::stream)
-				.map(viaje -> viaje.getTiempoEntreTerminales(this, t))
-				.min((v1,v2) -> v1.compareTo(v2))
-				.get());
+	public Double cuantoTardaEnLlegar(Naviera nav, TerminalPortuaria t) {
+		Double result = (!this.navieras.contains(nav) ? (-1d) : 
+			nav.cuantoTardaEnLlegarA(this, t));
 		
 		return result;
 	}
