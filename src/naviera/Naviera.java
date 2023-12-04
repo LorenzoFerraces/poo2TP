@@ -78,7 +78,19 @@ public class Naviera {
 				.toList();
 	}
 	
-//	public long cuantoTardaEnLlegar (delega a viaje)
+	public Double cuantoTardaEnLlegarA(TerminalPortuaria inicio, TerminalPortuaria fin) {
+		return this.viajes.stream()
+				.map(viaje -> viaje.getTiempoEntreTerminales(inicio, fin))
+				.min((d1,d2) -> d1.compareTo(d2)).get();
+
+	}
+	
+	public LocalDate proximaSalidaBuque(TerminalPortuaria t) {
+		return this.viajesConTerminal(t).stream()
+				.map(Viaje::getFechaDeSalida)
+				.min((f1,f2) -> f1.compareTo(f2))
+				.get();
+	}
 	
 	
 	
