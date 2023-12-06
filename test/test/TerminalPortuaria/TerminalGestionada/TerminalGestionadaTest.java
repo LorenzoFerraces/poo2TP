@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import buque.Buque;
 import clientes.Consignee;
@@ -220,45 +221,44 @@ class TerminalGestionadaTest {
 	
 	@Test
 	void testNotificarConsigneesSobreLlegadaDeBuque() {
-		Buque unBuque = mock(Buque.class);
-		terminalGest.notificarConsigneesSobreLlegadaDeBuque(unBuque);
-	}
-	
-	@Test
-	void testNotificarClientesSobrePartidaDeBuque() {
-		Buque unBuque = mock(Buque.class);
-		terminalGest.notificarClientesSobrePartidaDeBuque(unBuque);
-	}
-	
-	@Test
-	void testSeGeneraUnaFacturaParaUnConsignee() {
 		// Setup
-		OrdenImportacion orden = mock(OrdenImportacion.class);
-		when(orden.getCarga()).thenReturn(carga);
-		when(orden.getViajeElegido()).thenReturn(viaje1);
-		when(viaje1.getCircuito()).thenReturn(circ1);
-		when(circ1.precioTotal()).thenReturn(100.0);
-		when(orden.getConsignee()).thenReturn(cons1); // Consignee que recibe la factura
+		Buque unBuque = mock(Buque.class);
+		this.testImportar();
+		OrdenImportacion orden = terminalGest.getImportaciones(cons1).get(0);
+		when(viaje1.tieneBuque(unBuque)).thenReturn(true);
 		
 		// Exercise
-		terminalGest.generarFacturaParaConsignee(orden);
+		terminalGest.notificarConsigneesSobreLlegadaDeBuque(unBuque);
+		
+		verify(cons1).recibirAvisoPorImportacion(orden);
+	}
+	
+	@Test
+	void testSeNotificaALosShippersSobreLaPartidaDeUnBuque() {
+		// Setup
+		Buque unBuque = mock(Buque.class);
+		this.testExportar();
+		when(viaje1.tieneBuque(unBuque)).thenReturn(true);
+		
+		// Exercise
+		terminalGest.notificarClientesSobrePartidaDeBuque(unBuque);
+		
+		verify(ship1).recibirFactura(any(String.class));
+	}
+	
+	@Test
+	void testSeNotificaALosConsigneesSobreLaPartidaDeUnBuque() {
+		// Setup
+		Buque unBuque = mock(Buque.class);
+		this.testImportar();
+		when(viaje1.tieneBuque(unBuque)).thenReturn(true);
+		when(viaje1.getCircuito()).thenReturn(circ1);
+		when(circ1.precioTotal()).thenReturn(any(Double.class));
+		
+		// Exercise
+		terminalGest.notificarClientesSobrePartidaDeBuque(unBuque);
 		
 		verify(cons1).recibirFactura(any(String.class));
 	}
 	
-	@Test
-	void testSeGeneraUnaFacturaParaUnShipper() {
-		// Setup
-		OrdenExportacion orden = mock(OrdenExportacion.class);
-		when(orden.getCarga()).thenReturn(carga);
-		when(orden.getViajeElegido()).thenReturn(viaje1);
-		when(viaje1.getCircuito()).thenReturn(circ1);
-		when(circ1.precioTotal()).thenReturn(100.0);
-		when(orden.getShipper()).thenReturn(ship1); // Shipper que recibe la factura
-		
-		// Exercise
-		terminalGest.generarFacturaParaShipper(orden);
-		
-		verify(ship1).recibirFactura(any(String.class));
-	}
 }
