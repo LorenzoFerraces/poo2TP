@@ -1,7 +1,6 @@
 package clientes;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ class ShipperTest {
 	
 	@Test
 	void testUnShipperRecibeUnaFactura() {
-		unShipper.recibirFactura(any());
+		unShipper.recibirFactura("");
 		assertEquals(1, unShipper.getFacturas().size());
 	}
 

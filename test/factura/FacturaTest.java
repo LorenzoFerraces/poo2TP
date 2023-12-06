@@ -38,14 +38,11 @@ class FacturaTest {
 	}
 
 	@Test
-    public void testFacturaParaShipper() {
+    void testFacturaParaShipper() {
         // Setup
         when(servicioLavado.costo()).thenReturn(100.0);
-        when(circuito.precioTotal()).thenReturn(200.0);
-        when(viaje.getCircuito()).thenReturn(circuito);
         when(carga.getServicios()).thenReturn(Arrays.asList(servicioLavado));
         when(orden.getCarga()).thenReturn(carga);
-        when(orden.getViajeElegido()).thenReturn(viaje);
 
         // Verificar el resultado
         String stringEsperado = "Factura: \nFecha de expedicion: " + factura.getFechaDeFacturacion().toString() + "\nServicios brindados: \n" +
@@ -62,12 +59,12 @@ class FacturaTest {
 		ServicioDeLavado: 100.0
 
 		Subtotal Servicios: 100.0
-		Total a pagar: 200.0
+		Total a pagar: 100.0
          */
     }
 	
 	@Test
-    public void testFacturaParaConsignee() {
+    void testFacturaParaConsignee() {
         // Setup
         when(servicioLavado.costo()).thenReturn(100.0);
         when(circuito.precioTotal()).thenReturn(200.0);
