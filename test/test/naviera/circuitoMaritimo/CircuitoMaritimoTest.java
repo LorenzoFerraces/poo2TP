@@ -27,6 +27,7 @@ class CircuitoMaritimoTest {
 	private TerminalPortuaria terminal2;
 	private TerminalPortuaria terminal3;
 	private TerminalPortuaria terminal4;
+	private TerminalPortuaria terminal5;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -34,6 +35,7 @@ class CircuitoMaritimoTest {
 		this.terminal2 = mock(TerminalPortuaria.class);
 		this.terminal3 = mock(TerminalPortuaria.class);
 		this.terminal4 = mock(TerminalPortuaria.class);
+		this.terminal5 = mock(TerminalPortuaria.class);
 		
 		this.tramo1 = mock(Tramo.class);
 		this.tramo2 = mock(Tramo.class);
@@ -142,16 +144,15 @@ class CircuitoMaritimoTest {
 	}
 	
 	@Test
-	void testTiempoEntreTerminales() throws Exception {
+	void testTiempoEntreTerminalesVienenDespues() throws Exception {
 		circuito.agregarTramo(tramo1);
 		circuito.agregarTramo(tramo2);
 		circuito.agregarTramo(tramo3);
 		
 		when(tramo1.getTiempo()).thenReturn(100d);
 		when(tramo2.getTiempo()).thenReturn(120d);
-		when(tramo3.getTiempo()).thenReturn(80d);
 		
-		assertEquals(300d, circuito.getTiempoEntreTerminales(this.terminal1, this.terminal4));
+		assertEquals(220d, circuito.tiempoEntre(this.terminal1, this.terminal4));
 		
 	}
 	
@@ -161,20 +162,43 @@ class CircuitoMaritimoTest {
 		circuito.agregarTramo(tramo2);
 		circuito.agregarTramo(tramo3);
 		
-		when(tramo1.getTiempo()).thenReturn(100d);
-		when(tramo2.getTiempo()).thenReturn(120d);;
-		when(tramo3.getTiempo()).thenReturn(80d);
-		
 		assertAll(
 				() -> assertTrue(circuito.vieneDespuesDe(terminal1,terminal2)),
 				() -> assertTrue(circuito.vieneDespuesDe(terminal1,terminal3)),
-				() -> assertTrue(circuito.vieneDespuesDe(terminal1,terminal4))
+				() -> assertTrue(circuito.vieneDespuesDe(terminal1,terminal4)),
+				() -> assertFalse(circuito.vieneDespuesDe(terminal2,terminal5))
 				);
 		
 	}
 	
-	@Test void testGetTerminalInicio() throws Exception{
+	@Test 
+	void testGetTerminalInicio() throws Exception{
 		circuito.agregarTramo(tramo3);
 		assertEquals(terminal3, circuito.getTerminalInicio());
+	}
+	
+	@Test
+	void testTramosEntreVieneDespues() throws Exception {
+		
+		circuito.agregarTramo(tramo1);
+		circuito.agregarTramo(tramo2);
+		circuito.agregarTramo(tramo3);
+		
+		
+		assertEquals(2d, circuito.tramosEntre(terminal1,terminal4));
+	}
+	
+	@Test
+	void testPrecioEntreVieneDespues() throws Exception {
+		
+		circuito.agregarTramo(tramo1);
+		circuito.agregarTramo(tramo2);
+		circuito.agregarTramo(tramo3);
+		
+		when(tramo1.getPrecio()).thenReturn(100d);
+		when(tramo2.getPrecio()).thenReturn(120d);
+		
+		
+		assertEquals(220d, circuito.precioEntre(terminal1,terminal4));
 	}
 }

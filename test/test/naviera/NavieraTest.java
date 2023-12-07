@@ -168,8 +168,8 @@ class NavieraTest {
 		this.nav.addViaje(circ, buq, LocalDate.now());
 		this.nav.addViaje(circ2, buq2, LocalDate.now());
 		
-		when(circ.getTiempoEntreTerminales(t1, t2)).thenReturn(30d);
-		when(circ2.getTiempoEntreTerminales(t1, t2)).thenReturn(50d);
+		when(circ.tiempoEntre(t1, t2)).thenReturn(30d);
+		when(circ2.tiempoEntre(t1, t2)).thenReturn(50d);
 		
 		assertEquals(30d, this.nav.cuantoTardaEnLlegarA(t1, t2));
 	}

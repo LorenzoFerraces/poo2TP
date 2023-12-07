@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.util.List;
+//import java.util.Optional;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -148,7 +149,7 @@ class TerminalGestionadaTest {
 //		when(nav1.circuitosConTerminal(terminal1)).thenReturn(List.of(circ1));
 //		when(nav2.circuitosConTerminal(terminal1)).thenReturn(List.of(circ2));
 //		
-//		when(criterio.buscar(List.of(circ1,circ2))).thenReturn(Optional.of(circ2));
+//		when(criterio.buscar(List.of(circ1,circ2),terminalGest,terminal1)).thenReturn(Optional.of(circ2));
 //		
 //		assertEquals(circ2, terminalGest.calcularMejorCircuito(terminal1));
 //	};
