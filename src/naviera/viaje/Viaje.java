@@ -46,5 +46,9 @@ public class Viaje {
 	public boolean tieneCircuito(CircuitoMaritimo circ) {
 		return this.getCircuito().equals(circ);
 	}
+
+	public boolean tieneBuque(Buque unBuque) {
+		return this.buque.equals(unBuque);
+	}
 	
 }

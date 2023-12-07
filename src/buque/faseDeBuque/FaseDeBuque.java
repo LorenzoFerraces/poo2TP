@@ -6,7 +6,7 @@ public interface FaseDeBuque {
 
 	public FaseDeBuque siguienteFase(Buque unBuque);
 	
-	public void avisarArriboATerminal(Buque unBuque);
+	public void avisarInminenteArriboATerminal(Buque unBuque);
 	
 	public void realizarCargaYDescarga(Buque unBuque);
 	

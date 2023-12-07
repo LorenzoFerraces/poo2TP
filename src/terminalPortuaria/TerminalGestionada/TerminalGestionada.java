@@ -1,15 +1,19 @@
 package terminalPortuaria.TerminalGestionada;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import buque.Buque;
 import clientes.Consignee;
 import clientes.Shipper;
 import container.Container;
 import empresaTransportista.Camion;
 import empresaTransportista.Conductor;
 import empresaTransportista.EmpresaTransportista;
+import factura.Factura;
 import filtrosDeCircuitos.IFiltrable;
 import naviera.Naviera;
 import naviera.viaje.Viaje;
@@ -151,6 +155,47 @@ public class TerminalGestionada extends TerminalPortuaria {
 		return this.ordenesExportacion.stream().filter(orden -> orden.esShipper(ship)).toList();
 		
 	}
+
+	public void notificarConsigneesSobreLlegadaDeBuque(Buque unBuque) {
+		ordenesDeImportacionAsociadasABuque(unBuque)
+			.forEach(orden -> orden.getConsignee().recibirAvisoPorImportacion(orden));
+	}
+
+	public void notificarClientesSobrePartidaDeBuque(Buque unBuque) {
+		notificarShippersSobrePartidaDeBuque(unBuque);
+		notificarConsigneesSobrePartidaDeBuque(unBuque);
+	}
 	
+	public void notificarConsigneesSobrePartidaDeBuque(Buque unBuque) {
+		ordenesDeImportacionAsociadasABuque(unBuque).stream()
+			.forEach(orden -> this.generarFacturaParaConsignee(orden));
+	}
+
+	public void generarFacturaParaConsignee(OrdenImportacion orden) {
+		String factura = new Factura(orden, LocalDateTime.now()).facturaParaConsignee();
+		orden.getConsignee().recibirFactura(factura);
+	}
+
+	public void notificarShippersSobrePartidaDeBuque(Buque unBuque) {
+		ordenesDeExportacionAsociadasABuque(unBuque).stream()
+			.forEach(orden -> this.generarFacturaParaShipper(orden));
+	}
+
+	public void generarFacturaParaShipper(OrdenExportacion orden) {
+		String factura = new Factura(orden, LocalDateTime.now()).facturaParaShipper();
+		orden.getShipper().recibirFactura(factura);
+	}
+
+	private List<OrdenImportacion> ordenesDeImportacionAsociadasABuque(Buque unBuque) {
+		return this.ordenesImportacion.stream()
+			.filter(orden -> orden.getViajeElegido().tieneBuque(unBuque))
+			.toList();
+	}
+
+	private List<OrdenExportacion> ordenesDeExportacionAsociadasABuque(Buque unBuque) {
+		return this.ordenesExportacion.stream()
+			.filter(orden -> orden.getViajeElegido().tieneBuque(unBuque))
+			.toList();
+	}
 
 }

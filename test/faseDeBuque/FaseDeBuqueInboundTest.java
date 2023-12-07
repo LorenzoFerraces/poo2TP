@@ -9,16 +9,19 @@ import org.junit.jupiter.api.Test;
 import buque.Buque;
 import buque.faseDeBuque.FaseDeBuqueArrived;
 import buque.faseDeBuque.FaseDeBuqueInbound;
+import terminalPortuaria.TerminalGestionada.TerminalGestionada;
 
 class FaseDeBuqueInboundTest {
 
 	private FaseDeBuqueInbound faseInbound;
 	private Buque buque;
+	private TerminalGestionada terminal;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		faseInbound = new FaseDeBuqueInbound();
 		buque = mock(Buque.class);
+		terminal = mock(TerminalGestionada.class);
 	}
 
 	@Test
@@ -37,8 +40,11 @@ class FaseDeBuqueInboundTest {
 	
 	@Test
 	void testLaFaseInboundAvisaALaTerminalSobreLaLlegada() {
-		faseInbound.avisarArriboATerminal(buque);
+		when(buque.getTerminal()).thenReturn(terminal);
 		
+		faseInbound.avisarInminenteArriboATerminal(buque);
+		
+		verify(terminal).notificarConsigneesSobreLlegadaDeBuque(buque); // Verifica que se haya disparado el mensaje
 		verify(buque).cambiarFase();
 	}
 

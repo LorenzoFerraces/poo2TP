@@ -10,7 +10,9 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
+import buque.Buque;
 import clientes.Consignee;
 import clientes.Shipper;
 import container.Container;
@@ -21,6 +23,8 @@ import filtrosDeCircuitos.IFiltrable;
 import naviera.Naviera;
 import naviera.viaje.Viaje;
 import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
+import ordenes.OrdenExportacion;
+import ordenes.OrdenImportacion;
 import punto.Punto;
 import terminalPortuaria.TerminalPortuaria;
 import terminalPortuaria.TerminalGestionada.TerminalGestionada;
@@ -64,7 +68,6 @@ class TerminalGestionadaTest {
 	private IFiltrable filtro;
 	
 	
-
 	@BeforeEach
 	void setUp() throws Exception {
 		
@@ -215,4 +218,47 @@ class TerminalGestionadaTest {
 		
 		assertEquals(20d, terminalGest.cuantoTardaEnLlegar(nav1, terminal1));
 	}
+	
+	@Test
+	void testNotificarConsigneesSobreLlegadaDeBuque() {
+		// Setup
+		Buque unBuque = mock(Buque.class);
+		this.testImportar();
+		OrdenImportacion orden = terminalGest.getImportaciones(cons1).get(0);
+		when(viaje1.tieneBuque(unBuque)).thenReturn(true);
+		
+		// Exercise
+		terminalGest.notificarConsigneesSobreLlegadaDeBuque(unBuque);
+		
+		verify(cons1).recibirAvisoPorImportacion(orden);
+	}
+	
+	@Test
+	void testSeNotificaALosShippersSobreLaPartidaDeUnBuque() {
+		// Setup
+		Buque unBuque = mock(Buque.class);
+		this.testExportar();
+		when(viaje1.tieneBuque(unBuque)).thenReturn(true);
+		
+		// Exercise
+		terminalGest.notificarClientesSobrePartidaDeBuque(unBuque);
+		
+		verify(ship1).recibirFactura(any(String.class));
+	}
+	
+	@Test
+	void testSeNotificaALosConsigneesSobreLaPartidaDeUnBuque() {
+		// Setup
+		Buque unBuque = mock(Buque.class);
+		this.testImportar();
+		when(viaje1.tieneBuque(unBuque)).thenReturn(true);
+		when(viaje1.getCircuito()).thenReturn(circ1);
+		when(circ1.precioTotal()).thenReturn(any(Double.class));
+		
+		// Exercise
+		terminalGest.notificarClientesSobrePartidaDeBuque(unBuque);
+		
+		verify(cons1).recibirFactura(any(String.class));
+	}
+	
 }

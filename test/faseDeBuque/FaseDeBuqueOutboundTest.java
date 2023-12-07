@@ -38,7 +38,7 @@ class FaseDeBuqueOutboundTest {
 	@Test
 	void testLaFaseOutboundNoAvisaALaTerminalSobreLaLlegada() {
 		// Responsabilidad de la fase Inbound
-		faseOutbound.avisarArriboATerminal(buque);
+		faseOutbound.avisarInminenteArriboATerminal(buque);
 		verifyNoInteractions(buque);
 	}
 
