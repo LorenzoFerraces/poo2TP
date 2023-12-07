@@ -15,10 +15,12 @@ class TramoTest {
 	private Tramo tramo;
 	private TerminalPortuaria t1;
 	private TerminalPortuaria t2;
+	private TerminalPortuaria t3;
 	@BeforeEach
 	void setUp() throws Exception {
 		this.t1 = mock(TerminalPortuaria.class);
 		this.t2 = mock(TerminalPortuaria.class);
+		this.t3 = mock(TerminalPortuaria.class);
 		this.tramo = new Tramo(t1, t2, 360d, 800d);
 	}
 
@@ -37,6 +39,12 @@ class TramoTest {
 	void testContieneTerminalDestino() {
 		assertTrue(tramo.contieneTerminal(t2));
 	}
+	
+	@Test
+	void testNoContieneTerminal() {
+		assertFalse(tramo.contieneTerminal(t3));
+	}
+	
 	
 	@Test
 	void testGetPrecio() {

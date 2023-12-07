@@ -48,5 +48,23 @@ class OrdenImportacionTest {
 		assertEquals(unConsignee, ordenImportacion.getConsignee());
 	}
 	
+	@Test
+	void testUnaOrdenDeExportacionPuedeValidarElConsignee() {
+		assertTrue(ordenImportacion.esConsignee(unConsignee));
+	}
+	
+	@Test
+	void testUnaOrdenDeExportacionPuedeValidarElConsigneeasdf() {
+		Camion otroCamion = mock(Camion.class);
+		Conductor otroContuctor = mock(Conductor.class);
+		
+		ordenImportacion.cargarDatosRetiroDeCarga(otroCamion, otroContuctor);
+		
+		assertAll(
+				() -> assertEquals(ordenImportacion.getCamionAsignado(), otroCamion),
+				() -> assertEquals(ordenImportacion.getConductorAsignado(), otroContuctor)
+		);
+	}
+	
 	// Los métodos de la superclase están testeados en OrdenExportacionTest
 }
