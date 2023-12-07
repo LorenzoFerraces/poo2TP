@@ -5,16 +5,18 @@ import java.util.List;
 import java.util.Optional;
 
 import naviera.viaje.circuitoMaritimo.CircuitoMaritimo;
+import terminalPortuaria.TerminalPortuaria;
+import terminalPortuaria.TerminalGestionada.TerminalGestionada;
 
 public abstract class CriterioCircuito {
 	
 	protected Comparator<CircuitoMaritimo> criterio;
 	
-	public CriterioCircuito(Comparator<CircuitoMaritimo> comp) {
+	public CriterioCircuito() {
 		super();
-		this.criterio = comp;
+		
 	}
 	
-	public abstract Optional<CircuitoMaritimo> buscar( List<CircuitoMaritimo> lista);
+	public abstract Optional<CircuitoMaritimo> buscar(List<CircuitoMaritimo> lista, TerminalPortuaria t1, TerminalPortuaria t2);
 	
 }

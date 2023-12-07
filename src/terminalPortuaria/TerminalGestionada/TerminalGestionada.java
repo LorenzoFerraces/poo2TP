@@ -87,9 +87,9 @@ public class TerminalGestionada extends TerminalPortuaria {
 	
 	public CircuitoMaritimo calcularMejorCircuito(TerminalPortuaria t) {
 		return this.criterio.buscar(this.navieras.stream()
-				.map(nav -> nav.circuitosConTerminal(t))
+				.map(Naviera::getCircuitos)
 				.flatMap(List::stream)
-				.toList())
+				.toList(), this, t)
 				.get();
 			
 				

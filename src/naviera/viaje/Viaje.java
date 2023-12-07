@@ -27,7 +27,7 @@ public class Viaje {
 	}
 	
 	public Double getTiempoEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
-		return this.circuito.getTiempoEntreTerminales(inicio, fin);
+		return this.circuito.tiempoEntre(inicio, fin);
 	}
 	
 	public boolean contieneTerminal(TerminalPortuaria t) {

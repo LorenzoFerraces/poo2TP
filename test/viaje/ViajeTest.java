@@ -49,11 +49,11 @@ class ViajeTest {
 	@Test
 	void sePuedeCalcularELTiempoDeViajeEntreDosTerminales() {
 		double tiempo_esperado = 1200.0; //Valor expresado en minutos
-		when(circuito.getTiempoEntreTerminales(terminal1, terminal2)).thenReturn(tiempo_esperado);
+		when(circuito.tiempoEntre(terminal1, terminal2)).thenReturn(tiempo_esperado);
 		
 		assertEquals(this.miViaje.getTiempoEntreTerminales(terminal1, terminal2), tiempo_esperado);
 		
-		verify(circuito).getTiempoEntreTerminales(terminal1, terminal2); //Verifcar que se llame a la funcion de circuito
+		verify(circuito).tiempoEntre(terminal1, terminal2); //Verifcar que se llame a la funcion de circuito
 	}
 	
 	@Test

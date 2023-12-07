@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import naviera.viaje.circuitoMaritimo.tramo.Tramo;
 import terminalPortuaria.TerminalPortuaria;
+import terminalPortuaria.TerminalGestionada.TerminalGestionada;
 
 public class CircuitoMaritimo {
 
@@ -93,18 +94,6 @@ public class CircuitoMaritimo {
 //		Prop: describe el index del tramo en tramos que tiene a la terminal t como destino
 		return tramos.stream().map(Tramo::getDestino).collect(Collectors.toList()).indexOf(t);
 	}
-
-	public double getTiempoEntreTerminales(TerminalPortuaria inicio, TerminalPortuaria fin) {
-//		Prop: indica el tiempo de viaje (en dias) entre las terminales
-//		Prec: ambas terminales existen en el circuito
-		int p1 = this.posicionComoOrigen(inicio);
-		int p2 = this.posicionComoDestino(fin);
-		double result = 
-				((p1 == (-1)) || (p2 == (-1)) ) ? (Double.POSITIVE_INFINITY) : 
-					this.tramos.subList(p1, p2 +1).stream().mapToDouble(Tramo::getTiempo).sum()
-		;
-		return result;
-	}
 	
 	public boolean vieneDespuesDe(TerminalPortuaria origen, TerminalPortuaria destino) {
 //		Prop: indica si la segunda terminal viene despues de la primera
@@ -116,6 +105,37 @@ public class CircuitoMaritimo {
 	public TerminalPortuaria getTerminalInicio() {
 		
 		return this.tramos.get(0).getOrigen();
+	}
+	
+	public TerminalPortuaria getTerminalFin() {
+		return this.tramos.get(this.tramos.size() - 1).getDestino();
+	}
+
+	public Double precioEntre(TerminalPortuaria t1, TerminalPortuaria t2) {
+		int p1 = this.posicionComoOrigen(t1);
+		int p2 = this.posicionComoDestino(t2);
+		Double result = this.vieneDespuesDe(t1, t2) ? this.tramos.subList(p1, p2).stream().mapToDouble(Tramo::getPrecio).sum() : 
+			this.tramos.subList(0, p2+1).stream().mapToDouble(Tramo::getPrecio).sum() + 
+			this.tramos.subList(p1, this.tramos.size()-1).stream().mapToDouble(Tramo::getPrecio).sum();
+		return result;
+	}
+
+	public Double tiempoEntre(TerminalPortuaria t1, TerminalPortuaria t2) {
+		int p1 = this.posicionComoOrigen(t1);
+		int p2 = this.posicionComoDestino(t2);
+		Double result = this.vieneDespuesDe(t1, t2) ? this.tramos.subList(p1, p2).stream().mapToDouble(Tramo::getTiempo).sum() : 
+			this.tramos.subList(0, p2+1).stream().mapToDouble(Tramo::getTiempo).sum() + 
+			this.tramos.subList(p1, this.tramos.size()-1).stream().mapToDouble(Tramo::getTiempo).sum();
+		return result;
+	}
+
+	public Double tramosEntre(TerminalPortuaria t1, TerminalPortuaria t2) {
+		int p1 = this.posicionComoOrigen(t1);
+		int p2 = this.posicionComoDestino(t2);
+		Double result = (double) (this.vieneDespuesDe(t1, t2) ? this.tramos.subList(p1, p2).size() : 
+				this.tramos.subList(0, p2+1).size() +
+				this.tramos.subList(p1, this.tramos.size()-1).size());
+		return result;
 	}
 
 }
