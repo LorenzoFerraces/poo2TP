@@ -17,6 +17,11 @@ public class FaseDeBuqueWorking implements FaseDeBuque {
 	}
 
 	@Override
+	public void avisarArriboATerminal(Buque unBuque) {
+		// Implementando en la fase Arrived
+	}
+	
+	@Override
 	public void realizarCargaYDescarga(Buque unBuque) {
 		// Implementado en la fase Arrived
 	}

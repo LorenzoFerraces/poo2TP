@@ -156,7 +156,13 @@ public class TerminalGestionada extends TerminalPortuaria {
 		
 	}
 
-	public void notificarConsigneesSobreLlegadaDeBuque(Buque unBuque) {
+	public void recibirNotificacionDeArriboDeBuque(Buque unBuque) {
+		unBuque.realizarCargaYDescarga();
+		
+		unBuque.depart();
+	}
+	
+	public void notificarConsigneesSobreInminenteLlegadaDeBuque(Buque unBuque) {
 		ordenesDeImportacionAsociadasABuque(unBuque)
 			.forEach(orden -> orden.getConsignee().recibirAvisoPorImportacion(orden));
 	}

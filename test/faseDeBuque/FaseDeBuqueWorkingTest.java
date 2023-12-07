@@ -27,13 +27,20 @@ class FaseDeBuqueWorkingTest {
 	}
 	
 	@Test
-	void testLaFaseWorkingNoAvisaALaTerminalSobreLaLlegada() {
+	void testLaFaseWorkingNoAvisaALaTerminalSobreLaInminenteLlegada() {
 		// Responsabilidad de la fase Inbound
 		faseWorking.avisarInminenteArriboATerminal(buque);
 		
 		verifyNoInteractions(buque);
 	}
 
+	@Test
+	void testLaFaseWorkingNoAvisaALaTerminalSobreLaLlegada() {
+		// Responsabilidad de la fase Arrived
+		faseWorking.avisarArriboATerminal(buque);
+		verifyNoInteractions(buque);
+	}
+	
 	@Test
 	void testLaFaseWorkingRealizaLaCargaYDescarga() {
 		// Responsabilidad de la fase Arrived

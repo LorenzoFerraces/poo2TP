@@ -220,6 +220,16 @@ class TerminalGestionadaTest {
 	}
 	
 	@Test
+	void testLaTerminalRecibeLaNotificacionPorArriboDeBuque() {
+		Buque unBuque = mock(Buque.class);
+		
+		terminalGest.recibirNotificacionDeArriboDeBuque(unBuque);
+		
+		verify(unBuque).realizarCargaYDescarga();
+		verify(unBuque).depart();
+	}
+	
+	@Test
 	void testNotificarConsigneesSobreLlegadaDeBuque() {
 		// Setup
 		Buque unBuque = mock(Buque.class);
@@ -228,7 +238,7 @@ class TerminalGestionadaTest {
 		when(viaje1.tieneBuque(unBuque)).thenReturn(true);
 		
 		// Exercise
-		terminalGest.notificarConsigneesSobreLlegadaDeBuque(unBuque);
+		terminalGest.notificarConsigneesSobreInminenteLlegadaDeBuque(unBuque);
 		
 		verify(cons1).recibirAvisoPorImportacion(orden);
 	}
