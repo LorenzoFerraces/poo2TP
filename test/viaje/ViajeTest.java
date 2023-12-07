@@ -22,6 +22,7 @@ class ViajeTest {
 	TerminalPortuaria terminal2;
 	LocalDate fechaSalida;
 	Buque bu;
+	Buque bu2;
 	
 	
 	@BeforeEach
@@ -30,6 +31,7 @@ class ViajeTest {
 		this.terminal1 = mock(TerminalPortuaria.class);
 		this.terminal2 = mock(TerminalPortuaria.class);
 		this.bu = mock(Buque.class);
+		this.bu2 = mock(Buque.class);
 		this.fechaSalida = LocalDate.now();
 		this.miViaje = new Viaje(this.circuito, bu, this.fechaSalida);
 		when(circuito.tiempoTotal()).thenReturn(5d);
@@ -85,6 +87,16 @@ class ViajeTest {
 		when(this.circuito.vieneDespuesDe(terminal1, terminal2)).thenReturn(true);
 		assertTrue(this.miViaje.vieneDespuesDe(terminal1, terminal2));
 		
+	}
+	
+	@Test 
+	void tieneBuque() {
+		assertTrue(this.miViaje.tieneBuque(bu));
+	}
+	
+	@Test 
+	void noTieneBuque() {
+		assertFalse(this.miViaje.tieneBuque(bu2));
 	}
 
 }

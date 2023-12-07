@@ -65,6 +65,7 @@ class TerminalGestionadaTest {
 	private Container carga;
 	
 	private CriterioCircuito criterio;
+	private CriterioCircuito criterio2;
 
 	private IFiltrable filtro;
 	
@@ -275,6 +276,8 @@ class TerminalGestionadaTest {
 		
 		verify(cons1).recibirFactura(any(String.class));
 	}
+	
+	@Test
 	void testCuandoTardaEnLlegarSiNoExisteLaNaviera() {
 		Naviera terminalMock = mock(Naviera.class);
 //		when(nav1.cuantoTardaEnLlegarA(terminalGest, terminal1)).thenReturn(20d);

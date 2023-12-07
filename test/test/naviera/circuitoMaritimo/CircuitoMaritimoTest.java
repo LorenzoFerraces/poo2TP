@@ -254,5 +254,15 @@ class CircuitoMaritimoTest {
 		
 	}
 	
+	@Test 
+	void testGetTerminalFinal() throws Exception {
+		circuito.agregarTramo(tramo1);
+		circuito.agregarTramo(tramo2);
+		circuito.agregarTramo(tramo3);
+		circuito.agregarTramo(tramo4);
+		
+		assertEquals(terminal5, circuito.getTerminalFin());
+	}
+	
 
 }
