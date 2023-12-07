@@ -115,7 +115,7 @@ public class CircuitoMaritimo {
 		int p1 = this.posicionComoOrigen(t1);
 		int p2 = this.posicionComoDestino(t2);
 		Double result = this.vieneDespuesDe(t1, t2) ? this.tramos.subList(p1, p2).stream().mapToDouble(Tramo::getPrecio).sum() : 
-			this.tramos.subList(0, p2).stream().mapToDouble(Tramo::getPrecio).sum() + 
+			this.tramos.subList(0, p2+1).stream().mapToDouble(Tramo::getPrecio).sum() + 
 			this.tramos.subList(p1, this.tramos.size()-1).stream().mapToDouble(Tramo::getPrecio).sum();
 		return result;
 	}
@@ -124,7 +124,7 @@ public class CircuitoMaritimo {
 		int p1 = this.posicionComoOrigen(t1);
 		int p2 = this.posicionComoDestino(t2);
 		Double result = this.vieneDespuesDe(t1, t2) ? this.tramos.subList(p1, p2).stream().mapToDouble(Tramo::getTiempo).sum() : 
-			this.tramos.subList(0, p2).stream().mapToDouble(Tramo::getTiempo).sum() + 
+			this.tramos.subList(0, p2+1).stream().mapToDouble(Tramo::getTiempo).sum() + 
 			this.tramos.subList(p1, this.tramos.size()-1).stream().mapToDouble(Tramo::getTiempo).sum();
 		return result;
 	}
@@ -133,7 +133,7 @@ public class CircuitoMaritimo {
 		int p1 = this.posicionComoOrigen(t1);
 		int p2 = this.posicionComoDestino(t2);
 		Double result = (double) (this.vieneDespuesDe(t1, t2) ? this.tramos.subList(p1, p2).size() : 
-				this.tramos.subList(0, p2).size() +
+				this.tramos.subList(0, p2+1).size() +
 				this.tramos.subList(p1, this.tramos.size()-1).size());
 		return result;
 	}
