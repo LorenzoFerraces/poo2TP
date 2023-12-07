@@ -143,8 +143,8 @@ class TerminalGestionadaTest {
 	void testAddCamion() {
 		assertTrue(this.terminalGest.add(camion1));
 		}
-//	
-//	ESTE TEST NO ES CONSISTENTE
+
+	
 	@Test
 	void testCalcularMejorCircuito() {
 		when(nav1.getCircuitos()).thenReturn(List.of(circ1));
