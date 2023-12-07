@@ -53,6 +53,8 @@ class OrdenImportacionTest {
 		ordenImportacion.cargarDatosRetiroDeCarga(unCamion, unConductor);
 		assertEquals(unCamion, ordenImportacion.getCamionAsignado());
 		assertEquals(unConductor, ordenImportacion.getConductorAsignado());
+	}
+	
 	void testUnaOrdenDeExportacionPuedeValidarElConsignee() {
 		assertTrue(ordenImportacion.esConsignee(unConsignee));
 	}

@@ -143,18 +143,19 @@ class TerminalGestionadaTest {
 	void testAddCamion() {
 		assertTrue(this.terminalGest.add(camion1));
 		}
-	
+//	
+//	ESTE TEST NO ES CONSISTENTE
 	@Test
 	void testCalcularMejorCircuito() {
-		when(nav1.circuitosConTerminal(terminal1)).thenReturn(List.of(circ1));
-		when(nav2.circuitosConTerminal(terminal1)).thenReturn(List.of(circ2));
+		when(nav1.getCircuitos()).thenReturn(List.of(circ1));
+		when(nav2.getCircuitos()).thenReturn(List.of(circ2));
 		
-		when(criterio.buscar(List.of(circ2, circ1))).thenReturn(Optional.of(circ2));
-		when(criterio.buscar(List.of(circ1, circ2))).thenReturn(Optional.of(circ2));
+		when(criterio.buscar(List.of(circ2, circ1),terminalGest,terminal1)).thenReturn(Optional.of(circ2));
+		when(criterio.buscar(List.of(circ1, circ2),terminalGest,terminal1)).thenReturn(Optional.of(circ2));
 		
 		assertEquals(circ2, terminalGest.calcularMejorCircuito(terminal1));
 	};
-	
+//	
 	@Test
 	void testViajesConCircuito() {
 		terminalGest.add(nav3);
