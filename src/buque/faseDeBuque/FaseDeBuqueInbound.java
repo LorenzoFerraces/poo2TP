@@ -16,10 +16,15 @@ public class FaseDeBuqueInbound implements FaseDeBuque {
 
 	@Override
 	public void avisarInminenteArriboATerminal(Buque unBuque) {
-		unBuque.getTerminal().notificarConsigneesSobreLlegadaDeBuque(unBuque);
+		unBuque.getTerminal().notificarConsigneesSobreInminenteLlegadaDeBuque(unBuque);
 		unBuque.cambiarFase();
 	}
 
+	@Override
+	public void avisarArriboATerminal(Buque unBuque) {
+		// Implementando en la fase Arrived
+	}
+	
 	@Override
 	public void realizarCargaYDescarga(Buque unBuque) {
 		// Implementado en la fase Arrived

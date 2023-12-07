@@ -61,8 +61,12 @@ public class Buque {
 		faseDelBuque = faseDelBuque.siguienteFase(this);
 	}
 
-	public void avisarArriboATerminal() {
+	public void avisarInminenteArriboATerminal() {
 		this.faseDelBuque.avisarInminenteArriboATerminal(this);
+	}
+	
+	public void avisarArriboATerminal() {
+		this.faseDelBuque.avisarArriboATerminal(this);
 	}
 	
 	public void realizarCargaYDescarga() {

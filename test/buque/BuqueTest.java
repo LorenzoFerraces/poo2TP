@@ -110,8 +110,8 @@ class BuqueTest {
 	}
 	
 	@Test
-	void testUnBuqueDelegaASuFaseElAvisoALaTerminal() {
-		unBuque.avisarArriboATerminal();
+	void testUnBuqueDelegaASuFaseElAvisoDeInminenteLlegadaALaTerminal() {
+		unBuque.avisarInminenteArriboATerminal();
 		
 		verify(unBuque.getFase()).avisarInminenteArriboATerminal(unBuque); // Verifica la delegacion a la fase
 	}
@@ -127,6 +127,13 @@ class BuqueTest {
 		unBuque.cambiarFase(); // Pasa a fase Arrived
 		
 		assertEquals(FaseDeBuqueArrived.class, unBuque.getFase().getClass());
+	}
+	
+	@Test
+	void testUnBuqueDelegaASuFaseElAvisoDeLlegadaALaTerminal() {
+		unBuque.avisarArriboATerminal();
+		
+		verify(unBuque.getFase()).avisarArriboATerminal(unBuque); // Verifica la delegacion a la fase
 	}
 	
 	@Test

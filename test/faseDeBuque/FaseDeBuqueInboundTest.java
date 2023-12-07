@@ -39,15 +39,22 @@ class FaseDeBuqueInboundTest {
 	}
 	
 	@Test
-	void testLaFaseInboundAvisaALaTerminalSobreLaLlegada() {
+	void testLaFaseInboundAvisaALaTerminalSobreLaInminenteLlegada() {
 		when(buque.getTerminal()).thenReturn(terminal);
 		
 		faseInbound.avisarInminenteArriboATerminal(buque);
 		
-		verify(terminal).notificarConsigneesSobreLlegadaDeBuque(buque); // Verifica que se haya disparado el mensaje
+		verify(terminal).notificarConsigneesSobreInminenteLlegadaDeBuque(buque); // Verifica que se haya disparado el mensaje
 		verify(buque).cambiarFase();
 	}
 
+	@Test
+	void testLaFaseInboundNoAvisaALaTerminalSobreLaLlegada() {
+		// Responsabilidad de la fase Arrived
+		faseInbound.avisarArriboATerminal(buque);
+		verifyNoInteractions(buque);
+	}
+	
 	@Test
 	void testLaFaseInboundNoRealizaLaCargaYDescarga() {
 		// Responsabilidad de la fase Arrived
