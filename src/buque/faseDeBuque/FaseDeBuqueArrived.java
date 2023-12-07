@@ -17,6 +17,11 @@ public class FaseDeBuqueArrived implements FaseDeBuque {
 	}
 
 	@Override
+	public void avisarArriboATerminal(Buque unBuque) {
+		unBuque.getTerminal().recibirNotificacionDeArriboDeBuque(unBuque);
+	}
+	
+	@Override
 	public void realizarCargaYDescarga(Buque unBuque) {
 		// No contemplado en el trabajo
 		unBuque.cambiarFase();
