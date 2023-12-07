@@ -91,5 +91,15 @@ class OrdenExportacionTest {
 	void testUnaOrdenSabeSuFechaDeLlegada() {
 		assertEquals(fechaDeLlegadaADestino, ordenExportacion.getFechaDeLlegadaADestino());
 	}
+	
+	@Test
+	void testUnaOrdenSabeSuTurno() {
+		assertEquals(fechaTurno, ordenExportacion.getTurno());
+	}
+	
+	@Test
+	void testUnaOrdenSabeSiEsSuShipper() {
+		assertTrue(ordenExportacion.esShipper(unShipper));
+	}
 
 }

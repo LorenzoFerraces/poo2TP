@@ -144,15 +144,16 @@ class TerminalGestionadaTest {
 		assertTrue(this.terminalGest.add(camion1));
 		}
 	
-//	@Test
-//	void testCalcularMejorCircuito() {
-//		when(nav1.circuitosConTerminal(terminal1)).thenReturn(List.of(circ1));
-//		when(nav2.circuitosConTerminal(terminal1)).thenReturn(List.of(circ2));
-//		
-//		when(criterio.buscar(List.of(circ1,circ2),terminalGest,terminal1)).thenReturn(Optional.of(circ2));
-//		
-//		assertEquals(circ2, terminalGest.calcularMejorCircuito(terminal1));
-//	};
+	@Test
+	void testCalcularMejorCircuito() {
+		when(nav1.circuitosConTerminal(terminal1)).thenReturn(List.of(circ1));
+		when(nav2.circuitosConTerminal(terminal1)).thenReturn(List.of(circ2));
+		
+		when(criterio.buscar(List.of(circ2, circ1))).thenReturn(Optional.of(circ2));
+		when(criterio.buscar(List.of(circ1, circ2))).thenReturn(Optional.of(circ2));
+		
+		assertEquals(circ2, terminalGest.calcularMejorCircuito(terminal1));
+	};
 	
 	@Test
 	void testViajesConCircuito() {
@@ -205,13 +206,15 @@ class TerminalGestionadaTest {
 		assertEquals(LocalDate.now(), this.terminalGest.proximaSalidaBuque(terminal1));
 	}
 	
-//	@Test
-//	void testfiltrarViajes() {
+	@Test
+	void testfiltrarViajes() {
 //		List<Viaje> expected = List.of(viaje1,viaje4);
-//		when(filtro.filtrar(List.of(viaje1,viaje2,viaje3,viaje4))).thenReturn(expected);
-//		
+//		when(filtro.filtrar(anyList())).thenReturn(expected);
+		this.terminalGest.filtrarViajes(filtro);
+		
 //		assertEquals(expected, this.terminalGest.filtrarViajes(filtro));
-//	}
+		verify(filtro).filtrar(any());
+	}
 
 	@Test
 	void testCuandoTardaEnLlegar() {
@@ -261,5 +264,12 @@ class TerminalGestionadaTest {
 		
 		verify(cons1).recibirFactura(any(String.class));
 	}
+	void testCuandoTardaEnLlegarSiNoExisteLaNaviera() {
+		Naviera terminalMock = mock(Naviera.class);
+//		when(nav1.cuantoTardaEnLlegarA(terminalGest, terminal1)).thenReturn(20d);
+		
+		assertEquals(-1d, terminalGest.cuantoTardaEnLlegar(terminalMock, terminal1));
+	}
+	
 	
 }
